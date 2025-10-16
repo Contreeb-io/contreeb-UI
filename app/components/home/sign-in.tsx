@@ -44,7 +44,7 @@ export default function SignIn() {
   }
 
   return (
-    <Dialog open>
+    <Dialog>
       {/* <DialogTrigger>Open</DialogTrigger> */}
       <DialogContent
         className="flex w-[96%] flex-col gap-8 rounded-2xl p-8 md:max-w-[477px]"
