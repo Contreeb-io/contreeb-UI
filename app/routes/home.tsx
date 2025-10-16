@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import SignIn from "~/components/home/sign-in";
 import bgCover from "../../public/bg-cover.webp";
 import type { Route } from "./+types/home";
 
@@ -50,6 +51,8 @@ export default function Home() {
           <ArrowRight />
         </button>
       </article>
+
+      <SignIn />
     </section>
   );
 }
