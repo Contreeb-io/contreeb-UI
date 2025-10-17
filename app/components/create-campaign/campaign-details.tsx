@@ -2,7 +2,6 @@ import { CalendarIcon, Earth } from "lucide-react";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
 import { useMultiStepForm } from "~/context/multi-step-context";
-import dottedStraight from "../../../public/line-straight.png";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
@@ -16,9 +15,10 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Textarea } from "../ui/textarea";
+import Header from "./header";
 
 export default function CampaignDetails() {
-  const { currentStep, totalSteps, form, nextStep } = useMultiStepForm();
+  const { form, nextStep } = useMultiStepForm();
 
   const [openStart, setOpenStart] = useState(false);
   const [openEnd, setOpenEnd] = useState(false);
@@ -50,20 +50,10 @@ export default function CampaignDetails() {
 
   return (
     <section className="mx-auto max-w-[648px] space-y-8">
-      <article className="flex items-start justify-between">
-        <div className="space-y-2 md:max-w-[312px]">
-          <h3 className="font-bold text-[#0E021A] md:text-xl">
-            Tell us what your campaign is about
-          </h3>
-          <p className="text-sm text-[#5D5757] md:text-base">
-            Fill in the basic details of your campaign
-          </p>
-        </div>
-
-        <p className="text-[#5D5757]">
-          {currentStep} of {totalSteps}
-        </p>
-      </article>
+      <Header
+        header="Tell us what your campaign is about"
+        desc=" Fill in the basic details of your campaign"
+      />
 
       <form id="campaign-details" className="space-y-8">
         <FieldGroup className="space-y-2.5">
@@ -190,7 +180,7 @@ export default function CampaignDetails() {
             <div className="flex w-full flex-row items-center justify-between gap-1.5 text-sm font-medium text-[#574C62] md:flex-col md:items-start md:justify-start">
               <p>Start date & time</p>
               <img
-                src={dottedStraight}
+                src={"/line-straight.png"}
                 alt="dotted-lines"
                 className="hidden h-8 w-2 md:block"
               />

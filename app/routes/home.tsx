@@ -1,6 +1,5 @@
 import { ArrowRight } from "lucide-react";
 import SignIn from "~/components/home/sign-in";
-import bgCover from "../../public/bg-cover.webp";
 import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
@@ -12,10 +11,10 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   return (
-    <section className="flex min-h-screen items-center justify-center bg-[url('../../public/bg-image.webp')] px-4">
-      <div className="fixed top-[90px]">
+    <section className="flex h-svh items-center justify-center bg-[url('../../public/bg-image.webp')] px-4">
+      <div className="fixed top-[90px] right-[0.1px]">
         <img
-          src={bgCover}
+          src={"/bg-cover.webp"}
           alt="bg-cover-illustration"
           className="h-screen w-screen object-cover md:object-fill"
         />
