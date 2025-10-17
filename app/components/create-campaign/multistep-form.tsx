@@ -1,5 +1,6 @@
 import { useMultiStepForm } from "~/context/multi-step-context";
 import CampaignDetails from "./campaign-details";
+import CampaignItems from "./campaign-items";
 import FormLayout from "./layout";
 
 export default function MulltistepForm() {
@@ -8,7 +9,7 @@ export default function MulltistepForm() {
   return (
     <FormLayout>
       {currentStep === 1 && <CampaignDetails />}
-      {currentStep === 2 && <div>2</div>}
+      {currentStep === 2 && <CampaignItems />}
       {currentStep === 3 && <div>3</div>}
     </FormLayout>
   );
