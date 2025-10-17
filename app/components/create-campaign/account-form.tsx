@@ -1,11 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import z from "zod/v3";
 import { useMultiStepForm } from "~/context/multi-step-context";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
+import Back from "./back";
 import Header from "./header";
 
 const formSchema = z
@@ -213,16 +214,9 @@ export default function AccountForm() {
       </form>
 
       <article className="flex items-center justify-between">
-        <button
-          className="flex items-center gap-2 bg-transparent text-sm font-semibold text-[#505050]"
-          type="button"
-          onClick={prevStep}
-        >
-          <ArrowLeft size={20} />
-          Back
-        </button>
+        <Back />
 
-        <div className="md:max-w-[443px] md:flex-1">
+        <div className="md:max-w-[226px] md:flex-1">
           {" "}
           <button
             onClick={() => {

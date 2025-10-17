@@ -158,13 +158,14 @@ input[type="number"] {
 
 .button-bg {
   background:
-    linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
-    linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%),
     linear-gradient(
       90deg,
-      rgba(255, 197, 197, 0.2) 100%,
-      rgba(255, 197, 197, 0.2) 0%
-    );
+      rgba(255, 197, 197, 0.2) 0%,
+      rgba(255, 197, 197, 0.2) 100%
+    ),
+    linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7));
+  backdrop-filter: blur(4px);
 }
 
 .sing-in-btn {

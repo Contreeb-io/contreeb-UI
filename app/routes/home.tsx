@@ -20,10 +20,12 @@ export default function Home() {
         />
       </div>
 
-      <div className="button-bg absolute top-8 left-1/2 flex w-[310px] -translate-x-1/2 items-center justify-between gap-8 rounded-full px-6 py-2.5 opacity-70 backdrop-blur-xs">
-        <h5 className="text-2xl font-bold text-[#010040]">Contreeb.io</h5>
+      <div className="button-bg absolute top-8 left-1/2 flex w-[310px] -translate-x-1/2 items-center justify-between gap-8 rounded-full px-6 py-2.5 opacity-70">
+        <h5 className="text-xl font-bold text-[#010040] md:text-2xl">
+          Contreeb.io
+        </h5>
 
-        <button className="sing-in-btn cursor-pointer rounded-[695px] bg-[#FFDEDE1A] px-4 py-3 font-medium text-[#242424]">
+        <button className="sing-in-btn cursor-pointer rounded-[695px] bg-[#FFDEDE1A] px-4 py-3 text-sm font-medium text-[#242424] md:text-base">
           sign in
         </button>
       </div>
@@ -45,7 +47,7 @@ export default function Home() {
           </p>
         </div>
 
-        <button className="button-shadow mx-auto flex cursor-pointer gap-4 rounded-full bg-[#5C59ED] px-6 py-2 font-medium text-white">
+        <button className="button-shadow mx-auto flex cursor-pointer gap-4 rounded-full bg-[#5C59ED] px-6 py-2 text-sm font-medium text-white md:text-base">
           Create your campaign in 3 steps
           <ArrowRight />
         </button>

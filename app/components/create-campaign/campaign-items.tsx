@@ -1,6 +1,8 @@
-import { ArrowLeft, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useMultiStepForm } from "~/context/multi-step-context";
+import Back from "./back";
 import Header from "./header";
+import SuccessDialog from "./success-dialog";
 
 export default function CampaignItems() {
   const { nextStep, prevStep } = useMultiStepForm();
@@ -30,14 +32,7 @@ export default function CampaignItems() {
       </section>
 
       <article className="flex items-center justify-between">
-        <button
-          className="flex items-center gap-2 bg-transparent text-sm font-semibold text-[#505050]"
-          type="button"
-          onClick={prevStep}
-        >
-          <ArrowLeft size={20} />
-          Back
-        </button>
+        <Back />
 
         <div className="md:max-w-[443px] md:flex-1">
           {" "}
@@ -49,6 +44,8 @@ export default function CampaignItems() {
           </button>
         </div>
       </article>
+
+      <SuccessDialog />
     </section>
   );
 }
