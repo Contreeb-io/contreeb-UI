@@ -3,7 +3,6 @@ import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import z from "zod/v3";
-import { useMultiStepForm } from "~/context/multi-step-context";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import Back from "./back";
@@ -31,7 +30,6 @@ const formSchema = z
 export default function AccountForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const { prevStep } = useMultiStepForm();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,10 +52,14 @@ export default function AccountForm() {
         desc="Complete creating your campaign by setting up your  account "
       />
 
-      <form className="mt-8" onSubmit={form.handleSubmit(onSubmit)} id="signup">
+      <form
+        className="mt-8 rounded-2xl bg-white/50 p-6 font-sans"
+        onSubmit={form.handleSubmit(onSubmit)}
+        id="signup"
+      >
         <FieldGroup className="space-y-2">
           <Controller
-            name="email"
+            name="name"
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid} className="gap-1">

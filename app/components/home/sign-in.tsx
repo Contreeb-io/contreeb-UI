@@ -10,6 +10,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "~/components/ui/dialog";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
@@ -45,17 +46,19 @@ export default function SignIn() {
 
   return (
     <Dialog>
-      {/* <DialogTrigger>Open</DialogTrigger> */}
+      <DialogTrigger className="sing-in-btn cursor-pointer rounded-[695px] bg-[#FFDEDE1A] px-4 py-3 text-sm font-medium text-[#242424] md:text-base">
+        sign in
+      </DialogTrigger>
       <DialogContent
         className="flex w-[96%] flex-col gap-8 rounded-2xl p-8 md:max-w-[477px]"
         showCloseButton={false}
       >
         <article className="space-y-6">
           <DialogHeader>
-            <DialogTitle className="text-left text-xl font-bold text-[#010040]">
+            <DialogTitle className="font-mackinac text-left text-xl font-bold text-[#010040]">
               Sign in to Contreeb.io
             </DialogTitle>
-            <DialogDescription className="text-left text-[#5D5757]">
+            <DialogDescription className="text-left font-sans text-[#5D5757]">
               Don’t have an account?{" "}
               <Link to={"#"} className="font-medium text-[#6360F0] underline">
                 Sign up
@@ -63,7 +66,11 @@ export default function SignIn() {
             </DialogDescription>
           </DialogHeader>
 
-          <form onSubmit={form.handleSubmit(onSubmit)} id="signin">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            id="signin"
+            className="font-sans"
+          >
             {" "}
             <FieldGroup>
               <Controller
@@ -83,6 +90,7 @@ export default function SignIn() {
                       aria-invalid={fieldState.invalid}
                       placeholder="Nessa.Linn@contreeb.io"
                       autoComplete="off"
+                      className="shadow-none"
                     />
                     {fieldState.invalid && (
                       <FieldError errors={[fieldState.error]} />
@@ -109,6 +117,7 @@ export default function SignIn() {
                         placeholder="Enter password"
                         autoComplete="off"
                         type={showPassword ? "text" : "password"}
+                        className="shadow-none"
                       />
 
                       <button

@@ -1,14 +1,17 @@
 import { X } from "lucide-react";
 import type { ReactNode } from "react";
+import { Link } from "react-router";
 
 export default function FormLayout({ children }: { children: ReactNode }) {
   return (
-    <section className="min-h-svh px-5 pb-10">
-      <div className="flex h-16 max-w-[1440px] items-center justify-between">
-        <p className="text-xl font-bold text-[#010040]">Contreeb.io</p>
+    <section className="min-h-svh bg-white/40 bg-[url('/top.png')] px-5 pb-10 backdrop-blur-[980px]">
+      <div className="font-mackinac w-full max-w-[1440px]">
+        <div className="flex h-16 w-full items-center justify-between">
+          <p className="text-xl font-bold text-[#010040]">Contreeb.io</p>
 
-        <div className="size-9 rounded-full bg-[#E3EFFC] p-2">
-          <X size={20} color="#101928" />
+          <Link to={"/"} className="size-9 rounded-full bg-[#E3EFFC] p-2">
+            <X size={20} color="#101928" />
+          </Link>
         </div>
       </div>
 

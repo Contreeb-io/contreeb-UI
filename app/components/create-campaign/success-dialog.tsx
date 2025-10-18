@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogDescription } from "../ui/dialog";
 
 export default function SuccessDialog() {
   return (
-    <Dialog open>
+    <Dialog>
       {/* <DialogTrigger>Open</DialogTrigger> */}
       <DialogContent
         className="flex w-[92%] flex-col items-center gap-8 rounded-2xl p-8 md:max-w-[457px]"

@@ -1,4 +1,4 @@
-import { CalendarIcon, Earth } from "lucide-react";
+import { CalendarIcon, Earth, User } from "lucide-react";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
 import { useMultiStepForm } from "~/context/multi-step-context";
@@ -55,7 +55,7 @@ export default function CampaignDetails() {
         desc=" Fill in the basic details of your campaign"
       />
 
-      <form id="campaign-details" className="space-y-8">
+      <form id="campaign-details" className="z-30 space-y-8 font-sans">
         <FieldGroup className="space-y-2.5">
           <Controller
             name="type"
@@ -74,7 +74,7 @@ export default function CampaignDetails() {
                   <SelectTrigger
                     id="type"
                     aria-invalid={fieldState.invalid}
-                    className="flex w-[140px] border border-[#F0F2F5] shadow-none"
+                    className="flex w-[140px] border border-[#F0F2F5] bg-white shadow-none"
                   >
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
@@ -84,9 +84,12 @@ export default function CampaignDetails() {
                   >
                     <SelectItem value="personal">
                       {" "}
-                      <Earth color="#150524" size={18} /> Personal
+                      <User color="#150524" size={18} /> Personal
                     </SelectItem>
-                    <SelectItem value="public">Public</SelectItem>
+                    <SelectItem value="public">
+                      {" "}
+                      <Earth color="#150524" size={18} /> Public
+                    </SelectItem>
                   </SelectContent>
                 </Select>
                 {fieldState.invalid && (
@@ -176,7 +179,7 @@ export default function CampaignDetails() {
             )}
           />
 
-          <div className="flex w-full flex-col items-center justify-between gap-6 rounded-[8px] border border-red-500 bg-white/60 p-4 backdrop-blur-sm md:flex-row md:gap-16">
+          <div className="flex w-full flex-col items-center justify-between gap-6 rounded-[8px] bg-white p-4 backdrop-blur-sm md:flex-row md:gap-16">
             <div className="flex w-full flex-row items-center justify-between gap-1.5 text-sm font-medium text-[#574C62] md:flex-col md:items-start md:justify-start">
               <p>Start date & time</p>
               <img
@@ -344,7 +347,7 @@ export default function CampaignDetails() {
         <button
           type="button"
           onClick={nextStep}
-          className="mt-6 w-full cursor-pointer rounded-full bg-[#6360F0] px-4 py-3 text-sm font-semibold text-white"
+          className="font-inter mt-6 w-full cursor-pointer rounded-full bg-[#6360F0] px-4 py-3 text-sm font-semibold text-white"
         >
           Continue
         </button>
