@@ -2,6 +2,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import PhoneInputWithCountrySelect, {
+  isValidPhoneNumber,
+} from "react-phone-number-input";
 import z from "zod/v3";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
@@ -11,7 +14,20 @@ import Header from "./header";
 const formSchema = z
   .object({
     name: z.string().min(3, "name should be at least 3 characters"),
-    email: z.string().email("email is invalid"),
+    email: z.string().email("invalid email"),
+    number: z
+      .string()
+      .min(1, "invalid phone number")
+      .refine(
+        (value) => {
+          try {
+            return isValidPhoneNumber(value, "GH");
+          } catch {
+            return false;
+          }
+        },
+        { message: "invalid Ghana phone number" },
+      ),
     password: z
       .string()
       .min(8, "password must be at least 8 characters.")
@@ -109,6 +125,35 @@ export default function AccountForm() {
               </Field>
             )}
           />
+
+          <Controller
+            name="number"
+            control={form.control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid} className="gap-1">
+                <FieldLabel htmlFor="number" className="text-sm text-[#150524]">
+                  Phone number
+                </FieldLabel>
+                <PhoneInputWithCountrySelect
+                  international
+                  autoComplete="off"
+                  placeholder="Enter phone number"
+                  defaultCountry="GH"
+                  {...field}
+                  inputComponent={Input}
+                  className="border-input g flex items-center rounded-md border bg-white px-2 shadow-none"
+                  numberInputProps={{
+                    className:
+                      "flex-1 bg-transparent outline-none shadow-none border-none focus:ring-0 focus:outline-none",
+                  }}
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
+
           <Controller
             name="password"
             control={form.control}

@@ -91,7 +91,7 @@ export default function SelectedItems({
           }`}
         >
           <div className="flex items-center gap-2">
-            <Grip size={20} color="#343330" />
+            <Grip size={14} color="#343330" />
             <div className="capitalize">
               <h5 className="font-mackinac font-bold text-[#0E021A]">
                 {item.name}

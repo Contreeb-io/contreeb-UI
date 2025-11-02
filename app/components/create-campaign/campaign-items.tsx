@@ -36,15 +36,15 @@ export default function CampaignItems() {
         )}
         <article className="flex h-[372px] items-center justify-center overflow-y-auto rounded-2xl bg-white/50 px-6 pb-5 md:h-[402px]">
           {items.length === 0 ? (
-            <article className="flex max-w-[238px] flex-col items-center gap-y-6">
+            <article className="flex max-w-[238px] flex-col items-center gap-y-4">
               <img src={"/empty-state.webp"} alt="empty-state" />
 
               <div className="space-y-2 text-center">
                 <h5 className="font-mackinac font-bold text-[#0E021A]">
-                  No Item(s) added
+                  No Item added
                 </h5>
                 <p className="font-sans text-sm text-[#595959]">
-                  Add item(s) to your campaign and they appear here
+                  Add an item to this campaign......
                 </p>
               </div>
 
@@ -67,6 +67,7 @@ export default function CampaignItems() {
         <div className="md:max-w-[443px] md:flex-1">
           {" "}
           <button
+            type="button"
             onClick={nextStep}
             className="cursor-pointer rounded-full bg-[#6360F0] px-4 py-3 text-white disabled:bg-[#D7D0DD] disabled:text-white md:w-full"
           >

@@ -23,7 +23,7 @@ export default function Home() {
 
       <div className="button-bg font-mackinac absolute top-8 left-1/2 flex w-[310px] -translate-x-1/2 items-center justify-between gap-8 rounded-full px-6 py-2.5 opacity-70">
         <h5 className="font-mackinac text-xl font-bold text-[#010040] md:text-2xl">
-          Contreeb.io
+          Contreebute.io
         </h5>
 
         <SignIn />

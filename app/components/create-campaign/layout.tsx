@@ -7,7 +7,7 @@ export default function FormLayout({ children }: { children: ReactNode }) {
     <section className="min-h-svh bg-white/40 bg-[url('/top.png')] px-5 pb-10 backdrop-blur-[980px]">
       <div className="font-mackinac w-full max-w-[1440px]">
         <div className="flex h-16 w-full items-center justify-between">
-          <p className="text-xl font-bold text-[#010040]">Contreeb.io</p>
+          <p className="text-xl font-bold text-[#010040]">Contreebute.io</p>
 
           <Link to={"/"} className="size-9 rounded-full bg-[#E3EFFC] p-2">
             <X size={20} color="#101928" />

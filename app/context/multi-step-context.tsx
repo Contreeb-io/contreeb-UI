@@ -12,6 +12,9 @@ const completeFormSchema = z.object({
   end_date: z.date(),
   start_time: z.string(),
   end_time: z.string(),
+  network: z.string(),
+  number: z.string(),
+  account_name: z.string().min(2),
 });
 
 type FormData = z.infer<typeof completeFormSchema>;
@@ -61,12 +64,15 @@ export function MultiStepFormProvider({
       end_date: new Date(),
       start_time: "",
       end_time: "",
+      network: "",
+      number: "",
+      account_name: "",
     },
   });
 
   const stepFields: Record<number, (keyof FormData)[]> = {
     1: ["name", "type", "description", "target", "start_date", "end_date"],
-    // 2: ["email", "phone"],
+    2: [],
     // 3: ["address", "city", "zipCode"],
   };
 

@@ -16,6 +16,7 @@ import {
 } from "../ui/select";
 import { Textarea } from "../ui/textarea";
 import Header from "./header";
+import MomoForm from "./momo-form";
 
 export default function CampaignDetails() {
   const { form, nextStep } = useMultiStepForm();
@@ -64,7 +65,7 @@ export default function CampaignDetails() {
               <Field
                 orientation="responsive"
                 data-invalid={fieldState.invalid}
-                className="w-[120px]"
+                className="w-[140px]"
               >
                 <Select
                   name={field.name}
@@ -134,13 +135,13 @@ export default function CampaignDetails() {
                   htmlFor="description"
                   className="text-sm font-medium text-[#150524]"
                 >
-                  Campaign description?
+                  Campaign description
                 </FieldLabel>
                 <Textarea
                   {...field}
                   id="description"
                   aria-invalid={fieldState.invalid}
-                  placeholder="Enter description..."
+                  placeholder="Describe the goal of your campaign"
                   autoComplete="off"
                   className="shadow-none"
                 />
@@ -171,6 +172,7 @@ export default function CampaignDetails() {
                   autoComplete="off"
                   className="shadow-none"
                   type="number"
+                  min={1}
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
@@ -342,6 +344,8 @@ export default function CampaignDetails() {
               </div>
             </div>
           </div>
+
+          <MomoForm />
         </FieldGroup>
 
         <button
