@@ -10,6 +10,11 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
+export const links: Route.LinksFunction = () => [
+  { rel: "preload", as: "image", href: "/bg-image.webp" },
+  { rel: "preload", as: "image", href: "/google.png" },
+];
+
 export default function Home() {
   return (
     <section className="flex h-svh items-center justify-center bg-[url('/bg-image.webp')] px-4">

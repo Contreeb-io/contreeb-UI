@@ -109,7 +109,7 @@ export default function AddItemForm({
                     htmlFor="item-price"
                     className="text-sm text-[#150524]"
                   >
-                    Price (GHS)
+                    Amount (GHS)
                   </FieldLabel>
                   <Input
                     {...field}

@@ -29,8 +29,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="preload" as="image" href="/top.webp"></link>
-        <link rel="preload" as="image" href="/bg-image.webp"></link>
         <Meta />
         <Links />
       </head>
