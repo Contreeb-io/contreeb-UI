@@ -12,7 +12,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   return (
-    <section className="flex h-svh items-center justify-center bg-[url('../../public/bg-image.webp')] px-4">
+    <section className="flex h-svh items-center justify-center bg-[url('/bg-image.webp')] px-4">
       <div className="fixed top-[90px] right-[0.1px]">
         <img
           src={"/bg-cover.webp"}
