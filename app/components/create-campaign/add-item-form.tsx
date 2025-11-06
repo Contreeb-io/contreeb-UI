@@ -170,7 +170,6 @@ export default function AddItemForm({
                   <Input
                     id="item-image"
                     aria-invalid={fieldState.invalid}
-                    placeholder="Enter description..."
                     autoComplete="off"
                     className="hidden shadow-none"
                     type="file"

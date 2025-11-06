@@ -329,6 +329,9 @@ export default function CampaignDetails() {
                     form.setValue("start_time", e.target.value);
                   }}
                   className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+                  onClick={(e) => {
+                    e.currentTarget.showPicker?.();
+                  }}
                 />{" "}
                 <Input
                   type="time"
@@ -340,6 +343,9 @@ export default function CampaignDetails() {
                     form.setValue("end_time", e.target.value);
                   }}
                   className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+                  onClick={(e) => {
+                    e.currentTarget.showPicker?.();
+                  }}
                 />
               </div>
             </div>

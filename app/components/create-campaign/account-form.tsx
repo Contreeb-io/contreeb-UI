@@ -6,6 +6,7 @@ import PhoneInputWithCountrySelect, {
   isValidPhoneNumber,
 } from "react-phone-number-input";
 import z from "zod/v3";
+import { useMultiStepForm } from "~/context/multi-step-context";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import Back from "./back";
@@ -44,6 +45,7 @@ const formSchema = z
   });
 
 export default function AccountForm() {
+  const { form: F } = useMultiStepForm();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -95,6 +97,11 @@ export default function AccountForm() {
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
+                )}
+                {F.getValues("type") === "public" && (
+                  <div className="rounded-[5px] bg-[#FEF3C7] px-4 py-2 font-sans text-sm font-medium text-[#5D5757]">
+                    Your name should appear as it is on your national ID
+                  </div>
                 )}
               </Field>
             )}

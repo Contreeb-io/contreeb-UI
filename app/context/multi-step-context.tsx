@@ -15,6 +15,8 @@ const completeFormSchema = z.object({
   network: z.string(),
   number: z.string(),
   account_name: z.string().min(2),
+  id_card: z.instanceof(File).optional(),
+  proof_of_need: z.instanceof(File).optional(),
 });
 
 type FormData = z.infer<typeof completeFormSchema>;
@@ -67,6 +69,8 @@ export function MultiStepFormProvider({
       network: "",
       number: "",
       account_name: "",
+      id_card: undefined,
+      proof_of_need: undefined,
     },
   });
 
