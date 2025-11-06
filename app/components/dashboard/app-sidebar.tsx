@@ -11,7 +11,7 @@ import {
 
 export function AppSidebar() {
   return (
-    <Sidebar className="px-4 py-6">
+    <Sidebar>
       <SidebarHeader className="font-mackinac flex flex-row items-center justify-between">
         <div className="flex items-center gap-2">
           <h1 className="text-xl font-bold text-[#010040]">Contreebute.io</h1>

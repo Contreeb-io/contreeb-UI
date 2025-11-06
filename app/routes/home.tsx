@@ -17,7 +17,7 @@ export const links: Route.LinksFunction = () => [
 
 export default function Home() {
   return (
-    <section className="flex h-svh items-center justify-center overflow-hidden bg-[url('/bg-image.webp')] px-4">
+    <section className="flex h-svh items-center justify-center overflow-hidden bg-[url('/bg-image.webp')] bg-cover bg-no-repeat px-4">
       <div className="absolute inset-0 top-[90px]">
         <img
           src={"/bg-cover.webp"}
@@ -53,7 +53,7 @@ export default function Home() {
 
         <Link
           to={"/create-campaign"}
-          className="button-shadow font-mackinac mx-auto flex max-w-[347px] cursor-pointer items-center justify-center gap-4 rounded-full bg-[#5C59ED] px-6 py-2 text-sm font-medium text-white md:text-base"
+          className="button-shadow font-mackinac mx-auto flex max-w-[347px] cursor-pointer items-center justify-center gap-4 rounded-full bg-[#5C59ED] px-6 py-3 text-sm font-medium text-white md:text-lg"
         >
           Create your campaign in 3 steps
           <ArrowRight />
