@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
+import Payment from "~/components/settings/Payment";
 import Profile from "~/components/settings/profile";
 
 type Tab = "profile" | "payment";
@@ -45,12 +46,12 @@ export default function Settings() {
           }`}
           onClick={() => setSearchParams("?tab=payment")}
         >
-          Payment
+          Payment methods
         </button>
       </article>
 
       {activeTab === "profile" && <Profile />}
-      {activeTab === "payment" && <article>payment</article>}
+      {activeTab === "payment" && <Payment />}
     </main>
   );
 }
