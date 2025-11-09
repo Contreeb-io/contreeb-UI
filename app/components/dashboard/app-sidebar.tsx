@@ -1,4 +1,4 @@
-import { BanknoteX, Ellipsis, House } from "lucide-react";
+import { Ellipsis, HandCoins, House } from "lucide-react";
 import { NavLink } from "react-router";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
@@ -41,7 +41,7 @@ export function AppSidebar() {
             }`
           }
         >
-          <BanknoteX size={16} />
+          <HandCoins size={16} />
           <p>Donations</p>
         </NavLink>
       </SidebarContent>
