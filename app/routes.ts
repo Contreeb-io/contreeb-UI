@@ -11,5 +11,6 @@ export default [
   layout("./components/dashboard/layout.tsx", [
     route("/dashboard", "routes/dashboard.tsx"),
     route("/donations", "routes/donations.tsx"),
+    route("/settings", "routes/settings.tsx"),
   ]),
 ] satisfies RouteConfig;

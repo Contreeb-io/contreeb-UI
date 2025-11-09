@@ -1,6 +1,20 @@
-import { Ellipsis, HandCoins, House } from "lucide-react";
-import { NavLink } from "react-router";
+import {
+  Ellipsis,
+  HandCoins,
+  House,
+  LogOut,
+  Settings,
+  User,
+} from "lucide-react";
+import { Link, NavLink } from "react-router";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 import {
   Sidebar,
   SidebarContent,
@@ -54,6 +68,7 @@ export function AppSidebar() {
           <p>Donations</p>
         </NavLink>
       </SidebarContent>
+
       <SidebarFooter className="flex flex-row items-center justify-between rounded-[8px] border border-[#F0F2F5] bg-[#EEEEFF54] p-2">
         <div className="flex items-center gap-2">
           <Avatar>
@@ -69,7 +84,36 @@ export function AppSidebar() {
             </p>
           </div>
         </div>
-        <Ellipsis color="#0E021A" size={16} />
+
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Ellipsis color="#0E021A" size={16} />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="sidebar rounded-2xl border border-[#4949491F] p-3 font-sans shadow-[0px_2px_15px_7px_rgba(1,0,66,0.05)]">
+            <DropdownMenuItem className="flex items-center gap-2 p-4 text-sm font-medium text-[#1A1A1A]">
+              <Link to="/settings" className="flex w-full items-center gap-2">
+                <Settings color="#1A1A1A" />
+                Settings
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="flex items-center gap-2 p-4 text-sm font-medium text-[#1A1A1A]">
+              <Link to="/profile" className="flex w-full items-center gap-2">
+                <User color="#1A1A1A" />
+                Profile
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="flex items-center gap-2 p-4 text-sm font-medium text-[#1A1A1A]">
+              <button
+                // onClick={handleSignOut}
+                className="flex w-full items-center gap-2 text-left"
+              >
+                <LogOut color="#1A1A1A" />
+                Sign out
+              </button>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </SidebarFooter>
     </Sidebar>
   );
