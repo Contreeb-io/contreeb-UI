@@ -7,9 +7,16 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarTrigger,
+  useSidebar,
 } from "../ui/sidebar";
 
 export function AppSidebar() {
+  const { setOpenMobile } = useSidebar();
+
+  const handleNavClick = () => {
+    setOpenMobile(false);
+  };
+
   return (
     <Sidebar>
       <SidebarHeader className="font-mackinac flex flex-row items-center justify-between">
@@ -29,12 +36,14 @@ export function AppSidebar() {
               isActive ? "bg-[#DAD9FF47] text-[#0400CD]" : "text-[#333333]"
             }`
           }
+          onClick={handleNavClick}
         >
           <House size={16} />
           <p>Dashboard</p>
         </NavLink>
         <NavLink
           to={"/donations"}
+          onClick={handleNavClick}
           className={({ isActive }) =>
             `flex items-center gap-2 rounded-full px-4 py-2 text-sm ${
               isActive ? "bg-[#DAD9FF47] text-[#0400CD]" : "text-[#333333]"

@@ -20,11 +20,13 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  onRowClick?: (row: TData) => void;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  onRowClick,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
 
@@ -44,12 +46,12 @@ export function DataTable<TData, TValue>({
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id} className="border-[#FCFCFD]">
+            <TableRow key={headerGroup.id} className="border-[#EAECF0]">
               {headerGroup.headers.map((header) => {
                 return (
                   <TableHead
                     key={header.id}
-                    className="bg-[#EAECF0] text-sm text-[#1A1A1A] md:text-sm"
+                    className="bg-[#FCFCFD] text-sm text-[#1A1A1A] md:text-sm"
                   >
                     {header.isPlaceholder
                       ? null
@@ -70,6 +72,7 @@ export function DataTable<TData, TValue>({
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
                 className="border-[#EAECF0]"
+                onClick={() => onRowClick?.(row.original)}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell

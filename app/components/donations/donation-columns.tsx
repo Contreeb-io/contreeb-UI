@@ -8,7 +8,7 @@ export type Payment = {
   amount: number;
 };
 
-export const columns: ColumnDef<Payment>[] = [
+export const donationColumns: ColumnDef<Payment>[] = [
   {
     accessorKey: "date",
     header: ({ column }) => {
@@ -37,7 +37,7 @@ export const columns: ColumnDef<Payment>[] = [
       return (
         <div
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="flex cursor-pointer items-center"
+          className="hidden cursor-pointer items-center sm:flex"
         >
           Name
           {isSorted === "asc" ? (
@@ -49,6 +49,9 @@ export const columns: ColumnDef<Payment>[] = [
           )}
         </div>
       );
+    },
+    cell: ({ row }) => {
+      return <div className="hidden sm:block">{row.getValue("name")}</div>;
     },
   },
   {

@@ -1,6 +1,6 @@
 import { MoveUpRight, Pencil } from "lucide-react";
 import { Link } from "react-router";
-import { columns } from "~/components/donations/columns";
+import { dashboardColumns } from "~/components/donations/dashboard-columns";
 import { DataTable } from "~/components/donations/data-table";
 import StatCard from "~/components/ui/stat-card";
 
@@ -36,7 +36,12 @@ export default function Dashboard() {
           Edit campaign
         </div>
       </section>
-      <img src="/line-dashes.svg" alt="dashes" />
+      <img src="/line-dashes.svg" alt="dashes" className="hidden md:block" />
+      <img
+        src="/line-dashes-mobile.svg"
+        alt="dashes"
+        className="block md:hidden"
+      />
       <section className="space-y-6">
         <article className="flex flex-wrap items-center justify-between gap-4">
           <StatCard
@@ -61,7 +66,7 @@ export default function Dashboard() {
           />
         </article>
 
-        <article className="rounded-2xl border border-[#EAECF0]">
+        <article className="rounded-2xl border border-[#EAECF0] bg-white">
           <div className="flex items-center justify-between px-6 py-4">
             <h3 className="text-lg font-medium text-[#101828]">
               Recent donations
@@ -74,7 +79,7 @@ export default function Dashboard() {
             </Link>
           </div>
           <DataTable
-            columns={columns}
+            columns={dashboardColumns}
             data={[
               {
                 date: "20th May, 2025",
