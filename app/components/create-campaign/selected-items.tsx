@@ -90,8 +90,8 @@ export default function SelectedItems({
               : "border-[#E4E7EC]"
           }`}
         >
-          <div className="flex items-center gap-2">
-            <Grip size={14} color="#343330" />
+          <div className="flex items-baseline gap-2">
+            <Grip size={14} color="#343330" className="relative top-0.5" />
             <div className="capitalize">
               <h5 className="font-mackinac font-bold text-[#0E021A]">
                 {item.name}

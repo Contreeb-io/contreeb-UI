@@ -11,13 +11,12 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export const links: Route.LinksFunction = () => [
-  { rel: "preload", as: "image", href: "/bg-image.webp" },
   { rel: "preload", as: "image", href: "/google.png" },
 ];
 
 export default function Home() {
   return (
-    <section className="flex h-svh items-center justify-center overflow-hidden bg-[url('/bg-image.webp')] bg-cover bg-no-repeat px-4">
+    <section className="flex h-svh items-center justify-center overflow-hidden bg-[url('/image-mobile.webp')] bg-cover bg-no-repeat px-4 sm:bg-[url('/bg-image.webp')]">
       <div className="absolute inset-0 top-[90px]">
         <img
           src={"/bg-cover.webp"}
