@@ -16,7 +16,7 @@ export const links: Route.LinksFunction = () => [
 
 export default function Home() {
   return (
-    <section className="flex h-svh items-center justify-center overflow-hidden bg-[url('/image-mobile.webp')] bg-cover bg-no-repeat px-4 sm:bg-[url('/bg-image.webp')]">
+    <section className="flex h-svh items-center justify-center overflow-hidden bg-[url('/image-mobile.webp')] bg-cover bg-no-repeat px-4 sm:bg-[url('/image-desktop.webp')]">
       <div className="absolute inset-0 top-[90px]">
         <img
           src={"/bg-cover.webp"}
