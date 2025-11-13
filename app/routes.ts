@@ -13,4 +13,5 @@ export default [
     route("/donations", "routes/donations.tsx"),
     route("/settings", "routes/settings.tsx"),
   ]),
+  route("/donate/:id", "routes/donate.tsx"),
 ] satisfies RouteConfig;

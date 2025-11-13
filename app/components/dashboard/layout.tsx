@@ -39,7 +39,7 @@ function LayoutContent() {
                 Banana
               </SelectItem>
               <div className="mt-2 flex items-center justify-center rounded-full border-b border-[#F0F2F5] bg-[#F1F1FF] p-2 text-sm font-semibold text-[#6360F0]">
-                <PlusIcon color="#6360F0" /> Create campaign
+                <PlusIcon color="#6360F0" /> Create a campaign
               </div>
             </SelectGroup>
           </SelectContent>
