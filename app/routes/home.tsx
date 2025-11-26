@@ -16,7 +16,7 @@ export const links: Route.LinksFunction = () => [
 
 export default function Home() {
   return (
-    <section className="flex h-svh items-center justify-center overflow-hidden bg-[url('/image-mobile.webp')] bg-cover bg-no-repeat px-4 sm:bg-[url('/image-desktop.webp')]">
+    <section className="flex h-svh flex-col items-center justify-center overflow-hidden bg-[url('/image-mobile.webp')] bg-cover bg-no-repeat px-4 sm:bg-[url('/image-desktop.webp')]">
       <div className="absolute inset-0 top-[90px]">
         <img
           src={"/bg-cover.webp"}
@@ -33,7 +33,7 @@ export default function Home() {
         <SignIn />
       </div>
 
-      <article className="z-30 mt-20 max-w-[734px] space-y-10">
+      <article className="z-30 mt-20 max-w-[734px] space-y-10 self-center">
         <div className="space-y-3">
           <h1 className="font-mackinac text-center text-5xl font-medium text-[#06052A] md:text-8xl">
             Crowdfund for any Occasion
@@ -58,6 +58,19 @@ export default function Home() {
           <ArrowRight />
         </Link>
       </article>
+
+      <footer className="fixed bottom-4 z-30 w-full">
+        <div className="mx-auto flex max-w-[1100px] items-end justify-between px-2 font-sans sm:items-center">
+          <p className="text-[#464646]">
+            {new Date().getFullYear()} Contreebute
+          </p>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+            <Link to={"/user-guide"}>User Guide</Link>
+            <Link to={"/terms"}>Terms of Service</Link>
+            <Link to={"/privacy-policy"}>Privacy Policy</Link>
+          </div>
+        </div>
+      </footer>
     </section>
   );
 }
