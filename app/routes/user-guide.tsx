@@ -62,9 +62,9 @@ export default function UserGuide() {
 
           <Link
             to={"/"}
-            className="flex items-center rounded-full bg-[#E3EFFC] p-2 text-sm text-[#2B2B2B]"
+            className="flex items-center gap-1 rounded-full bg-[#E3EFFC] p-2 text-sm text-[#2B2B2B]"
           >
-            <X size={20} color="#101928" /> close
+            <X size={16} color="#101928" /> close
           </Link>
         </header>
       </div>
@@ -172,7 +172,95 @@ export default function UserGuide() {
               causes so more love reaches those who need it most.
             </p>
           </article>
+
+          <article className="space-y-4" id="how-to-create-campaign">
+            <h1 className="font-mackinac font-medium text-[#0E021A]">
+              3. How to Create a Campaign (It’s Free & Easy)
+            </h1>
+            <div className="space-y-1.5 text-[#5D5757]">
+              <h5 className="font-medium">Step 1: Tell Us Your Story</h5>
+              <ul className="list-inside list-decimal space-y-0.5 border-b border-[#C1C1C1] pb-2 text-sm">
+                <li>Tap “Start a Campaign”</li>
+                <li>Choose: Personal or Public</li>
+                <li>
+                  Give it a name (e.g., “Help Nana Yaa Go to Nursing School”)
+                </li>
+                <li>Write a short, honest story</li>
+                <li>Set your goal (say GHS 1,000)</li>
+                <li>Pick start & end date</li>
+              </ul>
+            </div>
+            <div className="space-y-1.5 border-b border-[#C1C1C1] pb-2 text-[#5D5757]">
+              <h5 className="font-medium">
+                Step 2: Add Items (Optional but Powerful)
+              </h5>
+              <p>Want to show exactly what the money is for?</p>
+              <ul className="list-inside list-disc space-y-0.5 text-sm">
+                <li>Tap “Add Item”</li>
+                <li>Example: “MacBook Pro – GHS 12,000”</li>
+                <li>Add photo (optional)</li>
+                <li>A short description.</li>
+                <li>Drag to reorder (if needed)</li>
+              </ul>
+              <p>No items? No problem. A general fund works too.</p>
+            </div>
+            <div className="space-y-1.5 border-b border-[#C1C1C1] pb-2 text-[#5D5757]">
+              <h5 className="font-medium">
+                Step 3: Verification (Public Campaigns Only)
+              </h5>
+              <p>We want to protect trust. So for Public campaigns:</p>
+              <ul className="list-inside list-disc space-y-0.5 text-sm">
+                <li>
+                  Upload{" "}
+                  <ul className="mt-0.5 ml-5 list-inside space-y-0.5 [&>li]:before:mr-2 [&>li]:before:content-['◦']">
+                    <li>Ghana Card (front only) </li>
+                    <li>Proof (hospital bill, school letter, etc.)</li>
+                  </ul>
+                </li>
+                <li>We review within 24 hours</li>
+                <li>You’ll see: “Verification in progress”</li>
+                <li>Once approved: You get a verification email.</li>
+              </ul>
+              <p>
+                We keep your documents private and secure. Your Ghana Card is
+                deleted right after verification.
+              </p>
+            </div>
+            <div className="space-y-1.5 text-[#5D5757]">
+              <h5 className="font-medium">Step 4: Set Up Payout</h5>
+              <ul className="list-inside list-decimal space-y-0.5 border-b border-[#C1C1C1] pb-2 text-sm">
+                <li>
+                  Choose how you’ll receive money:
+                  <ul className="mt-0.5 ml-5 list-inside list-disc space-y-0.5">
+                    <li>
+                      <span className="font-semibold">Mobile Money</span> (MTN,
+                      Vodafone, AT) —&gt; What we recommend (fastest)
+                    </li>
+                    <li>
+                      <span className="font-semibold">Bank Account</span> (any
+                      Ghanaian bank)
+                    </li>
+                  </ul>
+                </li>
+                <li>Enter your details (e.g., 0550 000 000 – Kwaku Krah)</li>
+              </ul>
+            </div>
+            <div className="flex items-baseline gap-4 rounded-md bg-[#FFFFFF57] px-4 py-2">
+              <p>💡</p>
+              <div className="text-sm text-[#5D5757]">
+                Your campaign is live! <br /> Share the link via WhatsApp, X,
+                Instagram, Snapchat or anywhere love travels.
+              </div>
+            </div>
+          </article>
+
+          <article className="space-y-4" id="how-donors-give">
+            <h1 className="font-mackinac font-medium text-[#0E021A]">
+              4. How Donors Give (So Simple, So Kind)
+            </h1>
+          </article>
         </section>
+
         <aside className="fixed right-10 hidden flex-col gap-3 rounded-[8px] border border-[#F0F0F0] bg-white/50 p-2 md:flex">
           <h5 className="text-sm font-medium text-[#0A0A0A]">
             Welcome Home, Friend
