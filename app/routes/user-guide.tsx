@@ -1,6 +1,19 @@
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import { GuideDataTable } from "~/components/donations/guide-table";
+import {
+  dashboard1Columns,
+  dashboard1Data,
+  dashboard2Columns,
+  dashboard2Data,
+  feesColumns,
+  feesData,
+  safetyColumns,
+  safetyData,
+  typeData,
+  typesColumns,
+} from "~/constant";
 
 const faqSections = [
   {
@@ -72,7 +85,7 @@ export default function UserGuide() {
           <div className="flex items-center gap-2">
             <h1 className="text-xl font-bold text-[#010040]">Contreebute.io</h1>
 
-            <div className="hidden h-[32px] border border-[#C1C1C1] md:block"></div>
+            <div className="hidden h-[32px] border border-[#c1c1c1] md:block"></div>
 
             <h3 className="mt-1 hidden text-sm font-medium text-[#2B2B2B] md:block">
               Contreebute - User Guide
@@ -164,26 +177,7 @@ export default function UserGuide() {
               2. Two Types of Campaigns (Choose What Fits Your Heart)
             </h1>
 
-            <table className="w-full rounded-md bg-[#FFFFFF57] px-4">
-              <tr className="[&>th]:border-b [&>th]:border-b-[#E3E4E5] [&>th]:py-3 [&>th]:text-left [&>th]:text-sm [&>th]:font-semibold [&>th]:text-[#4D595A]">
-                <th className="pl-4">Type</th>
-                <th>For</th>
-                <th>Verification</th>
-                <th>Fees</th>
-              </tr>
-              <tr className="[&>td]:border-b [&>td]:border-b-[#E3E4E5] [&>td]:py-3 [&>td]:text-xs">
-                <td className="pl-4">Personal</td>
-                <td>Birthdays, goals, gifts</td>
-                <td>No documents needed</td>
-                <td>6% + GHS 8/day</td>
-              </tr>
-              <tr className="[&>td]:border-b [&>td]:border-b-[#E3E4E5] [&>td]:py-3 [&>td]:text-xs">
-                <td className="pl-4">Personal</td>
-                <td>Birthdays, goals, gifts</td>
-                <td>No documents needed</td>
-                <td>6% + GHS 8/day</td>
-              </tr>
-            </table>
+            <GuideDataTable columns={typesColumns} data={typeData} />
 
             <p className="text-sm">
               Why lower fees for Public? <br /> Because a child’s surgery
@@ -198,7 +192,7 @@ export default function UserGuide() {
             </h1>
             <div className="space-y-1.5 text-[#5D5757]">
               <h5 className="font-medium">Step 1: Tell Us Your Story</h5>
-              <ul className="list-inside list-decimal space-y-0.5 border-b border-[#C1C1C1] pb-2 text-sm">
+              <ul className="list-inside list-decimal space-y-0.5 border-b border-white pb-2 text-sm">
                 <li>Tap “Start a Campaign”</li>
                 <li>Choose: Personal or Public</li>
                 <li>
@@ -209,7 +203,7 @@ export default function UserGuide() {
                 <li>Pick start & end date</li>
               </ul>
             </div>
-            <div className="space-y-1.5 border-b border-[#C1C1C1] pb-2 text-[#5D5757]">
+            <div className="space-y-1.5 border-b border-white pb-2 text-[#5D5757]">
               <h5 className="font-medium">
                 Step 2: Add Items (Optional but Powerful)
               </h5>
@@ -223,7 +217,7 @@ export default function UserGuide() {
               </ul>
               <p>No items? No problem. A general fund works too.</p>
             </div>
-            <div className="space-y-1.5 border-b border-[#C1C1C1] pb-2 text-[#5D5757]">
+            <div className="space-y-1.5 border-b border-white pb-2 text-[#5D5757]">
               <h5 className="font-medium">
                 Step 3: Verification (Public Campaigns Only)
               </h5>
@@ -247,7 +241,7 @@ export default function UserGuide() {
             </div>
             <div className="space-y-1.5 text-[#5D5757]">
               <h5 className="font-medium">Step 4: Set Up Payout</h5>
-              <ul className="list-inside list-decimal space-y-0.5 border-b border-[#C1C1C1] pb-2 text-sm">
+              <ul className="list-inside list-decimal space-y-0.5 border-b border-white pb-2 text-sm">
                 <li>
                   Choose how you’ll receive money:
                   <ul className="mt-0.5 ml-5 list-inside list-disc space-y-0.5">
@@ -308,8 +302,7 @@ export default function UserGuide() {
               5. Fees: Only If You Win (And You Keep 94%-96% of It)
             </h1>
             <div className="space-y-1.5 text-sm text-[#5D5757]">
-              <table>table</table>
-              <p>No money raised? You pay GHS 0. Always!</p>
+              <GuideDataTable columns={feesColumns} data={feesData} />
             </div>
           </article>
 
@@ -391,10 +384,16 @@ export default function UserGuide() {
             </h1>
             <div className="space-y-1.5 text-sm text-[#5D5757]">
               <p>After launching, tap “My Dashboard” to see:</p>
-              <table>table</table>
+              <GuideDataTable
+                columns={dashboard1Columns}
+                data={dashboard1Data}
+              />
               <div>
                 <h5 className="font-bold">Donations Table</h5>
-                <table>table</table>
+                <GuideDataTable
+                  columns={dashboard2Columns}
+                  data={dashboard2Data}
+                />
 
                 <p className="mt-1.5">
                   <span className="font-bold">Actions:</span> Export list, send
@@ -409,7 +408,7 @@ export default function UserGuide() {
               8. Trust & Safety (We’ve Got You)
             </h1>
             <div className="space-y-1.5 text-sm text-[#5D5757]">
-              <table>table</table>
+              <GuideDataTable columns={safetyColumns} data={safetyData} />
             </div>
           </article>
 
@@ -434,10 +433,7 @@ export default function UserGuide() {
             </div>
           </article>
 
-          <article
-            className="space-y-4 border-b border-[#c1c1c1] pb-3"
-            id="faq"
-          >
+          <article className="space-y-4 border-b border-white pb-3" id="faq">
             <h1 className="font-mackinac font-medium text-[#0E021A]">
               10. Frequently Asked Questions (FAQ)
             </h1>
@@ -491,7 +487,7 @@ export default function UserGuide() {
           </article>
 
           <article className="space-y-2 text-sm text-[#5D5757]">
-            <div className="space-y-1.5 border-b border-[#c1c1c1] pb-3">
+            <div className="space-y-1.5 border-b border-white pb-3">
               <h5 className="font-bold">You’re Ready to Begin</h5>
               <p>
                 Whether you’re{" "}
@@ -504,7 +500,7 @@ export default function UserGuide() {
                 </span>
               </p>
             </div>
-            <div className="space-y-1.5 border-b border-[#c1c1c1] pb-3">
+            <div className="space-y-1.5 border-b border-white pb-3">
               <div>
                 <h5 className="font-bold">Start Your Campaign</h5>
                 <p>Create Now – It’s free, fast and full of love.</p>

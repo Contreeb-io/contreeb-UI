@@ -35,7 +35,7 @@ export default function Home() {
 
       <article className="z-30 mt-20 max-w-[734px] space-y-10 self-center">
         <div className="space-y-3">
-          <h1 className="font-mackinac text-center text-3xl font-medium text-[#06052A] md:text-8xl">
+          <h1 className="font-mackinac text-center text-4xl font-medium text-[#06052A] md:text-8xl">
             Crowdfund for any Occasion
           </h1>
           <p className="text-center font-sans text-sm text-[#464646] md:text-lg">
@@ -59,15 +59,21 @@ export default function Home() {
         </Link>
       </article>
 
-      <footer className="fixed bottom-4 z-30 w-full">
-        <div className="mx-auto flex max-w-[1100px] items-end justify-between px-4 font-sans sm:items-center">
+      <footer className="fixed bottom-2 z-30 w-full">
+        <div className="mx-auto flex max-w-[1100px] flex-col justify-between gap-y-4 px-4 font-sans sm:items-center md:flex-row md:items-end">
           <p className="text-[#464646]">
             {new Date().getFullYear()} Contreebute
           </p>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-            <Link to={"/user-guide"}>User Guide</Link>
-            <Link to={"/terms"}>Terms of Service</Link>
-            <Link to={"/privacy-policy"}>Privacy Policy</Link>
+            <Link to={"/user-guide"} className="hover:text-[#2F2D9E]">
+              User Guide
+            </Link>
+            <Link to={"/terms"} className="hover:text-[#2F2D9E]">
+              Terms of Service
+            </Link>
+            <Link to={"/privacy-policy"} className="hover:text-[#2F2D9E]">
+              Privacy Policy
+            </Link>
           </div>
         </div>
       </footer>
