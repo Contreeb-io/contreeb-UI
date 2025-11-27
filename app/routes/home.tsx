@@ -59,12 +59,12 @@ export default function Home() {
         </Link>
       </article>
 
-      <footer className="fixed bottom-2 z-30 w-full">
-        <div className="mx-auto flex max-w-[1100px] flex-col justify-between gap-y-4 px-4 font-sans sm:items-center md:flex-row md:items-end">
+      <footer className="fixed bottom-2 z-30 w-full md:bottom-4">
+        <div className="mx-auto flex max-w-[1100px] items-end justify-between gap-y-4 px-4 font-sans md:items-center">
           <p className="text-[#464646]">
             {new Date().getFullYear()} Contreebute
           </p>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+          <div className="flex flex-col gap-1.5 sm:flex-row sm:items-center md:gap-4">
             <Link to={"/user-guide"} className="hover:text-[#2F2D9E]">
               User Guide
             </Link>

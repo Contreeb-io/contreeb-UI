@@ -1,5 +1,4 @@
 import { X } from "lucide-react";
-import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { GuideDataTable } from "~/components/donations/guide-table";
 import {
@@ -14,6 +13,8 @@ import {
   typeData,
   typesColumns,
 } from "~/constant";
+import { useScroll } from "~/hooks/use-scroll";
+import type { Route } from "./+types/user-guide";
 
 const faqSections = [
   {
@@ -58,22 +59,17 @@ const faqSections = [
   },
 ];
 
+export const meta: Route.MetaFunction = () => {
+  return [
+    {
+      name: "viewport",
+      content: "width=device-width, initial-scale=0.8",
+    },
+  ];
+};
+
 export default function UserGuide() {
-  const [changeBg, setChangeBg] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 40) {
-        setChangeBg(true);
-      } else {
-        setChangeBg(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {};
-  }, []);
+  const changeBg = useScroll();
 
   return (
     <main className="relative isolate min-h-svh pb-10">

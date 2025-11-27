@@ -54,6 +54,12 @@ export const safetyColumns: ColumnDef<ObjectType>[] = [
   },
 ];
 
+export const userFeeColumns: ColumnDef<ObjectType>[] = [
+  { accessorKey: "campaign", header: "Campaign" },
+  { accessorKey: "pfee", header: "Platform Fee" },
+  { accessorKey: "dfee", header: "Daily Fee" },
+];
+
 export const typeData = [
   {
     type: "Personal",
@@ -117,4 +123,9 @@ export const safetyData = [
     protection: "Your Privacy",
     help: "Documents deleted after verification",
   },
+];
+
+export const userFeeData = [
+  { campaign: "Personal", pfee: "6% of total raised", dfee: "GHS 8/day" },
+  { campaign: "Public", pfee: "4% of total raised", dfee: "GHS 4/day" },
 ];

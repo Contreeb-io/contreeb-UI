@@ -42,7 +42,7 @@ export function GuideDataTable<TData, TValue>({
   });
 
   return (
-    <div className="overflow-hidden rounded-[12px]">
+    <div className="mr-4 rounded-[12px]">
       <Table className="bg-[#FFFFFF57]">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
