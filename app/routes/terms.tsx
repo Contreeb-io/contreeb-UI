@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { GuideDataTable } from "~/components/donations/guide-table";
 import { userFeeColumns, userFeeData } from "~/constant";
 import { useScroll } from "~/hooks/use-scroll";
+import type { Route } from "./+types/terms";
 
 const termsOfService = [
   {
@@ -58,6 +59,15 @@ const termsOfService = [
     link: "#how-to-reach-us",
   },
 ];
+
+export const meta: Route.MetaFunction = () => {
+  return [
+    {
+      name: "viewport",
+      content: "width=device-width, initial-scale=0.8",
+    },
+  ];
+};
 
 export default function Terms() {
   const changeBg = useScroll();
