@@ -60,6 +60,12 @@ export const userFeeColumns: ColumnDef<ObjectType>[] = [
   { accessorKey: "dfee", header: "Daily Fee" },
 ];
 
+export const privacyColumns: ColumnDef<ObjectType>[] = [
+  { accessorKey: "when", header: "When you…" },
+  { accessorKey: "what", header: "We collect…" },
+  { accessorKey: "why", header: "Why we need it" },
+];
+
 export const typeData = [
   {
     type: "Personal",
@@ -128,4 +134,37 @@ export const safetyData = [
 export const userFeeData = [
   { campaign: "Personal", pfee: "6% of total raised", dfee: "GHS 8/day" },
   { campaign: "Public", pfee: "4% of total raised", dfee: "GHS 4/day" },
+];
+
+export const privacyData = [
+  {
+    when: "Sign up",
+    what: "Name, email, phone, password",
+    why: "Name, email, phone, password	So you can log in & we can message you",
+  },
+  {
+    when: "Create any campaign",
+    what: "Campaign story, goal",
+    why: "To show donors your dream",
+  },
+  {
+    when: "Create Public campaign",
+    what: "Ghana Card (front) + proof (bill/letter)",
+    why: "To verify & protect everyone",
+  },
+  {
+    when: "Receive money",
+    what: "MoMo number OR bank details",
+    why: "To send your money safely",
+  },
+  {
+    when: "Donate",
+    what: "Name (or “Anonymous”), phone/email",
+    why: "So creator can say thank you",
+  },
+  {
+    when: "Browse the site",
+    what: "IP address, browser type",
+    why: "To keep the site fast & block bad guys",
+  },
 ];

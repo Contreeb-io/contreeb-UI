@@ -377,7 +377,7 @@ export default function Terms() {
             {termsOfService.map((item, index) => (
               <li
                 key={index}
-                className="list-inside list-decimal px-2 text-sm text-[#525252]"
+                className="list-inside list-decimal px-2 text-sm text-[#525252] first:font-medium first:text-[#0A0A0A]"
               >
                 <Link to={item.link}>{item.question}</Link>
               </li>

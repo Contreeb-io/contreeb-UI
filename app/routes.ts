@@ -9,6 +9,7 @@ export default [
   index("routes/home.tsx"),
   route("/user-guide", "routes/user-guide.tsx"),
   route("/terms", "routes/terms.tsx"),
+  route("/privacy-policy", "routes/privacy-policy.tsx"),
   route("/create-campaign", "routes/create-campaign.tsx"),
   layout("./components/dashboard/layout.tsx", [
     route("/dashboard", "routes/dashboard.tsx"),
