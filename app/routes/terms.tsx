@@ -73,10 +73,10 @@ export default function Terms() {
   const changeBg = useScroll();
 
   return (
-    <main className="relative isolate min-h-svh pb-10">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[70px] md:blur-[490px]" />
+    <main className="relative min-h-screen pb-10">
+      <div className="fixed inset-0 z-10 h-full bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[50px] md:blur-[490px]" />
       <div
-        className={`fixed top-0 z-10 w-full ${!changeBg ? "bg-[#FFFFFF29]" : "bg-white/50"} `}
+        className={`fixed top-0 z-20 w-full ${!changeBg ? "bg-[#FFFFFF29]" : "bg-white/50"} `}
       >
         <header className="mx-auto flex max-w-[1500px] items-center justify-between px-6 py-3">
           <div className="flex items-center gap-2">
@@ -98,7 +98,7 @@ export default function Terms() {
         </header>
       </div>
 
-      <section className="mx-auto mt-20 flex max-w-[1500px] px-6">
+      <section className="z-20 mx-auto mt-20 flex max-w-[1500px] px-6">
         <section className="max-w-[780px] flex-1 space-y-6">
           <article
             className="space-y-2 border-b border-white pb-3"
@@ -352,27 +352,27 @@ export default function Terms() {
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
               <p>
-                Email: <span className="font-bold">hello@contreebute.io</span>
+                Email:{" "}
+                <a href="mailto:hello@contreebute.io">hello@contreebute.io</a>
               </p>
               <p>Contreebute: All platforms</p>
             </div>
           </article>
           <article className="space-y-2 border-b border-white pb-3 text-sm text-[#5D5757]">
             <p className="font-bold">
-              By clicking “I Accept” or using Contreebute.io, you agree to all
-              the above.
+              By using Contreebute.io, you agree to all the above.
             </p>
             <p>
               Thank you for trusting us with your dreams and your kindness.
               Walahi, we no go disappoint you. 🙏🏽💜
             </p>
-            <p>
-              With impact, <br />
-              The Contreebute Team
-            </p>
+            <div className="">
+              With impact, <br />{" "}
+              <span className="font-bold">The Contreebute Team</span>
+            </div>
           </article>
         </section>
-        <aside className="fixed right-10 hidden flex-col gap-3 rounded-[8px] border border-[#F0F0F0] bg-white/50 p-2 md:flex">
+        <aside className="fixed right-10 z-20 hidden flex-col gap-3 rounded-[8px] border border-[#F0F0F0] bg-white/50 p-2 md:flex">
           <ul className="space-y-3">
             {termsOfService.map((item, index) => (
               <li

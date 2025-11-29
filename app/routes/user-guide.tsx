@@ -72,8 +72,8 @@ export default function UserGuide() {
   const changeBg = useScroll();
 
   return (
-    <main className="relative isolate min-h-svh pb-10">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[70px] md:blur-[490px]" />
+    <main className="relative min-h-svh pb-10">
+      <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[70px] md:blur-[490px]" />
       <div
         className={`fixed top-0 z-10 w-full ${!changeBg ? "bg-[#FFFFFF29]" : "bg-white/50"} `}
       >

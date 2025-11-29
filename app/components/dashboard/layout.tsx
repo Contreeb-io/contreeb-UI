@@ -16,7 +16,7 @@ function LayoutContent() {
   const isSidebarOpen = isMobile ? openMobile : open;
 
   return (
-    <main className="sidebar flex-1 space-y-8 px-4 py-6 md:space-y-14 md:px-6">
+    <main className="sidebar flex-1 space-y-8 px-4 pt-6 pb-10 md:space-y-14 md:px-6">
       <div className="flex items-center gap-4 pb-5 font-sans">
         {!isSidebarOpen && <SidebarTrigger className="hover:bg-sidebar" />}
         <Select>

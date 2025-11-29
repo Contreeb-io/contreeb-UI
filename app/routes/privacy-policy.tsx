@@ -69,7 +69,7 @@ export default function PrivacyPolicy() {
   const changeBg = useScroll();
   return (
     <main className="relative isolate min-h-svh pb-10">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[70px] md:blur-[490px]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[70px] md:blur-[490px]" />
       <div
         className={`fixed top-0 z-10 w-full ${!changeBg ? "bg-[#FFFFFF29]" : "bg-white/50"} `}
       >
@@ -292,25 +292,38 @@ export default function PrivacyPolicy() {
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
               <p>
-                <span className="font-bold">Email:</span> hello@contreebute.io
+                <a href="mailto:hello@contreebute.io">hello@contreebute.io</a>
               </p>
 
               <div className="flex items-center gap-2">
-                <a href="">
+                <a
+                  href="https://www.instagram.com/contreebute?igsh=MTBydHVibm45NHpieQ== "
+                  target="_blank"
+                >
                   <img src="ig.png" alt="contreebute-instagram" />
                 </a>
-                <a href="">
+                <a href="" target="_blank">
                   <img
                     src="linkedin.png"
                     className="size-5 rounded-xs"
                     alt="contreebute-linkedin"
                   />
                 </a>
-                <a href="">
+                <a href="https://x.com/contreebute" target="_blank">
                   <img
                     src="x.jpg"
                     className="size-5 rounded-xs"
                     alt="contreebute-x"
+                  />
+                </a>
+                <a
+                  href="https://www.tiktok.com/@contreebute?_r=1&_t=ZS-91mAw9lP8I3 "
+                  target="_blank"
+                >
+                  <img
+                    src="tiktok.png"
+                    className="size-5 rounded-xs"
+                    alt="contreebute-tiktok"
                   />
                 </a>
               </div>
@@ -324,9 +337,9 @@ export default function PrivacyPolicy() {
                 We no go leak. We no go sell. We go protect you like blood.
                 <br />
               </div>
-              <div>
-                With impact,
-                <br /> <span className="font-bold">The Contreebute Team</span>
+              <div className="">
+                With impact, <br />{" "}
+                <span className="font-bold">The Contreebute Team</span>
               </div>
             </div>
           </article>
