@@ -1,4 +1,4 @@
-import { useMultiStepForm } from "~/context/multi-step-context";
+import { useMultiStepForm } from "../../context/multi-step-context";
 
 export default function Header({
   header,

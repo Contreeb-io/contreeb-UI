@@ -1,6 +1,6 @@
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import { useMultiStepForm } from "~/context/multi-step-context";
+import { useMultiStepForm } from "../../context/multi-step-context";
 import { DialogTrigger } from "../ui/dialog";
 import AddItemForm from "./add-item-form";
 import Back from "./back";
@@ -25,7 +25,7 @@ export default function CampaignItems() {
         desc="Add items to your campaign. Drag to reorder."
       />
 
-      <section className="flex flex-col gap-2">
+      <section className="relative z-10 flex flex-col gap-2">
         {items.length > 0 && (
           <AddItemForm setItems={setItems}>
             <DialogTrigger className="font-inter flex w-full cursor-pointer items-center justify-center gap-2 self-end rounded-full border border-[#6360F0] px-3 py-2.5 text-sm font-semibold text-[#6360F0] md:ml-auto md:max-w-[185px]">
@@ -64,7 +64,7 @@ export default function CampaignItems() {
       <article className="font-inter flex items-center justify-between">
         <Back />
 
-        <div className="md:max-w-[443px] md:flex-1">
+        <div className="relative z-10 md:max-w-[443px] md:flex-1">
           {" "}
           <button
             type="button"

@@ -1,6 +1,6 @@
 import { Link } from "react-router";
-import DonationDetails from "~/components/donate/donation-details";
-import PaymentCard from "~/components/donate/payment-card";
+import DonationDetails from "../components/donate/donation-details";
+import PaymentCard from "../components/donate/payment-card";
 
 export default function Donate() {
   const donations = [
@@ -33,7 +33,7 @@ export default function Donate() {
       <div className="font-mackinac w-full max-w-[1440px]">
         <div className="flex h-16 w-full items-center justify-between">
           <Link to={"/"}>
-            <p className="text-xl font-bold text-[#010040]">Contreebute.io</p>
+            <img src="/logo.svg" alt="Contreebute-logo" className="h-10 w-28" />
           </Link>
 
           <div className="flex items-center gap-4">

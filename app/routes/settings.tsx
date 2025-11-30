@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
-import Payment from "~/components/settings/payment";
-import Profile from "~/components/settings/profile";
+import Payment from "../components/settings/payment";
+import Profile from "../components/settings/profile";
 
 type Tab = "profile" | "payment";
 

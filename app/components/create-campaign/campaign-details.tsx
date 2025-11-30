@@ -1,7 +1,7 @@
 import { CalendarIcon, Earth, User } from "lucide-react";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
-import { useMultiStepForm } from "~/context/multi-step-context";
+import { useMultiStepForm } from "../../context/multi-step-context";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
@@ -75,7 +75,7 @@ export default function CampaignDetails() {
                   <SelectTrigger
                     id="type"
                     aria-invalid={fieldState.invalid}
-                    className="flex w-[140px] border border-[#F0F2F5] bg-white shadow-none"
+                    className="z-10 flex w-[140px] border border-[#F0F2F5] bg-white shadow-none"
                   >
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
@@ -117,7 +117,7 @@ export default function CampaignDetails() {
                   aria-invalid={fieldState.invalid}
                   placeholder="Enter campaign name"
                   autoComplete="off"
-                  className="shadow-none"
+                  className="z-10 shadow-none"
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
@@ -143,7 +143,7 @@ export default function CampaignDetails() {
                   aria-invalid={fieldState.invalid}
                   placeholder="Describe the goal of your campaign"
                   autoComplete="off"
-                  className="shadow-none"
+                  className="z-10 shadow-none"
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
@@ -170,7 +170,7 @@ export default function CampaignDetails() {
                   aria-invalid={fieldState.invalid}
                   placeholder="1000"
                   autoComplete="off"
-                  className="shadow-none"
+                  className="z-10 shadow-none"
                   type="number"
                   min={1}
                 />
@@ -357,7 +357,7 @@ export default function CampaignDetails() {
         <button
           type="button"
           onClick={nextStep}
-          className="font-inter mt-6 w-full cursor-pointer rounded-full bg-[#6360F0] px-4 py-3 text-sm font-semibold text-white"
+          className="font-inter relative z-10 mt-6 w-full cursor-pointer rounded-full bg-[#6360F0] px-4 py-3 text-sm font-semibold text-white"
         >
           Continue
         </button>

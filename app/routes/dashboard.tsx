@@ -1,18 +1,8 @@
 import { MoveUpRight, Pencil } from "lucide-react";
 import { Link } from "react-router";
-import { dashboardColumns } from "~/components/donations/dashboard-columns";
-import { DataTable } from "~/components/donations/data-table";
-import StatCard from "~/components/ui/stat-card";
-import type { Route } from "./+types/dashboard";
-
-export const meta: Route.MetaFunction = () => {
-  return [
-    {
-      name: "viewport",
-      content: "width=device-width, initial-scale=0.8",
-    },
-  ];
-};
+import { dashboardColumns } from "../components/donations/dashboard-columns";
+import { DataTable } from "../components/donations/data-table";
+import StatCard from "../components/ui/stat-card";
 
 export default function Dashboard() {
   return (

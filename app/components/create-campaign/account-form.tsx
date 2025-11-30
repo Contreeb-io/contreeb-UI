@@ -5,8 +5,9 @@ import { Controller, useForm } from "react-hook-form";
 import PhoneInputWithCountrySelect, {
   isValidPhoneNumber,
 } from "react-phone-number-input";
+import { useSubmit } from "react-router";
 import z from "zod/v3";
-import { useMultiStepForm } from "~/context/multi-step-context";
+import { useMultiStepForm } from "../../context/multi-step-context";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import Back from "./back";
@@ -16,7 +17,7 @@ const formSchema = z
   .object({
     name: z.string().min(3, "name should be at least 3 characters"),
     email: z.string().email("invalid email"),
-    number: z
+    phone_number: z
       .string()
       .min(1, "invalid phone number")
       .refine(
@@ -37,17 +38,18 @@ const formSchema = z
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/,
         "password must contain at least one uppercase letter, one lowercase letter, one number, and one symbol.",
       ),
-    confirm_password: z.string(),
+    password_confirmation: z.string(),
   })
-  .refine((data) => data.password === data.confirm_password, {
+  .refine((data) => data.password === data.password_confirmation, {
     message: "passwords do not match",
-    path: ["confirm_password"],
+    path: ["password_confirmation"],
   });
 
 export default function AccountForm() {
   const { form: F } = useMultiStepForm();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const submit = useSubmit();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,7 +57,7 @@ export default function AccountForm() {
       name: "",
       email: "",
       password: "",
-      confirm_password: "",
+      password_confirmation: "",
     },
   });
 
@@ -71,7 +73,7 @@ export default function AccountForm() {
       />
 
       <form
-        className="mt-8 rounded-2xl bg-white/50 p-6 font-sans"
+        className="relative z-10 mt-8 rounded-2xl bg-white/50 p-6 font-sans"
         onSubmit={form.handleSubmit(onSubmit)}
         id="signup"
       >
@@ -93,7 +95,7 @@ export default function AccountForm() {
                   aria-invalid={fieldState.invalid}
                   placeholder="Nessa.Linn"
                   autoComplete="off"
-                  className="shadow-none"
+                  className="z-10 shadow-none"
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
@@ -134,7 +136,7 @@ export default function AccountForm() {
           />
 
           <Controller
-            name="number"
+            name="phone_number"
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid} className="gap-1">
@@ -148,10 +150,10 @@ export default function AccountForm() {
                   defaultCountry="GH"
                   {...field}
                   inputComponent={Input}
-                  className="border-input g flex items-center rounded-md border bg-white px-2 shadow-none"
+                  className="border-input flex items-center rounded-md border bg-white! px-2 shadow-none"
                   numberInputProps={{
                     className:
-                      "flex-1 bg-transparent outline-none shadow-none border-none focus:ring-0 focus:outline-none",
+                      "flex-1 bg-transparent relative bg-white z-10 outline-none shadow-none border-none focus:ring-0 focus:outline-none",
                   }}
                 />
                 {fieldState.invalid && (
@@ -212,7 +214,7 @@ export default function AccountForm() {
           />
 
           <Controller
-            name="confirm_password"
+            name="password_confirmation"
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid} className="gap-1">
@@ -270,7 +272,7 @@ export default function AccountForm() {
       <article className="flex items-center justify-between">
         <Back />
 
-        <div className="md:max-w-[226px] md:flex-1">
+        <div className="relative z-10 md:max-w-[226px] md:flex-1">
           {" "}
           <button
             onClick={() => {

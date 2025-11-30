@@ -1,6 +1,5 @@
-import { X } from "lucide-react";
-import { Link } from "react-router";
-import { GuideDataTable } from "~/components/donations/guide-table";
+import { GuideDataTable } from "../components/donations/guide-table";
+import NavBar from "../components/ui/nav-bar";
 import {
   dashboard1Columns,
   dashboard1Data,
@@ -12,9 +11,7 @@ import {
   safetyData,
   typeData,
   typesColumns,
-} from "~/constant";
-import { useScroll } from "~/hooks/use-scroll";
-import type { Route } from "./+types/user-guide";
+} from "../constant";
 
 const faqSections = [
   {
@@ -59,43 +56,11 @@ const faqSections = [
   },
 ];
 
-export const meta: Route.MetaFunction = () => {
-  return [
-    {
-      name: "viewport",
-      content: "width=device-width, initial-scale=0.8",
-    },
-  ];
-};
-
 export default function UserGuide() {
-  const changeBg = useScroll();
-
   return (
     <main className="relative min-h-svh pb-10">
       <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[70px] md:blur-[490px]" />
-      <div
-        className={`fixed top-0 z-10 w-full ${!changeBg ? "bg-[#FFFFFF29]" : "bg-white/50"} `}
-      >
-        <header className="mx-auto flex max-w-[1500px] items-center justify-between px-6 py-3">
-          <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold text-[#010040]">Contreebute.io</h1>
-
-            <div className="hidden h-[32px] border border-[#c1c1c1] md:block"></div>
-
-            <h3 className="mt-1 hidden text-sm font-medium text-[#2B2B2B] md:block">
-              Contreebute - User Guide
-            </h3>
-          </div>
-
-          <Link
-            to={"/"}
-            className="flex items-center gap-1 rounded-full bg-[#E3EFFC] p-2 text-sm text-[#2B2B2B]"
-          >
-            <X size={16} color="#101928" /> close
-          </Link>
-        </header>
-      </div>
+      <NavBar text="Contreebute - User Guide" closeText />
 
       <section className="mx-auto mt-20 flex max-w-[1500px] px-6">
         <section className="max-w-[780px] flex-1 space-y-6">
@@ -528,7 +493,7 @@ export default function UserGuide() {
                 key={index}
                 className="list-inside list-decimal px-2 text-sm text-[#525252]"
               >
-                <Link to={item.link}>{item.question}</Link>
+                <a href={item.link}>{item.question}</a>
               </li>
             ))}
           </ul>

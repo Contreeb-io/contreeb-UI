@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Controller } from "react-hook-form";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { useMultiStepForm } from "~/context/multi-step-context";
+import { useMultiStepForm } from "../../context/multi-step-context";
 import {
   Dialog,
   DialogContent,

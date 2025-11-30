@@ -1,18 +1,18 @@
 import { CloudDownload, ListFilter, X } from "lucide-react";
 import { useState } from "react";
-import { DataTable } from "~/components/donations/data-table";
+import { DataTable } from "../components/donations/data-table";
 import {
   donationColumns,
   type Payment,
-} from "~/components/donations/donation-columns";
+} from "../components/donations/donation-columns";
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "~/components/ui/dialog";
-import { Input } from "~/components/ui/input";
+} from "../components/ui/dialog";
+import { Input } from "../components/ui/input";
 
 export default function Donations() {
   const [selectedDonation, setSelectedDonation] = useState<Payment | null>(

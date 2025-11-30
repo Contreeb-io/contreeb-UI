@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import type { FormType } from "~/types";
 import {
   Dialog,
   DialogContent,
@@ -7,8 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "~/components/ui/dialog";
-import type { FormType } from "~/types";
+} from "../../components/ui/dialog";
 import MagicLinkForm from "../auth/magic-link-form";
 import PasswordForm from "../auth/password-form";
 import OrDivider from "../ui/or-divider";

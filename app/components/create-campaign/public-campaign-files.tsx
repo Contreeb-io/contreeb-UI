@@ -1,5 +1,5 @@
 import { Controller } from "react-hook-form";
-import { useMultiStepForm } from "~/context/multi-step-context";
+import { useMultiStepForm } from "../../context/multi-step-context";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import FileUpload from "../ui/file-upload";
 import { Input } from "../ui/input";
@@ -89,7 +89,7 @@ export default function PublicCampaignFiles() {
             <button
               type="button"
               onClick={nextStep}
-              className="cursor-pointer rounded-full bg-[#6360F0] px-4 py-3 text-white disabled:bg-[#D7D0DD] disabled:text-white md:w-full"
+              className="relative z-10 cursor-pointer rounded-full bg-[#6360F0] px-4 py-3 text-white disabled:bg-[#D7D0DD] disabled:text-white md:w-full"
             >
               Create campaign
             </button>

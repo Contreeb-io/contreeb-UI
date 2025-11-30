@@ -1,18 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
-import SignIn from "~/components/home/sign-in";
-import type { Route } from "./+types/home";
-
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
-  ];
-}
-
-export const links: Route.LinksFunction = () => [
-  { rel: "preload", as: "image", href: "/google.png" },
-];
+import SignIn from "../components/home/sign-in";
 
 export default function Home() {
   return (
@@ -35,7 +23,7 @@ export default function Home() {
 
       <article className="z-30 mt-20 max-w-[734px] space-y-10 self-center">
         <div className="space-y-3">
-          <h1 className="font-mackinac text-center text-[40px] font-medium text-[#06052A] md:text-8xl">
+          <h1 className="font-mackinac text-center text-5xl font-medium text-[#06052A] md:text-8xl">
             Crowdfund for any Occasion
           </h1>
           <p className="text-center font-sans text-sm text-[#464646] md:text-lg">

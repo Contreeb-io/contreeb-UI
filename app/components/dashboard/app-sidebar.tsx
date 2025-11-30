@@ -6,6 +6,7 @@ import {
   Settings,
   User,
 } from "lucide-react";
+import { useState } from "react";
 import { Link, NavLink } from "react-router";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
@@ -27,6 +28,8 @@ import {
 export function AppSidebar() {
   const { setOpenMobile } = useSidebar();
 
+  const [open, setOpen] = useState(false);
+
   const handleNavClick = () => {
     setOpenMobile(false);
   };
@@ -35,7 +38,7 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarHeader className="font-mackinac flex flex-row items-center justify-between">
         <div className="flex items-center gap-2">
-          <h1 className="text-xl font-bold text-[#010040]">Contreebute.io</h1>
+          <img src="/logo.svg" alt="Contreebute-logo" className="h-10 w-28" />
           <span className="rounded-full bg-[#F0E3FC] px-[5px] py-[3px] text-[10px] font-bold text-[#8620D4]">
             beta
           </span>
@@ -85,25 +88,34 @@ export function AppSidebar() {
           </div>
         </div>
 
-        <DropdownMenu>
+        <DropdownMenu open={open} onOpenChange={setOpen}>
           <DropdownMenuTrigger>
             <Ellipsis color="#0E021A" size={16} />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="sidebar rounded-2xl border border-[#4949491F] p-3 font-sans shadow-[0px_2px_15px_7px_rgba(1,0,66,0.05)]">
-            <DropdownMenuItem className="flex items-center gap-2 p-4 text-sm font-medium text-[#1A1A1A]">
+            <DropdownMenuItem
+              className="flex items-center gap-2 p-4 text-sm font-medium text-[#1A1A1A]"
+              onClick={() => setOpen(false)}
+            >
               <Link to="/settings" className="flex w-full items-center gap-2">
                 <Settings color="#1A1A1A" />
                 Settings
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem className="flex items-center gap-2 p-4 text-sm font-medium text-[#1A1A1A]">
+            <DropdownMenuItem
+              className="flex items-center gap-2 p-4 text-sm font-medium text-[#1A1A1A]"
+              onClick={() => setOpen(false)}
+            >
               <Link to="/profile" className="flex w-full items-center gap-2">
                 <User color="#1A1A1A" />
                 Profile
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="flex items-center gap-2 p-4 text-sm font-medium text-[#1A1A1A]">
+            <DropdownMenuItem
+              className="flex items-center gap-2 p-4 text-sm font-medium text-[#1A1A1A]"
+              onClick={handleNavClick}
+            >
               <button
                 // onClick={handleSignOut}
                 className="flex w-full items-center gap-2 text-left"

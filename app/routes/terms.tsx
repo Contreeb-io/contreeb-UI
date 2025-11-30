@@ -1,9 +1,6 @@
-import { X } from "lucide-react";
-import { Link } from "react-router";
-import { GuideDataTable } from "~/components/donations/guide-table";
-import { userFeeColumns, userFeeData } from "~/constant";
-import { useScroll } from "~/hooks/use-scroll";
-import type { Route } from "./+types/terms";
+import { GuideDataTable } from "../components/donations/guide-table";
+import NavBar from "../components/ui/nav-bar";
+import { userFeeColumns, userFeeData } from "../constant";
 
 const termsOfService = [
   {
@@ -60,43 +57,11 @@ const termsOfService = [
   },
 ];
 
-export const meta: Route.MetaFunction = () => {
-  return [
-    {
-      name: "viewport",
-      content: "width=device-width, initial-scale=0.8",
-    },
-  ];
-};
-
 export default function Terms() {
-  const changeBg = useScroll();
-
   return (
     <main className="relative min-h-screen pb-10">
       <div className="fixed inset-0 z-10 h-full bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[50px] md:blur-[490px]" />
-      <div
-        className={`fixed top-0 z-20 w-full ${!changeBg ? "bg-[#FFFFFF29]" : "bg-white/50"} `}
-      >
-        <header className="mx-auto flex max-w-[1500px] items-center justify-between px-6 py-3">
-          <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold text-[#010040]">Contreebute.io</h1>
-
-            <div className="hidden h-[32px] border border-[#c1c1c1] md:block"></div>
-
-            <h3 className="mt-1 hidden text-sm font-medium text-[#2B2B2B] md:block">
-              Contreebute - Terms of Service
-            </h3>
-          </div>
-
-          <Link
-            to={"/"}
-            className="flex items-center gap-1 rounded-full bg-[#E3EFFC] p-2 text-sm text-[#2B2B2B]"
-          >
-            <X size={16} color="#101928" /> close
-          </Link>
-        </header>
-      </div>
+      <NavBar text=" Contreebute - Terms of Service" closeText />
 
       <section className="z-20 mx-auto mt-20 flex max-w-[1500px] px-6">
         <section className="max-w-[780px] flex-1 space-y-6">
@@ -379,7 +344,7 @@ export default function Terms() {
                 key={index}
                 className="list-inside list-decimal px-2 text-sm text-[#525252] first:font-medium first:text-[#0A0A0A]"
               >
-                <Link to={item.link}>{item.question}</Link>
+                <a href={item.link}>{item.question}</a>
               </li>
             ))}
           </ul>
