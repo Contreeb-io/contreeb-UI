@@ -26,6 +26,8 @@ export default function Donate() {
     },
   ];
 
+  console.log(donations);
+
   return (
     <main className="relative isolate min-h-svh px-5 pb-10">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[70px] md:blur-[490px]" />

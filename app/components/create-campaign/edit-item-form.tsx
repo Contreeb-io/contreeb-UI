@@ -30,7 +30,6 @@ export default function EditItemForm({
   setItems,
   idx,
   selectedItem,
-  items,
 }: {
   children: ReactNode;
   setItems: React.Dispatch<SetStateAction<Item[]>>;

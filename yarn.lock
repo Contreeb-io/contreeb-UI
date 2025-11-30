@@ -2737,7 +2737,7 @@ __metadata:
     react-day-picker: "npm:^9.11.1"
     react-dom: "npm:^19.1.1"
     react-hook-form: "npm:^7.65.0"
-    react-phone-number-input: "npm:^3.4.13"
+    react-phone-number-input: "npm:^3.4.14"
     react-router: "npm:^7.9.2"
     react-router-dom: "npm:^7.9.6"
     tailwind-merge: "npm:^3.3.1"
@@ -3497,7 +3497,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"input-format@npm:^0.3.10":
+"input-format@npm:^0.3.14":
   version: 0.3.14
   resolution: "input-format@npm:0.3.14"
   dependencies:
@@ -3668,10 +3668,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"libphonenumber-js@npm:^1.12.24":
-  version: 1.12.25
-  resolution: "libphonenumber-js@npm:1.12.25"
-  checksum: 10c0/071c942e34e32d7883fb08a3c6f53003eca7067d06d19511c8ba7312fefe5420b998479afd078a5be6958bac163481072ba2560b4ccb5c680b7c6aa67b6810c2
+"libphonenumber-js@npm:^1.12.27":
+  version: 1.12.29
+  resolution: "libphonenumber-js@npm:1.12.29"
+  checksum: 10c0/54d45ed866fd9a4a285498754b7f1a46f73f55be3318d6d002cb20d0d79d47255de54463ba1e5338502bf94f2f27d9f5d2199deb4e7d7b58a544fd2280d17059
   languageName: node
   linkType: hard
 
@@ -4538,19 +4538,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-phone-number-input@npm:^3.4.13":
-  version: 3.4.13
-  resolution: "react-phone-number-input@npm:3.4.13"
+"react-phone-number-input@npm:^3.4.14":
+  version: 3.4.14
+  resolution: "react-phone-number-input@npm:3.4.14"
   dependencies:
     classnames: "npm:^2.5.1"
     country-flag-icons: "npm:^1.5.17"
-    input-format: "npm:^0.3.10"
-    libphonenumber-js: "npm:^1.12.24"
+    input-format: "npm:^0.3.14"
+    libphonenumber-js: "npm:^1.12.27"
     prop-types: "npm:^15.8.1"
   peerDependencies:
     react: ">=16.8"
     react-dom: ">=16.8"
-  checksum: 10c0/69a17597f5e1c2c72c8d3e7a32a4b97528a50b140e620cc87858286310120b32bd7ea2e2b079808dbaac62bba6b43ec908aed31d4c1cf04505c0f5c71d1ab9c8
+  checksum: 10c0/f7722a337086f6f14162d282af2b09aea2fb7c476a1b954d22d9dcf93b5693b90c5dff64c68d84cc17e1d8a273c9c32b46666a8a30605f74f6363ea694c645f2
   languageName: node
   linkType: hard
 

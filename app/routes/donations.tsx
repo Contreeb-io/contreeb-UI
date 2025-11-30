@@ -25,11 +25,6 @@ export default function Donations() {
     setIsDialogOpen(true);
   };
 
-  const handleCloseDialog = () => {
-    setIsDialogOpen(false);
-    setTimeout(() => setSelectedDonation(null), 200);
-  };
-
   return (
     <main className="mx-auto max-w-[902px] space-y-6 pb-20 font-sans">
       <section className="space-y-2">

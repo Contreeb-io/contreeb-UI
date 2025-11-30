@@ -5,7 +5,6 @@ import { Controller, useForm } from "react-hook-form";
 import PhoneInputWithCountrySelect, {
   isValidPhoneNumber,
 } from "react-phone-number-input";
-import { useSubmit } from "react-router";
 import z from "zod/v3";
 import { useMultiStepForm } from "../../context/multi-step-context";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
@@ -49,7 +48,6 @@ export default function AccountForm() {
   const { form: F } = useMultiStepForm();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const submit = useSubmit();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

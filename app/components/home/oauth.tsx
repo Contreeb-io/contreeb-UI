@@ -1,6 +1,6 @@
 import type React from "react";
 import type { SetStateAction } from "react";
-import type { FormType } from "~/types";
+import type { FormType } from "../../types";
 
 export default function Oauth({
   formType,
