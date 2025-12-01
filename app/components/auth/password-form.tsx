@@ -1,9 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Link } from "react-router";
 import z from "zod";
+import api from "../../lib/api-client";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 
@@ -19,10 +21,21 @@ const formSchema = z.object({
     ),
 });
 
+type PasswordSignUp = z.infer<typeof formSchema>;
+
+async function passwordLogin(values: PasswordSignUp) {
+  try {
+    const res = await api.post("/login", values);
+    console.log(res.data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export default function PasswordForm() {
   const [showPassword, setShowPassword] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<PasswordSignUp>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
@@ -30,8 +43,12 @@ export default function PasswordForm() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log(data);
+  const { mutate, isPending } = useMutation({
+    mutationFn: passwordLogin,
+  });
+
+  function onSubmit(data: PasswordSignUp) {
+    mutate(data);
   }
 
   return (

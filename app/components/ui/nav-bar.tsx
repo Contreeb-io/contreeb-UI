@@ -32,9 +32,10 @@ export default function NavBar({
 
         <Link
           to={"/"}
-          className="flex items-end gap-1 rounded-full bg-[#E3EFFC] p-2 text-sm text-[#2B2B2B]"
+          className="flex items-center gap-1 rounded-full bg-[#E3EFFC] p-2 text-sm text-[#2B2B2B]"
         >
-          <X size={16} color="#101928" /> {closeText && <span>close</span>}
+          <X size={18} color="#101928" />{" "}
+          {closeText && <p className="">close</p>}
         </Link>
       </header>
     </div>

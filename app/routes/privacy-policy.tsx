@@ -56,15 +56,12 @@ const privacyPolicy = [
 export default function PrivacyPolicy() {
   return (
     <main className="relative isolate min-h-svh pb-10">
-      <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[70px] md:blur-[490px]" />
-      <NavBar text="Contreebute - Privacy Policy" closeText />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[70px] md:blur-[490px]" />
+      <NavBar text="Privacy Policy" closeText />
 
       <section className="mx-auto mt-20 flex max-w-[1500px] px-6">
         <section className="max-w-[800px] flex-1 space-y-6">
-          <article
-            className="space-y-2 border-b border-white pb-3"
-            id="short-version"
-          >
+          <article className="space-y-2 pb-3" id="short-version">
             <h1 className="font-mackinac font-medium text-[#0E021A]">
               1. The Short TL;DR
             </h1>
@@ -79,10 +76,7 @@ export default function PrivacyPolicy() {
               <p>Keep reading if you want the full love letter.</p>
             </div>
           </article>
-          <article
-            className="space-y-2 border-b border-white pb-3"
-            id="who-we-are"
-          >
+          <article className="space-y-2 pb-3" id="who-we-are">
             <h1 className="font-mackinac font-medium text-[#0E021A]">
               2. Who We Are
             </h1>
@@ -108,10 +102,7 @@ export default function PrivacyPolicy() {
               <p>We only win when you do. ❤️</p>
             </div>
           </article>
-          <article
-            className="space-y-2 border-b border-white pb-3"
-            id="what-we-collect"
-          >
+          <article className="space-y-2 pb-3" id="what-we-collect">
             <h1 className="font-mackinac font-medium text-[#0E021A]">
               3. What We Collect (And Why)
             </h1>
@@ -119,10 +110,7 @@ export default function PrivacyPolicy() {
               <GuideDataTable columns={privacyColumns} data={privacyData} />
             </div>
           </article>
-          <article
-            className="space-y-2 border-b border-white pb-3"
-            id="ghana-card-documents"
-          >
+          <article className="space-y-2 pb-3" id="ghana-card-documents">
             <h1 className="font-mackinac font-medium text-[#0E021A]">
               4. Ghana Card & Documents – Super Safe
             </h1>
@@ -135,10 +123,7 @@ export default function PrivacyPolicy() {
               </ul>
             </div>
           </article>
-          <article
-            className="space-y-2 border-b border-white pb-3"
-            id="how-we-use-info"
-          >
+          <article className="space-y-2 pb-3" id="how-we-use-info">
             <h1 className="font-mackinac font-medium text-[#0E021A]">
               5. How We Use Your Info
             </h1>
@@ -151,10 +136,7 @@ export default function PrivacyPolicy() {
               </ul>
             </div>
           </article>
-          <article
-            className="space-y-2 border-b border-white pb-3"
-            id="who-sees-info"
-          >
+          <article className="space-y-2 pb-3" id="who-sees-info">
             <h1 className="font-mackinac font-medium text-[#0E021A]">
               6. Who Sees Your Info
             </h1>
@@ -174,10 +156,7 @@ export default function PrivacyPolicy() {
               </ul>
             </div>
           </article>
-          <article
-            className="space-y-2 border-b border-white pb-3"
-            id="your-rights"
-          >
+          <article className="space-y-2 pb-3" id="your-rights">
             <h1 className="font-mackinac font-medium text-[#0E021A]">
               7. Your Rights (Ghana Data Protection Act)
             </h1>
@@ -190,10 +169,7 @@ export default function PrivacyPolicy() {
               </ul>
             </div>
           </article>
-          <article
-            className="space-y-2 border-b border-white pb-3"
-            id="cookies"
-          >
+          <article className="space-y-2 pb-3" id="cookies">
             <h1 className="font-mackinac font-medium text-[#0E021A]">
               8. Cookies (Small Sweet Biscuits)
             </h1>
@@ -207,10 +183,7 @@ export default function PrivacyPolicy() {
               </ul>
             </div>
           </article>
-          <article
-            className="space-y-2 border-b border-white pb-3"
-            id="children"
-          >
+          <article className="space-y-2 pb-3" id="children">
             <h1 className="font-mackinac font-medium text-[#0E021A]">
               9. Children
             </h1>
@@ -220,11 +193,8 @@ export default function PrivacyPolicy() {
               <br /> If we find out, we delete the account with love.
             </div>
           </article>
-          <article
-            className="space-y-2 border-b border-white pb-3"
-            id="security"
-          >
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+          <article className="space-y-2 pb-3" id="security">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               10. Security – We No Dey Play
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
@@ -236,11 +206,8 @@ export default function PrivacyPolicy() {
               </ul>
             </div>
           </article>
-          <article
-            className="space-y-2 border-b border-white pb-3"
-            id="changes-to-policy"
-          >
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+          <article className="space-y-2 pb-3" id="changes-to-policy">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               11. Changes to This Policy
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
@@ -249,11 +216,8 @@ export default function PrivacyPolicy() {
               Keep using Contreebute = you accept new rules.
             </div>
           </article>
-          <article
-            className="space-y-2 border-b border-white pb-3"
-            id="how-to-reach-us"
-          >
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+          <article className="space-y-2 pb-3" id="how-to-reach-us">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               12. Contact Us (We Answer Fast)
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">

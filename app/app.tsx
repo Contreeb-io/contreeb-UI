@@ -1,14 +1,16 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import Layout from "./components/dashboard/layout";
-import CreateCampaign from "./routes/create-campaign";
-import Dashboard from "./routes/dashboard";
-import Donate from "./routes/donate";
-import Donations from "./routes/donations";
-import Home from "./routes/home";
-import PrivacyPolicy from "./routes/privacy-policy";
-import Settings from "./routes/settings";
-import Terms from "./routes/terms";
-import UserGuide from "./routes/user-guide";
+const Layout = lazy(() => import("./components/dashboard/layout"));
+const CreateCampaign = lazy(() => import("./routes/create-campaign"));
+const Dashboard = lazy(() => import("./routes/dashboard"));
+const Donate = lazy(() => import("./routes/donate"));
+const Donations = lazy(() => import("./routes/donations"));
+const Home = lazy(() => import("./routes/home"));
+const PrivacyPolicy = lazy(() => import("./routes/privacy-policy"));
+const Settings = lazy(() => import("./routes/settings"));
+const Terms = lazy(() => import("./routes/terms"));
+const UserGuide = lazy(() => import("./routes/user-guide"));
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
   { path: "/donate/:id", element: <Donate /> },
 ]);
 
+const queryClient = new QueryClient();
+
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </>
+  );
 }

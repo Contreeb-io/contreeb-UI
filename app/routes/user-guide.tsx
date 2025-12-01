@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { GuideDataTable } from "../components/donations/guide-table";
 import NavBar from "../components/ui/nav-bar";
 import {
@@ -59,17 +60,18 @@ const faqSections = [
 export default function UserGuide() {
   return (
     <main className="relative min-h-svh pb-10">
-      <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[70px] md:blur-[490px]" />
-      <NavBar text="Contreebute - User Guide" closeText />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[70px] md:blur-[490px]" />
+      <NavBar text="User Guide" closeText />
 
-      <section className="mx-auto mt-20 flex max-w-[1500px] px-6">
+      <section className="z-20 mx-auto mt-20 flex max-w-[1500px] px-6">
         <section className="max-w-[780px] flex-1 space-y-6">
           <article className="space-y-2">
             <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               Hi there, we’re Contreebute!
             </h1>
             <div className="text-sm text-[#5D5757]">
-              A trusted, simple and warm place where dreamers meet givers.
+              A trusted, simple and warm place{" "}
+              <span className="font-bold">where dreamers meet givers.</span>
               <br />
               Whether you’re asking for help, giving with love or cheering
               someone on, you’re safe here!
@@ -92,7 +94,7 @@ export default function UserGuide() {
           </article>
 
           <article className="space-y-2" id="what-is-contreebute">
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               1. What Is Contreebute?
             </h1>
             <div className="space-y-1.5 text-sm text-[#5D5757]">
@@ -134,7 +136,7 @@ export default function UserGuide() {
           </article>
 
           <article className="space-y-4" id="two-types-of-campaigns">
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               2. Two Types of Campaigns (Choose What Fits Your Heart)
             </h1>
 
@@ -148,11 +150,11 @@ export default function UserGuide() {
           </article>
 
           <article className="space-y-4" id="how-to-create-campaign">
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               3. How to Create a Campaign (It’s Free & Easy)
             </h1>
             <div className="space-y-1.5 text-[#5D5757]">
-              <h5 className="font-medium">Step 1: Tell Us Your Story</h5>
+              <h5 className="text-xl font-bold">Step 1: Tell Us Your Story</h5>
               <ul className="list-inside list-decimal space-y-0.5 border-b border-white pb-2 text-sm">
                 <li>Tap “Start a Campaign”</li>
                 <li>Choose: Personal or Public</li>
@@ -229,7 +231,7 @@ export default function UserGuide() {
           </article>
 
           <article className="space-y-4" id="how-donors-give">
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               4. How Donors Give (So Simple, So Kind)
             </h1>
             <div className="space-y-1.5 text-sm text-[#5D5757]">
@@ -259,7 +261,7 @@ export default function UserGuide() {
           </article>
 
           <article className="space-y-4" id="fees">
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               5. Fees: Only If You Win (And You Keep 94%-96% of It)
             </h1>
             <div className="space-y-1.5 text-sm text-[#5D5757]">
@@ -268,7 +270,7 @@ export default function UserGuide() {
           </article>
 
           <article className="space-y-4" id="when-how-paid">
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               6. When & How You Get Paid
             </h1>
             <div className="space-y-1.5 text-sm text-[#5D5757]">
@@ -340,7 +342,7 @@ export default function UserGuide() {
           </article>
 
           <article className="space-y-4" id="your-dashboard">
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               7. Your Dashboard: Stay Close to Your Progress
             </h1>
             <div className="space-y-1.5 text-sm text-[#5D5757]">
@@ -365,7 +367,7 @@ export default function UserGuide() {
           </article>
 
           <article className="space-y-4" id="trust-and-safety">
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               8. Trust & Safety (We’ve Got You)
             </h1>
             <div className="space-y-1.5 text-sm text-[#5D5757]">
@@ -374,7 +376,7 @@ export default function UserGuide() {
           </article>
 
           <article className="space-y-4" id="need-help">
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               9. Need Help? We’re Here (Like Family)
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
@@ -395,7 +397,7 @@ export default function UserGuide() {
           </article>
 
           <article className="space-y-4 border-b border-white pb-3" id="faq">
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               10. Frequently Asked Questions (FAQ)
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
@@ -449,7 +451,15 @@ export default function UserGuide() {
 
           <article className="space-y-2 text-sm text-[#5D5757]">
             <div className="space-y-1.5 border-b border-white pb-3">
-              <h5 className="font-bold">You’re Ready to Begin</h5>
+              <h5 className="font-bold">
+                You’re Ready to Begin{" "}
+                <Link
+                  to={"/create-campaign"}
+                  className="font-medium text-blue-400 underline"
+                >
+                  Click here
+                </Link>
+              </h5>
               <p>
                 Whether you’re{" "}
                 <span className="font-bold">asking with hope</span> or{" "}
@@ -484,7 +494,7 @@ export default function UserGuide() {
         </section>
 
         <aside className="fixed right-10 hidden flex-col gap-3 rounded-[8px] border border-[#F0F0F0] bg-white/50 p-2 md:flex">
-          <h5 className="text-sm font-medium text-[#0A0A0A]">
+          <h5 className="text-xl font-bold text-[#0A0A0A]">
             Welcome Home, Friend
           </h5>
           <ul className="space-y-3">
@@ -497,7 +507,12 @@ export default function UserGuide() {
               </li>
             ))}
           </ul>
-          <p className="text-sm text-[#525252]">You’re Ready to Begin</p>
+          <p className="text-sm text-[#525252]">
+            You’re Ready to Begin{" "}
+            <Link to={"/create-campaign"} className="text-blue-400 underline">
+              Click here
+            </Link>{" "}
+          </p>
         </aside>
       </section>
     </main>

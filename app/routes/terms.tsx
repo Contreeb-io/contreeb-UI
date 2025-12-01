@@ -60,8 +60,8 @@ const termsOfService = [
 export default function Terms() {
   return (
     <main className="relative min-h-screen pb-10">
-      <div className="fixed inset-0 z-10 h-full bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[50px] md:blur-[490px]" />
-      <NavBar text=" Contreebute - Terms of Service" closeText />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[70px] md:blur-[490px]" />
+      <NavBar text="Terms of Service" closeText />
 
       <section className="z-20 mx-auto mt-20 flex max-w-[1500px] px-6">
         <section className="max-w-[780px] flex-1 space-y-6">
@@ -69,7 +69,7 @@ export default function Terms() {
             className="space-y-2 border-b border-white pb-3"
             id="short-version"
           >
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               1. The Short Version (TL;DR)
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
@@ -91,7 +91,7 @@ export default function Terms() {
             className="space-y-2 border-b border-white pb-3"
             id="who-we-are"
           >
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               2. Who We Are
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
@@ -118,7 +118,7 @@ export default function Terms() {
             className="space-y-2 border-b border-white pb-3"
             id="what-you-can-do"
           >
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               3. What You Can Do on Contreebute
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
@@ -136,7 +136,7 @@ export default function Terms() {
             className="space-y-2 border-b border-white pb-3"
             id="what-you-cannot-do"
           >
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               4. What You CANNOT Do (Please Don’t)
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
@@ -160,7 +160,7 @@ export default function Terms() {
             </div>
           </article>
           <article className="space-y-2 border-b border-white pb-3" id="fees">
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               5. Fees – Same As On The Website
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
@@ -183,7 +183,7 @@ export default function Terms() {
             className="space-y-2 border-b border-white pb-3"
             id="payouts"
           >
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               6. Payouts – When & How
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
@@ -203,7 +203,7 @@ export default function Terms() {
             className="space-y-2 border-b border-white pb-3"
             id="refunds"
           >
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               7. Refunds
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
@@ -225,7 +225,7 @@ export default function Terms() {
             className="space-y-2 border-b border-white pb-3"
             id="verification"
           >
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               8. Verification (Public Campaigns)
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
@@ -243,7 +243,7 @@ export default function Terms() {
             className="space-y-2 border-b border-white pb-3"
             id="your-data"
           >
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               9. Your Data: We Protect it.
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
@@ -268,7 +268,7 @@ export default function Terms() {
             className="space-y-2 border-b border-white pb-3"
             id="intellectual-property"
           >
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               10. Intellectual Property
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
@@ -282,7 +282,7 @@ export default function Terms() {
             className="space-y-2 border-b border-white pb-3"
             id="if-something-goes-wrong"
           >
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               11. If Something Goes Wrong
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
@@ -300,7 +300,7 @@ export default function Terms() {
             className="space-y-2 border-b border-white pb-3"
             id="we-can-change-terms"
           >
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               12. We Can Change These Terms
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
@@ -312,7 +312,7 @@ export default function Terms() {
             className="space-y-2 border-b border-white pb-3"
             id="how-to-reach-us"
           >
-            <h1 className="font-mackinac font-medium text-[#0E021A]">
+            <h1 className="font-mackinac text-xl font-bold text-[#0E021A]">
               13. How to Reach Us
             </h1>
             <div className="space-y-2 text-sm text-[#5D5757]">
