@@ -133,10 +133,11 @@ export default function PasswordForm() {
         </Link>
       </FieldGroup>
       <button
+        disabled={isPending}
         type="submit"
         className="mt-4 w-full rounded-full bg-[#6360F0] px-4 py-3 text-sm font-semibold text-white"
       >
-        Submit
+        {isPending ? "" : "Submit"}
       </button>
     </form>
   );
