@@ -21,7 +21,8 @@ export default function Home() {
       <article className="z-30 mt-20 max-w-[734px] space-y-10 self-center">
         <div className="space-y-3">
           <h1 className="font-mackinac text-center text-5xl font-medium text-[#06052A] md:text-8xl">
-            Crowdfund for any Occasion
+            Where <span className="italic">dreamers</span> meet{" "}
+            <span className="italic">givers</span>
           </h1>
           <p className="text-center font-sans text-sm text-[#464646] md:text-lg">
             Bring <span className="font-semibold text-[#01003C]">friends</span>{" "}
