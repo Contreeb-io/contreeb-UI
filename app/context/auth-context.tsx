@@ -64,11 +64,12 @@ export const AuthProvider: React.FC<{
   };
 
   const logout = () => {
+    window.location.href = "/";
     setTokenState(null);
     setUserState(null);
+    cookie.remove(TOKEN_KEY);
     if (persist) {
       try {
-        localStorage.removeItem(TOKEN_KEY);
         localStorage.removeItem(USER_KEY);
       } catch {}
     }

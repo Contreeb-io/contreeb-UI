@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Link, NavLink } from "react-router";
+import { useAuth } from "../../context/auth-context";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
   DropdownMenu,
@@ -27,7 +28,7 @@ import {
 
 export function AppSidebar() {
   const { setOpenMobile } = useSidebar();
-
+  const { logout, user } = useAuth();
   const [open, setOpen] = useState(false);
 
   const handleNavClick = () => {
@@ -73,18 +74,20 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter className="flex flex-row items-center justify-between rounded-[8px] border border-[#F0F2F5] bg-[#EEEEFF54] p-2">
-        <div className="flex items-center gap-2">
-          <Avatar>
-            <AvatarImage src="" alt="name" />
-            <AvatarFallback className="bg-[#000130] text-sm font-bold text-white">
-              CN
-            </AvatarFallback>
-          </Avatar>
-          <div className="-space-y-0.5">
-            <h6 className="text-sm font-semibold">Lina Niss</h6>
-            <p className="text-xs text-ellipsis text-[#344054]">
-              lina.niss@contreeb.io
-            </p>
+        <div className="flex max-w-[90%]">
+          <div className="flex items-center gap-2">
+            <Avatar>
+              <AvatarImage src={user?.image || ""} alt="name" />
+              <AvatarFallback className="bg-[#000130] text-sm font-bold text-white">
+                {user?.name[0]}
+              </AvatarFallback>
+            </Avatar>
+            <div className="-space-y-0.5">
+              <h6 className="truncate text-sm font-semibold">{user?.name}</h6>
+              <p className="line-clamp-1 max-w-[85%] truncate text-xs text-[#344054]">
+                {user?.email}
+              </p>
+            </div>
           </div>
         </div>
 
@@ -117,7 +120,7 @@ export function AppSidebar() {
               onClick={handleNavClick}
             >
               <button
-                // onClick={handleSignOut}
+                onClick={() => logout()}
                 className="flex w-full items-center gap-2 text-left"
               >
                 <LogOut color="#1A1A1A" />

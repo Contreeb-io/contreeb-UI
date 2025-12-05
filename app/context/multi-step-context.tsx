@@ -14,7 +14,7 @@ const completeFormSchema = z.object({
   end_time: z.string(),
   network: z.string(),
   number: z.string(),
-  account_name: z.string().min(2),
+  account_name: z.string(), //an min later,
   id_card: z.instanceof(File).optional(),
   proof_of_need: z.instanceof(File).optional(),
 });

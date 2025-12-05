@@ -17,7 +17,6 @@ function convertDateToDays(date: Date): number {
 
 function set(name: string, value: string, expiry: Date) {
   const days = convertDateToDays(expiry);
-
   Cookies.set(name, value, { expires: days, secure: true });
 }
 
@@ -25,4 +24,8 @@ function get(name: string) {
   return Cookies.get(name);
 }
 
-export default { set, get };
+function remove(name: string) {
+  Cookies.remove(name);
+}
+
+export default { set, get, remove };

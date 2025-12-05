@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -6,7 +7,11 @@ import PhoneInputWithCountrySelect, {
   isValidPhoneNumber,
 } from "react-phone-number-input";
 import z from "zod/v3";
+import { TOKEN_KEY, useAuth } from "../../context/auth-context";
 import { useMultiStepForm } from "../../context/multi-step-context";
+import { createAccount } from "../../lib/auth";
+import token from "../../lib/token";
+import { Button } from "../ui/button";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import Back from "./back";
@@ -44,12 +49,15 @@ const formSchema = z
     path: ["password_confirmation"],
   });
 
+export type AccountType = z.infer<typeof formSchema>;
+
 export default function AccountForm() {
   const { form: F } = useMultiStepForm();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { setUser } = useAuth();
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<AccountType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
@@ -59,8 +67,19 @@ export default function AccountForm() {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
+  const { mutate, isPending } = useMutation({
+    mutationFn: createAccount,
+    onSuccess: (res) => {
+      if (res) {
+        token.set(TOKEN_KEY, res.token, res.expired_at);
+        setUser(res.user);
+        // submit form
+      }
+    },
+  });
+
+  const onSubmit = (data: AccountType) => {
+    mutate(data);
   };
 
   return (
@@ -272,14 +291,16 @@ export default function AccountForm() {
 
         <div className="relative z-10 md:max-w-[226px] md:flex-1">
           {" "}
-          <button
+          <Button
             onClick={() => {
               document.getElementById("submit")?.click();
             }}
-            className="cursor-pointer rounded-full bg-[#6360F0] px-4 py-3 text-white disabled:bg-[#D7D0DD] disabled:text-white md:w-full"
+            variant="custom"
+            isLoading={isPending}
+            disabled={isPending}
           >
             Create campaign
-          </button>
+          </Button>
         </div>
       </article>
     </section>
