@@ -3,9 +3,12 @@ import { useMutation } from "@tanstack/react-query";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import z from "zod";
-import api from "../../lib/api-client";
+import { TOKEN_KEY, useAuth } from "../../context/auth-context";
+import { passwordLogin } from "../../lib/auth";
+import token from "../../lib/token";
+import { Button } from "../ui/button";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 
@@ -21,19 +24,12 @@ const formSchema = z.object({
     ),
 });
 
-type PasswordSignUp = z.infer<typeof formSchema>;
-
-async function passwordLogin(values: PasswordSignUp) {
-  try {
-    const res = await api.post("/login", values);
-    console.log(res.data);
-  } catch (error) {
-    console.log(error);
-  }
-}
+export type PasswordSignUp = z.infer<typeof formSchema>;
 
 export default function PasswordForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const { setUser } = useAuth();
+  const navigate = useNavigate();
 
   const form = useForm<PasswordSignUp>({
     resolver: zodResolver(formSchema),
@@ -45,6 +41,13 @@ export default function PasswordForm() {
 
   const { mutate, isPending } = useMutation({
     mutationFn: passwordLogin,
+    onSuccess: (res) => {
+      if (res) {
+        token.set(TOKEN_KEY, res.data.token, res.data.expired_at);
+        setUser(res.user);
+        navigate("/dashboard");
+      }
+    },
   });
 
   function onSubmit(data: PasswordSignUp) {
@@ -132,13 +135,14 @@ export default function PasswordForm() {
           Forgot password?
         </Link>
       </FieldGroup>
-      <button
+      <Button
         disabled={isPending}
+        isLoading={isPending}
         type="submit"
-        className="mt-4 w-full rounded-full bg-[#6360F0] px-4 py-3 text-sm font-semibold text-white"
+        variant="custom"
       >
-        {isPending ? "" : "Submit"}
-      </button>
+        Submit
+      </Button>
     </form>
   );
 }

@@ -1,6 +1,13 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
+
+import "@fontsource/instrument-sans/400.css";
+import "@fontsource/instrument-sans/700.css";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/700.css";
+
 const Layout = lazy(() => import("./components/dashboard/layout"));
 const CreateCampaign = lazy(() => import("./routes/create-campaign"));
 const Dashboard = lazy(() => import("./routes/dashboard"));

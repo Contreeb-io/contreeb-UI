@@ -1,0 +1,207 @@
+import { toast } from "sonner";
+import { TOKEN_KEY } from "../context/auth-context";
+import token from "./token";
+
+const baseUrl = import.meta.env.VITE_BACKEND_URL || "";
+
+const errorStyle = {
+  backgroundColor: "#ef4444",
+  color: "white",
+  borderColor: "#ef4444",
+};
+
+/**
+ * Handles errors returned by API responses.
+ * @param response - The fetch response object.
+ * @returns Throws an error or returns parsed data.
+ */
+async function handleErrors(response: Response): Promise<any> {
+  const res = await response.json();
+  if (response.status === 401) {
+    toast.error(res.error, {
+      style: errorStyle,
+    });
+    return;
+  }
+
+  if (!response.ok) {
+    if (res.errors && typeof res.errors === "object") {
+      const errors = Object.values(res.errors).flat();
+      errors.forEach((error: unknown): void => {});
+      return;
+    }
+
+    if (response.status === 500) {
+      toast.error("Internal Server error", {
+        style: errorStyle,
+      });
+    } else {
+      if (typeof res.error === "string") {
+        toast.error(res.error, {
+          style: errorStyle,
+        });
+        return;
+      } else if (typeof res.errors === "string") {
+        toast.error(res.error, {
+          style: errorStyle,
+        });
+        return;
+      } else if (typeof res.message === "string") {
+        toast.error(res.error, {
+          style: errorStyle,
+        });
+        return;
+      } else {
+        toast.error(res.error, {
+          style: errorStyle,
+        });
+      }
+    }
+
+    throw new Error(`HTTP Error: ${response.status}`);
+  }
+
+  if (res?.hasError === 1) {
+    // toaster("error", "Oops. An error occurred");
+    console.log(res);
+    throw new Error("Server reported an error");
+  }
+
+  return res;
+}
+
+function setHeaders(config: {
+  headers?: Record<string, string>;
+  formData?: boolean;
+}): Record<string, string> {
+  const apiToken = token.get(TOKEN_KEY);
+
+  const headers: Record<string, string> = {
+    Accept: "application/json",
+    ...config.headers,
+  };
+
+  if (apiToken) {
+    headers["Authorization"] = `Bearer ${apiToken}`;
+  }
+
+  if (!config.formData) {
+    headers["Content-Type"] = "application/json";
+  }
+
+  return headers;
+}
+
+/**
+ * Sends a GET request to the API.
+ * @param url - The endpoint URL.
+ * @param params - Optional query parameters to append to the URL.
+ * @param options - Optional configuration and additional headers for the request.
+ * @param config - Optional or additonal configuration for the fetch api.
+ * @returns The parsed response data.
+ */
+const get = async <T = any>(
+  url: string,
+  params?: Record<string, any>,
+  options: { headers?: Record<string, string>; formData?: boolean } = {},
+  config: RequestInit = {},
+): Promise<T> => {
+  let newUrl = `${url}`;
+  if (params) {
+    const queryParams = new URLSearchParams();
+    for (const [key, value] of Object.entries(params)) {
+      if (value !== undefined && value !== null) {
+        queryParams.append(key, String(value));
+      }
+    }
+
+    if (queryParams.toString()) {
+      newUrl += `?${queryParams.toString()}`;
+    }
+  }
+
+  const response = await fetch(`${baseUrl}/${newUrl}`, {
+    method: "GET",
+    headers: setHeaders(options),
+    ...config,
+  });
+  return handleErrors(response) as T;
+};
+
+/**
+ * Sends a POST request to the API.
+ * @param url - The endpoint URL.
+ * @param data - The data to send in the request body.
+ * @param options - Optional configuration and additional headers for the request.
+ * @param config - Optional or additonal configuration for the fetch api.
+ * @returns The parsed response data.
+ */
+
+const post = async <T = any>(
+  url: string,
+  data: any,
+  options: { headers?: Record<string, string>; formData?: boolean } = {},
+  config: RequestInit = {},
+): Promise<T> => {
+  const response = await fetch(`${baseUrl}/${url}`, {
+    method: "POST",
+    headers: setHeaders(options),
+    body: options.formData ? data : JSON.stringify(data),
+    ...config,
+  });
+  return handleErrors(response) as T;
+};
+
+/**
+ * Sends a PUT request to the API.
+ * @param url - The endpoint URL.
+ * @param data - The data to send in the request body.
+ * @param options - Optional configuration and additional headers for the request.
+ * @param config - Optional or additonal configuration for the fetch api.
+ * @returns The parsed response data.
+ */
+
+const update = async <T = any>(
+  url: string,
+  data: any,
+  options: { headers?: Record<string, string>; formData?: boolean } = {},
+  config: RequestInit = {},
+): Promise<T> => {
+  const response = await fetch(`${baseUrl}/${url}`, {
+    method: "PUT",
+    headers: setHeaders(options),
+    body: options.formData ? data : JSON.stringify(data),
+    ...config,
+  });
+
+  return handleErrors(response) as T;
+};
+
+/**
+ * Sends a DELETE request to the API.
+ * @param url - The endpoint URL.
+ * @param options - Optional configuration and additional headers for the request.
+ * @param config - Optional or additonal configuration for the fetch api.
+ * @returns The parsed response data.
+ */
+
+const destroy = async <T = any>(
+  url: string,
+  options: { headers?: Record<string, string>; formData?: boolean } = {},
+  config: RequestInit = {},
+): Promise<T> => {
+  const response = await fetch(`${baseUrl}/${url}`, {
+    method: "DELETE",
+    headers: setHeaders(options),
+    ...config,
+  });
+
+  return handleErrors(response) as T;
+};
+
+export default {
+  post,
+  get,
+  update,
+  destroy,
+};
