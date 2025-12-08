@@ -10,6 +10,12 @@ const errorStyle = {
   borderColor: "#ef4444",
 };
 
+export const successStyle = {
+  backgroundColor: "#10b981",
+  color: "white",
+  borderColor: "#10b981",
+};
+
 /**
  * Handles errors returned by API responses.
  * @param response - The fetch response object.

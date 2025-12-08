@@ -16,9 +16,10 @@ import Oauth from "./oauth";
 
 export default function SignIn() {
   const [formType, setFormType] = useState<FormType>("password");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
-    <Dialog>
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger className="sing-in-btn cursor-pointer rounded-[695px] bg-[#FFDEDE1A] px-4 py-3 text-sm font-medium text-[#242424] md:text-base">
         sign in
       </DialogTrigger>
@@ -43,7 +44,9 @@ export default function SignIn() {
           </DialogHeader>
 
           {formType === "password" && <PasswordForm />}
-          {formType === "magicLink" && <MagicLinkForm />}
+          {formType === "magicLink" && (
+            <MagicLinkForm setIsDialogOpen={setIsDialogOpen} />
+          )}
         </article>
 
         <OrDivider />

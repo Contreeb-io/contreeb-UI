@@ -1,6 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import type React from "react";
+import type { SetStateAction } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
+import http, { successStyle } from "../../lib/http";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -9,6 +14,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "../ui/alert-dialog";
+import { Button } from "../ui/button";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 
@@ -16,7 +22,11 @@ const formSchema = z.object({
   email: z.email("Invalid email"),
 });
 
-export default function MagicLinkForm() {
+export default function MagicLinkForm({
+  setIsDialogOpen,
+}: {
+  setIsDialogOpen: React.Dispatch<SetStateAction<boolean>>;
+}) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -24,8 +34,21 @@ export default function MagicLinkForm() {
     },
   });
 
+  async function requestMagicLink(values: z.infer<typeof formSchema>) {
+    const res = await http.post("magic_links", values);
+    return res;
+  }
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: requestMagicLink,
+    onSuccess: (data) => {
+      toast.success(data.message, { style: successStyle });
+      setIsDialogOpen(false);
+    },
+  });
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    mutate(values);
   }
 
   return (
@@ -86,12 +109,14 @@ export default function MagicLinkForm() {
             )}
           />
         </FieldGroup>
-        <button
+        <Button
           type="submit"
-          className="mt-4 w-full rounded-full bg-[#6360F0] px-4 py-3 text-sm font-semibold text-white"
+          variant="custom"
+          disabled={isPending}
+          isLoading={isPending}
         >
           Request magic link
-        </button>
+        </Button>
       </form>
     </div>
   );
