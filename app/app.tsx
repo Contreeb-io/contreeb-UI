@@ -7,6 +7,8 @@ import "@fontsource/instrument-sans/700.css";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/700.css";
+import http from "./lib/http";
+import VerifyMagicLink from "./routes/verify_magic_link";
 
 const Layout = lazy(() => import("./components/dashboard/layout"));
 const CreateCampaign = lazy(() => import("./routes/create-campaign"));
@@ -24,6 +26,17 @@ const router = createBrowserRouter([
   { path: "/user-guide", element: <UserGuide /> },
   { path: "/terms", element: <Terms /> },
   { path: "/privacy-policy", element: <PrivacyPolicy /> },
+  {
+    path: "/magic_links/verify",
+    element: <VerifyMagicLink />,
+    loader: async ({ request }) => {
+      const url = new URL(request.url);
+      const searchParams = url.searchParams;
+      const token = searchParams.get("token");
+      const res = await http.post("magic_links/verify", { token });
+      return res;
+    },
+  },
   { path: "/create-campaign", element: <CreateCampaign /> },
   {
     path: "/",

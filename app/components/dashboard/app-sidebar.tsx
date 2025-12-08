@@ -84,7 +84,7 @@ export function AppSidebar() {
             </Avatar>
             <div className="-space-y-0.5">
               <h6 className="truncate text-sm font-semibold">{user?.name}</h6>
-              <p className="line-clamp-1 max-w-[85%] truncate text-xs text-[#344054]">
+              <p className="line-clamp-1 truncate text-xs text-[#344054] md:max-w-[85%]">
                 {user?.email}
               </p>
             </div>
