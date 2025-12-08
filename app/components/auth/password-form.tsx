@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import z from "zod";
 import { TOKEN_KEY, useAuth } from "../../context/auth-context";
 import { passwordLogin } from "../../lib/auth";
@@ -26,7 +26,11 @@ const formSchema = z.object({
 
 export type PasswordSignUp = z.infer<typeof formSchema>;
 
-export default function PasswordForm() {
+export default function PasswordForm({
+  showResetPassword,
+}: {
+  showResetPassword: () => void;
+}) {
   const [showPassword, setShowPassword] = useState(false);
   const { setUser } = useAuth();
   const navigate = useNavigate();
@@ -128,12 +132,12 @@ export default function PasswordForm() {
             </Field>
           )}
         />
-        <Link
-          to={"#"}
-          className="-mt-2 ml-auto font-medium text-[#6360F0] underline"
+        <p
+          onClick={() => showResetPassword()}
+          className="-mt-2 ml-auto cursor-pointer font-medium text-[#6360F0] underline"
         >
           Forgot password?
-        </Link>
+        </p>
       </FieldGroup>
       <Button
         disabled={isPending}

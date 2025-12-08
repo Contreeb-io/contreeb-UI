@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
+import { HelmetProvider } from "react-helmet-async";
 import { createBrowserRouter, RouterProvider } from "react-router";
 
 import "@fontsource/instrument-sans/400.css";
@@ -53,11 +54,15 @@ const router = createBrowserRouter([
 const queryClient = new QueryClient();
 
 export default function App() {
+  const helmetContext = {};
+
   return (
-    <>
+    <HelmetProvider context={helmetContext}>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <Suspense fallback={<div></div>}>
+          <RouterProvider router={router} />
+        </Suspense>
       </QueryClientProvider>
-    </>
+    </HelmetProvider>
   );
 }
