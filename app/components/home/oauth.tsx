@@ -22,7 +22,7 @@ export default function Oauth({
 
   const { mutate, isPending } = useMutation({
     mutationFn: googleSignIn,
-    onSuccess: (data) => {
+    onSuccess: () => {
       // set token and user
     },
   });

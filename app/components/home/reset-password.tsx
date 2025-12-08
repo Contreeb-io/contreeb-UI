@@ -29,7 +29,7 @@ export default function ResetPassword({
   setIsResetPasswordOpen: React.Dispatch<SetStateAction<boolean>>;
   showForm: () => void;
 }) {
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isSuccess] = useState(false);
   const [submittedEmail] = useState("");
 
   const form = useForm<FormType>({
