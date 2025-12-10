@@ -8,6 +8,8 @@ export async function passwordLogin(values: PasswordSignUp) {
 }
 
 export async function createAccount(values: AccountType) {
-  const res = await http.post("/users", { ...values, role: "regular" });
+  const res = await http.post("/users", {
+    user: { ...values, role: "regular" },
+  });
   return res;
 }

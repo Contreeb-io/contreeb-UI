@@ -286,10 +286,10 @@ export default function AccountForm() {
         </button>
       </form>
 
-      <article className="flex items-center justify-between">
+      <article className="flex items-baseline justify-between">
         <Back />
 
-        <div className="relative z-10 md:max-w-[226px] md:flex-1">
+        <div className="relative bottom-1 z-10 min-w-[120px] md:max-w-[226px] md:flex-1">
           {" "}
           <Button
             onClick={() => {
