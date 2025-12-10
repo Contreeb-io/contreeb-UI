@@ -13,3 +13,18 @@ export async function createAccount(values: AccountType) {
   });
   return res;
 }
+
+export async function magicLinkVerification(token: string) {
+  const res = await http.post("magic_links/verify", { token });
+  return res;
+}
+
+export async function requestMagicLink(values: { email: string }) {
+  const res = await http.post("magic_links", values);
+  return res;
+}
+
+export async function forgotPassword(values: { email: string }) {
+  const res = await http.post("password/forgot", values);
+  return res;
+}

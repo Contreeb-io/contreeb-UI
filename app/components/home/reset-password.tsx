@@ -1,8 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { ArrowLeft, X } from "lucide-react";
 import { useState, type SetStateAction } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
+import { forgotPassword } from "../../lib/auth";
+import { successStyle } from "../../lib/http";
 import { Button } from "../ui/button";
 import {
   Dialog,
@@ -29,8 +33,8 @@ export default function ResetPassword({
   setIsResetPasswordOpen: React.Dispatch<SetStateAction<boolean>>;
   showForm: () => void;
 }) {
-  const [isSuccess] = useState(false);
-  const [submittedEmail] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState("");
 
   const form = useForm<FormType>({
     resolver: zodResolver(formSchema),
@@ -39,8 +43,19 @@ export default function ResetPassword({
     },
   });
 
+  const { mutate, isPending } = useMutation({
+    mutationFn: forgotPassword,
+    onSuccess: (data, variables) => {
+      if (data) {
+        toast.success(data.message, { style: successStyle });
+        setSubmittedEmail(variables.email);
+        setIsSuccess(true);
+      }
+    },
+  });
+
   function onSubmit(values: FormType) {
-    console.log(values);
+    mutate(values);
   }
 
   return (
@@ -72,10 +87,11 @@ export default function ResetPassword({
             <div className="text-sm text-[#5D5757]">
               Didn't receive any link?{" "}
               <button
-                // onClick={handleResend}
+                onClick={() => mutate({ email: submittedEmail })}
                 className="font-semibold text-[#010040] hover:underline"
+                disabled={isPending}
               >
-                Resend
+                {isPending ? "Resending..." : "Resend"}
               </button>
             </div>
           </>
@@ -128,7 +144,12 @@ export default function ResetPassword({
                   )}
                 />
               </FieldGroup>
-              <Button type="submit" variant="custom">
+              <Button
+                type="submit"
+                variant="custom"
+                isLoading={isPending}
+                disabled={isPending}
+              >
                 Send reset link
               </Button>
             </form>

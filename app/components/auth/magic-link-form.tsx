@@ -5,7 +5,8 @@ import type { SetStateAction } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
-import http, { successStyle } from "../../lib/http";
+import { requestMagicLink } from "../../lib/auth";
+import { successStyle } from "../../lib/http";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -33,11 +34,6 @@ export default function MagicLinkForm({
       email: "",
     },
   });
-
-  async function requestMagicLink(values: z.infer<typeof formSchema>) {
-    const res = await http.post("magic_links", values);
-    return res;
-  }
 
   const { mutate, isPending } = useMutation({
     mutationFn: requestMagicLink,

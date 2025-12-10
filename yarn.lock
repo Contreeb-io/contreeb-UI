@@ -694,6 +694,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/fraunces@npm:^5.2.9":
+  version: 5.2.9
+  resolution: "@fontsource/fraunces@npm:5.2.9"
+  checksum: 10c0/304da1515a9282551849c6bafcffe88cb51e845898e65072b08014ffadb43a6be9521fb94c03bfcdd487f5e5b41ba8f9573b2f7e41913837bd131f0906b3eac9
+  languageName: node
+  linkType: hard
+
 "@fontsource/instrument-sans@npm:^5.2.8":
   version: 5.2.8
   resolution: "@fontsource/instrument-sans@npm:5.2.8"
@@ -2743,6 +2750,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "contreeb-ui@workspace:."
   dependencies:
+    "@fontsource/fraunces": "npm:^5.2.9"
     "@fontsource/instrument-sans": "npm:^5.2.8"
     "@fontsource/inter": "npm:^5.2.8"
     "@hookform/resolvers": "npm:^5.2.2"

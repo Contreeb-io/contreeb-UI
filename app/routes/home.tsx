@@ -25,8 +25,8 @@ export default function Home() {
         </div>
 
         <article className="z-30 mt-20 max-w-[734px] space-y-10 self-center">
-          <div className="space-y-3">
-            <h1 className="font-mackinac text-center text-5xl font-medium text-[#06052A] md:text-8xl">
+          <div className="space-y-4">
+            <h1 className="font-fraunces text-center text-[40px] leading-tight font-medium text-[#06052A] md:text-[80px] md:leading-[1.1]">
               Where <span className="italic">dreamers</span> meet{" "}
               <span className="italic">givers</span>
             </h1>
