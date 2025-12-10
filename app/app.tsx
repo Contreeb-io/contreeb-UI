@@ -10,6 +10,7 @@ import "@fontsource/instrument-sans/700.css";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/700.css";
+import ResetPassword from "./routes/reset-password";
 import VerifyMagicLink from "./routes/verify_magic_link";
 
 const Layout = lazy(() => import("./components/dashboard/layout"));
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
     element: <VerifyMagicLink />,
   },
   { path: "/create-campaign", element: <CreateCampaign /> },
+  { path: "/reset_password", element: <ResetPassword /> },
   {
     path: "/",
     element: <Layout />,

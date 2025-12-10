@@ -1,5 +1,6 @@
 import type { PasswordSignUp } from "../components/auth/password-form";
 import type { AccountType } from "../components/create-campaign/account-form";
+import type { ResetPasswordType } from "../routes/reset-password";
 import http from "./http";
 
 export async function passwordLogin(values: PasswordSignUp) {
@@ -26,5 +27,10 @@ export async function requestMagicLink(values: { email: string }) {
 
 export async function forgotPassword(values: { email: string }) {
   const res = await http.post("password/forgot", values);
+  return res;
+}
+
+export async function resetPassword(values: ResetPasswordType) {
+  const res = await http.post("password/reset", values);
   return res;
 }

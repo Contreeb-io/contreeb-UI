@@ -1,14 +1,17 @@
 import { useMutation } from "@tanstack/react-query";
-import { useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router";
+import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router";
 import { Spinner } from "../components/ui/spinner";
 import { useAuth } from "../context/auth-context";
+import { useQueryParams } from "../hooks/use-searchParams";
 import { magicLinkVerification } from "../lib/auth";
 
 export default function VerifyMagicLink() {
   const navigate = useNavigate();
+  const hasAttempted = useRef(false);
   const {} = useAuth();
-  const [searchParams] = useSearchParams();
+
+  const { query } = useQueryParams("token");
 
   const { mutate, isPending } = useMutation({
     mutationFn: magicLinkVerification,
@@ -23,13 +26,10 @@ export default function VerifyMagicLink() {
   });
 
   useEffect(() => {
-    const token = searchParams.get("token");
-    if (!token) {
-      navigate("/");
-      return;
-    }
-    mutate(token);
-  }, [searchParams, mutate]);
+    if (hasAttempted.current) return;
+    hasAttempted.current = true;
+    mutate(query);
+  }, [query, mutate]);
 
   if (isPending) {
     return (

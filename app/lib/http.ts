@@ -71,12 +71,6 @@ async function handleErrors(response: Response): Promise<any> {
     throw new Error(`HTTP Error: ${response.status}`);
   }
 
-  if (res?.hasError === 1) {
-    // toaster("error", "Oops. An error occurred");
-    console.log(res);
-    throw new Error("Server reported an error");
-  }
-
   return res;
 }
 
