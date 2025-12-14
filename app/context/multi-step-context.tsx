@@ -4,10 +4,10 @@ import { useForm, type UseFormReturn } from "react-hook-form";
 import z from "zod";
 
 const completeFormSchema = z.object({
-  type: z.string(),
-  name: z.string(),
+  campaign_type: z.enum(["public_campaign", "personal_campaign"]),
+  title: z.string(),
   description: z.string(),
-  target: z.string(),
+  goal_amount: z.string(),
   start_date: z.date(),
   end_date: z.date(),
   start_time: z.string(),
@@ -58,10 +58,10 @@ export function MultiStepFormProvider({
   const form = useForm<FormData>({
     resolver: zodResolver(completeFormSchema),
     defaultValues: {
-      name: "",
-      type: "personal",
+      title: "",
+      campaign_type: "personal_campaign",
       description: "",
-      target: "",
+      goal_amount: "",
       start_date: new Date(),
       end_date: new Date(),
       start_time: "",
@@ -75,7 +75,14 @@ export function MultiStepFormProvider({
   });
 
   const stepFields: Record<number, (keyof FormData)[]> = {
-    1: ["name", "type", "description", "target", "start_date", "end_date"],
+    1: [
+      "title",
+      "campaign_type",
+      "description",
+      "goal_amount",
+      "start_date",
+      "end_date",
+    ],
     2: [],
     // 3: ["address", "city", "zipCode"],
   };

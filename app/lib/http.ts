@@ -24,7 +24,7 @@ export const successStyle = {
 async function handleErrors(response: Response): Promise<any> {
   const res = await response.json();
   if (response.status === 401) {
-    toast.error(res.error, {
+    toast.error(res.error || res.message, {
       style: errorStyle,
     });
     return;

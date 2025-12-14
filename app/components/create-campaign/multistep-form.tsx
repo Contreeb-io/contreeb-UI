@@ -13,8 +13,12 @@ export default function MultistepForm() {
       {currentStep === 1 && <CampaignDetails />}
       {currentStep === 2 && (
         <div>
-          {form.getValues("type") === "personal" && <CampaignItems />}{" "}
-          {form.getValues("type") === "public" && <PublicCampaignFiles />}
+          {form.getValues("campaign_type") === "personal_campaign" && (
+            <CampaignItems />
+          )}{" "}
+          {form.getValues("campaign_type") === "public_campaign" && (
+            <PublicCampaignFiles />
+          )}
         </div>
       )}
       {currentStep === 3 && <AccountForm />}

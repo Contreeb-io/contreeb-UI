@@ -59,7 +59,7 @@ export default function CampaignDetails() {
       <form id="campaign-details" className="z-30 space-y-8 font-sans">
         <FieldGroup className="space-y-2.5">
           <Controller
-            name="type"
+            name="campaign_type"
             control={form.control}
             render={({ field, fieldState }) => (
               <Field
@@ -73,7 +73,7 @@ export default function CampaignDetails() {
                   onValueChange={field.onChange}
                 >
                   <SelectTrigger
-                    id="type"
+                    id="campaign_type"
                     aria-invalid={fieldState.invalid}
                     className="z-10 flex w-[140px] border border-[#F0F2F5] bg-white shadow-none"
                   >
@@ -83,11 +83,11 @@ export default function CampaignDetails() {
                     position="item-aligned"
                     className="text-sm font-medium text-[#150524]"
                   >
-                    <SelectItem value="personal">
+                    <SelectItem value="personal_campaign">
                       {" "}
                       <User color="#150524" size={18} /> Personal
                     </SelectItem>
-                    <SelectItem value="public">
+                    <SelectItem value="public_campaign">
                       {" "}
                       <Earth color="#150524" size={18} /> Public
                     </SelectItem>
@@ -101,19 +101,19 @@ export default function CampaignDetails() {
           />
 
           <Controller
-            name="name"
+            name="title"
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid} className="gap-1">
                 <FieldLabel
-                  htmlFor="name"
+                  htmlFor="title"
                   className="text-sm font-medium text-[#150524]"
                 >
                   What would you like to call your campaign?
                 </FieldLabel>
                 <Input
                   {...field}
-                  id="name"
+                  id="title"
                   aria-invalid={fieldState.invalid}
                   placeholder="Enter campaign name"
                   autoComplete="off"
@@ -153,12 +153,12 @@ export default function CampaignDetails() {
           />
 
           <Controller
-            name="target"
+            name="goal_amount"
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid} className="gap-1">
                 <FieldLabel
-                  htmlFor="name"
+                  htmlFor="goal_amount"
                   className="text-sm font-medium text-[#150524]"
                 >
                   Campaign target (GHS)
@@ -166,7 +166,7 @@ export default function CampaignDetails() {
 
                 <Input
                   {...field}
-                  id="name"
+                  id="goal_amount"
                   aria-invalid={fieldState.invalid}
                   placeholder="1000"
                   autoComplete="off"

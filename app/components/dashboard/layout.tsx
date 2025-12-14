@@ -22,7 +22,7 @@ function LayoutContent() {
         {!isSidebarOpen && <SidebarTrigger className="hover:bg-sidebar" />}
         <Select>
           <SelectTrigger className="rounded-full border border-[#F0F2F5] bg-[#F7F9FC] px-4 font-medium text-[#0E021A] shadow-none">
-            <SelectValue placeholder="Select a fruit" />
+            <SelectValue placeholder="Select campaign " />
           </SelectTrigger>
           <SelectContent className="sidebar p-3 font-medium text-[#0E021A]">
             <SelectGroup>

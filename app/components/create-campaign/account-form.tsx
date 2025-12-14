@@ -117,7 +117,7 @@ export default function AccountForm() {
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
                 )}
-                {F.getValues("type") === "public" && (
+                {F.getValues("campaign_type") === "public_campaign" && (
                   <div className="rounded-[5px] bg-[#FEF3C7] px-4 py-2 font-sans text-sm font-medium text-[#5D5757]">
                     Your name should appear as it is on your national ID
                   </div>

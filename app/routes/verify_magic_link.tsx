@@ -17,10 +17,11 @@ export default function VerifyMagicLink() {
     mutationFn: magicLinkVerification,
     mutationKey: ["verify magic link"],
     onSuccess: (data) => {
-      console.log(data);
-      // set token and user here
-    },
-    onError: () => {
+      if (data) {
+        console.log(data);
+        // set token and user here
+        return;
+      }
       navigate("/");
     },
   });
@@ -33,7 +34,7 @@ export default function VerifyMagicLink() {
 
   if (isPending) {
     return (
-      <section className="flex h-screen items-center justify-center px-6">
+      <section className="sidebar flex h-screen items-center justify-center px-6">
         <article className="flex w-full flex-col items-center gap-4 rounded-md py-6 shadow-sm md:w-[500px]">
           <Spinner color="#06052A" className="size-6" />
           <div className="text-center">
