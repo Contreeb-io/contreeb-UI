@@ -1,25 +1,28 @@
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
+import { toast } from "sonner";
 import { Spinner } from "../components/ui/spinner";
-import { useAuth } from "../context/auth-context";
-import { useQueryParams } from "../hooks/use-searchParams";
+import { TOKEN_KEY, useAuth } from "../context/auth-context";
 import { magicLinkVerification } from "../lib/auth";
+import { successStyle } from "../lib/http";
+import token from "../lib/token";
 
 export default function VerifyMagicLink() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const hasAttempted = useRef(false);
-  const {} = useAuth();
-
-  const { query } = useQueryParams("token");
+  const { setUser } = useAuth();
 
   const { mutate, isPending } = useMutation({
     mutationFn: magicLinkVerification,
     mutationKey: ["verify magic link"],
     onSuccess: (data) => {
       if (data) {
-        console.log(data);
-        // set token and user here
+        toast(data.message, { style: successStyle });
+        setUser(data.user);
+        token.set(TOKEN_KEY, data.token, data.expires_at);
+        navigate("/dashboard");
         return;
       }
       navigate("/");
@@ -29,8 +32,9 @@ export default function VerifyMagicLink() {
   useEffect(() => {
     if (hasAttempted.current) return;
     hasAttempted.current = true;
-    mutate(query);
-  }, [query, mutate]);
+    const token = searchParams.get("token") as string;
+    mutate(token);
+  }, [mutate]);
 
   if (isPending) {
     return (
