@@ -91,9 +91,7 @@ export default function Oauth({
   const loginWithGoogle = () => {
     if (window.google) {
       window.google.accounts.id.prompt((notification: any) => {
-        if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-          console.log("One Tap was not displayed or skipped");
-        }
+        console.log(notification);
       });
     } else {
       console.error("Google Identity Services not loaded");
