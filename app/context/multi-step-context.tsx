@@ -10,11 +10,19 @@ const completeFormSchema = z.object({
   goal_amount: z.string(),
   start_date: z.date(),
   end_date: z.date(),
-  start_time: z.string(),
-  end_time: z.string(),
+  // start_time: z.string(),
+  // end_time: z.string(),
   network: z.string(),
   number: z.string(),
   account_name: z.string(), //an min later,
+  campaign_items_attributes: z.array(
+    z.object({
+      name: z.string().min(3, "name should be at least 3 characters"),
+      amount: z.number().min(1, "amount is required"),
+      description: z.string().optional(),
+      image: z.instanceof(File).optional(),
+    }),
+  ),
   id_card: z.instanceof(File).optional(),
   proof_of_need: z.instanceof(File).optional(),
 });
@@ -64,13 +72,13 @@ export function MultiStepFormProvider({
       goal_amount: "",
       start_date: new Date(),
       end_date: new Date(),
-      start_time: "",
-      end_time: "",
-      network: "",
-      number: "",
-      account_name: "",
-      id_card: undefined,
-      proof_of_need: undefined,
+      // start_time: "",
+      // end_time: "",
+      // network: "",
+      // number: "",
+      // account_name: "",
+      // id_card: undefined,
+      // proof_of_need: undefined,
     },
   });
 
@@ -84,7 +92,6 @@ export function MultiStepFormProvider({
       "end_date",
     ],
     2: [],
-    // 3: ["address", "city", "zipCode"],
   };
 
   const nextStep = async () => {

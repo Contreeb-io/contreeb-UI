@@ -4,7 +4,7 @@ import token from "./token";
 
 const baseUrl = import.meta.env.VITE_BACKEND_URL || "";
 
-const errorStyle = {
+export const errorStyle = {
   backgroundColor: "#ef4444",
   color: "white",
   borderColor: "#ef4444",

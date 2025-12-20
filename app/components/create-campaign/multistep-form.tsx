@@ -3,7 +3,6 @@ import AccountForm from "./account-form";
 import CampaignDetails from "./campaign-details";
 import CampaignItems from "./campaign-items";
 import FormLayout from "./layout";
-import PublicCampaignFiles from "./public-campaign-files";
 
 export default function MultistepForm() {
   const { currentStep, form } = useMultiStepForm();
@@ -16,9 +15,9 @@ export default function MultistepForm() {
           {form.getValues("campaign_type") === "personal_campaign" && (
             <CampaignItems />
           )}{" "}
-          {form.getValues("campaign_type") === "public_campaign" && (
+          {/* {form.getValues("campaign_type") === "public_campaign" && (
             <PublicCampaignFiles />
-          )}
+          )} */}
         </div>
       )}
       {currentStep === 3 && <AccountForm />}

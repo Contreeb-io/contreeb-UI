@@ -1,10 +1,42 @@
 import { useMutation } from "@tanstack/react-query";
 import type React from "react";
-import type { SetStateAction } from "react";
-import http from "../../lib/http";
+import { useEffect, type SetStateAction } from "react";
+import { googleSignIn } from "../../lib/auth";
 import type { FormType } from "../../types";
 import { Button } from "../ui/button";
 import { Spinner } from "../ui/spinner";
+
+declare global {
+  interface Window {
+    google?: {
+      accounts: {
+        id: {
+          initialize: (config: {
+            client_id: string;
+            callback: (response: { credential: string }) => void;
+            auto_select?: boolean;
+            cancel_on_tap_outside?: boolean;
+          }) => void;
+          prompt: (notification?: (notification: any) => void) => void;
+          renderButton: (
+            parent: HTMLElement,
+            options: {
+              theme?: "outline" | "filled_blue" | "filled_black";
+              size?: "large" | "medium" | "small";
+              type?: "standard" | "icon";
+              shape?: "rectangular" | "pill" | "circle" | "square";
+              text?: "signin_with" | "signup_with" | "continue_with" | "signin";
+              logo_alignment?: "left" | "center";
+              width?: number;
+              locale?: string;
+            },
+          ) => void;
+          disableAutoSelect: () => void;
+        };
+      };
+    };
+  }
+}
 
 export default function Oauth({
   formType,
@@ -13,23 +45,64 @@ export default function Oauth({
   formType: FormType;
   setFormType: React.Dispatch<SetStateAction<FormType>>;
 }) {
-  async function googleSignIn() {
-    const res = await http.post("auth/google", {
-      id_token: import.meta.env.VITE_GOOGLE_TOKEN,
-    });
-    return res;
-  }
-
   const { mutate, isPending } = useMutation({
     mutationFn: googleSignIn,
-    onSuccess: () => {
+    onSuccess: (data) => {
       // set token and user
+      console.log("Sign in successful:", data);
+    },
+    onError: (error) => {
+      console.error("Sign in failed:", error);
     },
   });
 
+  useEffect(() => {
+    const initializeGoogleSignIn = () => {
+      if (window.google) {
+        window.google.accounts.id.initialize({
+          client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+          callback: handleCredentialResponse,
+          auto_select: false,
+          cancel_on_tap_outside: true,
+        });
+      }
+    };
+
+    if (!window.google) {
+      const script = document.createElement("script");
+      script.src = "https://accounts.google.com/gsi/client";
+      script.async = true;
+      script.defer = true;
+      script.onload = initializeGoogleSignIn;
+      document.body.appendChild(script);
+
+      return () => {
+        document.body.removeChild(script);
+      };
+    } else {
+      initializeGoogleSignIn();
+    }
+  }, []);
+
+  const handleCredentialResponse = (response: { credential: string }) => {
+    console.log(response);
+  };
+
+  const loginWithGoogle = () => {
+    if (window.google) {
+      window.google.accounts.id.prompt((notification: any) => {
+        if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+          console.log("One Tap was not displayed or skipped");
+        }
+      });
+    } else {
+      console.error("Google Identity Services not loaded");
+    }
+  };
+
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    mutate();
+    loginWithGoogle();
   }
 
   return (
@@ -38,6 +111,7 @@ export default function Oauth({
         <Button
           disabled={isPending}
           className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-[#F0F2F5] bg-transparent p-3 text-[#101928] hover:bg-transparent"
+          onClick={() => loginWithGoogle()}
         >
           {isPending ? (
             <Spinner className="text-[#101928]" />

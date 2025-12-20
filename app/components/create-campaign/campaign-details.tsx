@@ -1,4 +1,4 @@
-import { CalendarIcon, Earth, User } from "lucide-react";
+import { CalendarIcon, User } from "lucide-react";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
 import { useMultiStepForm } from "../../context/multi-step-context";
@@ -23,8 +23,12 @@ export default function CampaignDetails() {
 
   const [openStart, setOpenStart] = useState(false);
   const [openEnd, setOpenEnd] = useState(false);
-  const [startDate, setStartDate] = useState<Date>(new Date());
-  const [endDate, setEndDate] = useState<Date>(new Date());
+  const [startDate, setStartDate] = useState<Date>(
+    form.getValues("start_date") || new Date(),
+  );
+  const [endDate, setEndDate] = useState<Date>(
+    form.getValues("end_date") || new Date(),
+  );
   const [startMonth, setStartMonth] = useState<Date>(startDate);
   const [endMonth, setEndMonth] = useState<Date>(endDate);
   const [startValue, setStartValue] = useState(formatDate(startDate));
@@ -87,10 +91,10 @@ export default function CampaignDetails() {
                       {" "}
                       <User color="#150524" size={18} /> Personal
                     </SelectItem>
-                    <SelectItem value="public_campaign">
+                    {/* <SelectItem value="public_campaign">
                       {" "}
                       <Earth color="#150524" size={18} /> Public
-                    </SelectItem>
+                    </SelectItem> */}
                   </SelectContent>
                 </Select>
                 {fieldState.invalid && (
@@ -244,6 +248,9 @@ export default function CampaignDetails() {
                         captionLayout="dropdown"
                         month={startMonth}
                         onMonthChange={setStartMonth}
+                        disabled={(date) =>
+                          date < new Date(new Date().setHours(0, 0, 0, 0))
+                        }
                         onSelect={(date) => {
                           if (!date) {
                             return;
@@ -251,6 +258,13 @@ export default function CampaignDetails() {
                           setStartDate(date);
                           setStartValue(formatDate(date));
                           form.setValue("start_date", date);
+
+                          if (endDate < date) {
+                            setEndDate(date);
+                            setEndValue(formatDate(date));
+                            form.setValue("end_date", date);
+                          }
+
                           setOpenStart(false);
                         }}
                       />
@@ -303,6 +317,10 @@ export default function CampaignDetails() {
                         selected={endDate}
                         captionLayout="dropdown"
                         month={endMonth}
+                        disabled={(date) =>
+                          date < new Date(new Date().setHours(0, 0, 0, 0)) ||
+                          date < startDate
+                        }
                         onMonthChange={setEndMonth}
                         onSelect={(date) => {
                           if (!date) {
@@ -318,7 +336,7 @@ export default function CampaignDetails() {
                   </Popover>
                 </div>
               </div>
-              <div className="w-[130px] space-y-4">
+              {/* <div className="w-[130px] space-y-4">
                 <Input
                   type="time"
                   id="time-picker"
@@ -347,7 +365,7 @@ export default function CampaignDetails() {
                     e.currentTarget.showPicker?.();
                   }}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
 

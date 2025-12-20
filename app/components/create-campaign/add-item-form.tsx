@@ -18,9 +18,9 @@ import type { Item } from "./campaign-items";
 
 const formSchema = z.object({
   name: z.string().min(3, "name should be at least 3 characters"),
-  price: z.string().min(1, "price is required"),
+  amount: z.string().min(1, "amount is required"),
   description: z.string().optional(),
-  image: z.instanceof(File).optional(),
+  images: z.instanceof(File).optional(),
 });
 
 export type ItemType = z.infer<typeof formSchema>;
@@ -36,14 +36,14 @@ export default function AddItemForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      price: "",
+      amount: "",
       description: "",
-      image: undefined,
+      images: undefined,
     },
   });
 
   const onSubmit = (data: ItemType) => {
-    setItems((prev) => [...prev, { ...data, price: Number(data.price) }]);
+    setItems((prev) => [...prev, { ...data, amount: Number(data.amount) }]);
     document.getElementById("close")?.click();
     form.reset();
   };
@@ -101,7 +101,7 @@ export default function AddItemForm({
             />
 
             <Controller
-              name="price"
+              name="amount"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid} className="gap-1">
@@ -156,7 +156,7 @@ export default function AddItemForm({
             />
 
             <Controller
-              name="image"
+              name="images"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid} className="gap-1">

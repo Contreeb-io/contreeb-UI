@@ -13,9 +13,9 @@ export default function SelectedItems({
 }) {
   const [selectedItem, setSelectedItem] = useState<Item>({
     name: "",
-    price: 0,
+    amount: 0,
     description: "",
-    image: undefined,
+    images: undefined,
   });
   const [idx, setIdx] = useState<number | null>(null);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
@@ -103,7 +103,7 @@ export default function SelectedItems({
           </div>
 
           <div className="flex items-center gap-6">
-            <p className="font-medium text-[#0E021A]">GHC{item.price}.00</p>
+            <p className="font-medium text-[#0E021A]">GHC{item.amount}.00</p>
             <div className="h-11 w-0 border border-[#F0F2F5]"></div>
             <div className="flex gap-2">
               <EditItemForm

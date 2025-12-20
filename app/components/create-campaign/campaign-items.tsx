@@ -1,5 +1,6 @@
 import { Plus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../context/auth-context";
 import { useMultiStepForm } from "../../context/multi-step-context";
 import { DialogTrigger } from "../ui/dialog";
 import AddItemForm from "./add-item-form";
@@ -10,14 +11,22 @@ import SuccessDialog from "./success-dialog";
 
 export interface Item {
   name: string;
-  price: number;
+  amount: number;
   description?: string | undefined;
-  image?: File | undefined;
+  images?: File | undefined;
 }
 
 export default function CampaignItems() {
-  const { nextStep } = useMultiStepForm();
-  const [items, setItems] = useState<Item[]>([]);
+  const { isAuthenticated } = useAuth();
+  const { nextStep, form } = useMultiStepForm();
+  const [items, setItems] = useState<Item[]>(
+    form.getValues("campaign_items_attributes") || [],
+  );
+
+  useEffect(() => {
+    form.setValue("campaign_items_attributes", items);
+  }, [items, form]);
+
   return (
     <section className="mx-auto max-w-[902px] space-y-6">
       <Header
@@ -68,7 +77,13 @@ export default function CampaignItems() {
           {" "}
           <button
             type="button"
-            onClick={nextStep}
+            onClick={() => {
+              if (isAuthenticated) {
+                console.log("submit data");
+              } else {
+                nextStep();
+              }
+            }}
             className="cursor-pointer rounded-full bg-[#6360F0] px-4 py-3 text-white disabled:bg-[#D7D0DD] disabled:text-white md:w-full"
           >
             Create campaign

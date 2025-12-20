@@ -34,3 +34,10 @@ export async function resetPassword(values: ResetPasswordType) {
   const res = await http.post("password/reset", values);
   return res;
 }
+
+export async function googleSignIn(token: string) {
+  const res = await http.post("auth/google", {
+    id_token: token,
+  });
+  return res;
+}
