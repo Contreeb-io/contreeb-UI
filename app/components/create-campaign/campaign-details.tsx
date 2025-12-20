@@ -33,8 +33,8 @@ export default function CampaignDetails() {
   const [endMonth, setEndMonth] = useState<Date>(endDate);
   const [startValue, setStartValue] = useState(formatDate(startDate));
   const [endValue, setEndValue] = useState(formatDate(endDate));
-  const [startTime, setStartTime] = useState("00:00:00");
-  const [endTime, setEndTime] = useState("00:00:00");
+  // const [startTime, setStartTime] = useState("00:00:00");
+  // const [endTime, setEndTime] = useState("00:00:00");
 
   function formatDate(date: Date | undefined) {
     if (!date) {

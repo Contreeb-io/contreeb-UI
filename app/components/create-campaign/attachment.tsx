@@ -9,7 +9,7 @@ export default function Attachment({
   form: UseFormReturn<ItemType>;
 }) {
   const [isDragging, setIsDragging] = useState(false);
-  const image = form.watch("image");
+  const image = form.watch("images");
   const imageUrl = image instanceof File ? URL.createObjectURL(image) : image;
 
   const handleDragOver = (e: React.DragEvent<HTMLElement>) => {
@@ -34,7 +34,7 @@ export default function Attachment({
       const file = files[0];
 
       if (file.type.startsWith("image/")) {
-        form.setValue("image", file);
+        form.setValue("images", file);
       }
     }
   };
@@ -45,7 +45,7 @@ export default function Attachment({
         <div
           onClick={(e) => {
             e.stopPropagation();
-            form.setValue("image", undefined);
+            form.setValue("images", undefined);
           }}
           className="absolute top-1 right-2 z-30 flex size-9 cursor-pointer items-center justify-center rounded-full bg-[#E3EFFC] p-2 transition-colors hover:bg-[#D1E7FA]"
         >

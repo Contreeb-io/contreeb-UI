@@ -45,7 +45,7 @@ export default function Oauth({
   formType: FormType;
   setFormType: React.Dispatch<SetStateAction<FormType>>;
 }) {
-  const { mutate, isPending } = useMutation({
+  const { isPending } = useMutation({
     mutationFn: googleSignIn,
     onSuccess: (data) => {
       // set token and user

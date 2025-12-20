@@ -18,9 +18,9 @@ import type { Item } from "./campaign-items";
 
 const formSchema = z.object({
   name: z.string().min(3, "name should be at least 3 characters"),
-  price: z.string().min(1, "price is required"),
+  amount: z.string().min(1, "price is required"),
   description: z.string().optional(),
-  image: z.instanceof(File).optional(),
+  images: z.instanceof(File).optional(),
 });
 
 export type ItemType = z.infer<typeof formSchema>;
@@ -41,9 +41,9 @@ export default function EditItemForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      price: "",
+      amount: "",
       description: "",
-      image: undefined,
+      images: undefined,
     },
   });
 
@@ -51,16 +51,16 @@ export default function EditItemForm({
     if (selectedItem) {
       form.reset({
         name: selectedItem.name || "",
-        price: String(selectedItem.price) || "",
+        amount: String(selectedItem.amount) || "",
         description: selectedItem.description || "",
-        image: selectedItem.image || undefined,
+        images: selectedItem.images || undefined,
       });
     } else {
       form.reset({
         name: "",
-        price: "",
+        amount: "",
         description: "",
-        image: undefined,
+        images: undefined,
       });
     }
   }, [selectedItem, form]);
@@ -69,7 +69,7 @@ export default function EditItemForm({
     if (idx !== null) {
       setItems((prev) => {
         const updatedItems = [...prev];
-        updatedItems[idx] = { ...data, price: Number(data.price) };
+        updatedItems[idx] = { ...data, amount: Number(data.amount) };
         return updatedItems;
       });
     }
@@ -131,7 +131,7 @@ export default function EditItemForm({
             />
 
             <Controller
-              name="price"
+              name="amount"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid} className="gap-1">
@@ -186,7 +186,7 @@ export default function EditItemForm({
             />
 
             <Controller
-              name="image"
+              name="images"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid} className="gap-1">
