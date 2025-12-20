@@ -25,6 +25,8 @@ export default function Oauth({
     },
   });
 
+  console.log(isPending);
+
   const loginWithGoogle = () => {
     console.log("hello");
   };
