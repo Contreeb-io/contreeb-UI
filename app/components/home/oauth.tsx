@@ -91,7 +91,7 @@ export default function Oauth({
   const loginWithGoogle = () => {
     if (window.google) {
       window.google.accounts.id.prompt((notification: any) => {
-        console.log(notification);
+        console.log({ notification });
       });
     } else {
       console.error("Google Identity Services not loaded");
