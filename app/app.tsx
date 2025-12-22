@@ -10,7 +10,6 @@ import "@fontsource/instrument-sans/700.css";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/700.css";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import DashboardEmpty from "./routes/dashboard-empty";
 import ResetPassword from "./routes/reset-password";
 import VerifyMagicLink from "./routes/verify_magic_link";
@@ -57,13 +56,11 @@ export default function App() {
 
   return (
     <HelmetProvider context={helmetContext}>
-      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-        <QueryClientProvider client={queryClient}>
-          <Suspense fallback={<div></div>}>
-            <RouterProvider router={router} />
-          </Suspense>
-        </QueryClientProvider>{" "}
-      </GoogleOAuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <Suspense fallback={<div></div>}>
+          <RouterProvider router={router} />
+        </Suspense>
+      </QueryClientProvider>{" "}
     </HelmetProvider>
   );
 }
