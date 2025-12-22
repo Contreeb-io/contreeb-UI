@@ -6,12 +6,6 @@ import type { FormType } from "../../types";
 import { Button } from "../ui/button";
 import { Spinner } from "../ui/spinner";
 
-// interface GoogleSignInProps {
-//   onSuccess: (response: GoogleCredentialResponse) => void;
-//   onError?: () => void;
-//   clientId: string;
-// }
-
 interface GoogleCredentialResponse {
   credential: string;
   select_by: string;
@@ -25,7 +19,7 @@ declare global {
         id: {
           initialize: (config: any) => void;
           renderButton: (parent: HTMLElement, options: any) => void;
-          prompt: () => void;
+          prompt: (notification?: (notification: any) => void) => void;
         };
       };
     };
@@ -39,14 +33,9 @@ export default function Oauth({
   formType: FormType;
   setFormType: React.Dispatch<SetStateAction<FormType>>;
 }) {
-  function loginWithGoogle() {
-    console.log("clicked");
-  }
-
   const { isPending } = useMutation({
     mutationFn: googleSignIn,
     onSuccess: (data) => {
-      // set token and user
       console.log("Sign in successful:", data);
       // Example: localStorage.setItem("token", data.token);
       // Example: localStorage.setItem("user", JSON.stringify(data.user));
@@ -56,30 +45,23 @@ export default function Oauth({
     },
   });
 
-  console.log(isPending);
-
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    loginWithGoogle();
-    window.google?.accounts.id.prompt();
-  }
-
   useEffect(() => {
-    // Wait for Google script to load
+    const handleCredentialResponse = (response: GoogleCredentialResponse) => {
+      if (response.credential) {
+        console.log("Received credential:", response);
+      } else {
+        console.log("No credential received");
+      }
+    };
+
     const initializeGoogleSignIn = () => {
       if (window.google) {
         window.google.accounts.id.initialize({
           client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
           callback: handleCredentialResponse,
+          auto_select: false,
+          cancel_on_tap_outside: true,
         });
-      }
-    };
-
-    const handleCredentialResponse = (response: GoogleCredentialResponse) => {
-      if (response.credential) {
-        console.log(response);
-      } else {
-        console.log("error");
       }
     };
 
@@ -97,9 +79,36 @@ export default function Oauth({
     }
   }, []);
 
+  function handleGoogleSignIn(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    if (window.google) {
+      // Show the One Tap prompt
+      window.google.accounts.id.prompt((notification: any) => {
+        console.log("Prompt notification:", notification);
+
+        // Handle different notification types
+        if (notification.isNotDisplayed()) {
+          console.log(
+            "Prompt not displayed:",
+            notification.getNotDisplayedReason(),
+          );
+          // Reasons: browser_not_supported, invalid_client, missing_client_id,
+          // opt_out_or_no_session, secure_http_required, suppressed_by_user,
+          // unregistered_origin, unknown_reason
+        }
+
+        if (notification.isSkippedMoment()) {
+          console.log("Prompt skipped:", notification.getSkippedReason());
+          // Reasons: auto_cancel, user_cancel, tap_outside, issuing_failed
+        }
+      });
+    }
+  }
+
   return (
     <div className="font-inter flex w-full flex-col gap-4 text-sm font-medium text-[#101928]">
-      <form onSubmit={onSubmit} className="w-full">
+      <form onSubmit={handleGoogleSignIn} className="w-full">
         <Button
           type="submit"
           disabled={isPending}
