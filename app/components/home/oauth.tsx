@@ -1,9 +1,11 @@
-import { GoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 import { useMutation } from "@tanstack/react-query";
 import type React from "react";
 import { type SetStateAction } from "react";
 import { googleSignIn } from "../../lib/auth";
 import type { FormType } from "../../types";
+import { Button } from "../ui/button";
+import { Spinner } from "../ui/spinner";
 
 export default function Oauth({
   formType,
@@ -12,6 +14,20 @@ export default function Oauth({
   formType: FormType;
   setFormType: React.Dispatch<SetStateAction<FormType>>;
 }) {
+  const handleSuccess = async (credentialResponse: any) => {
+    console.log(credentialResponse);
+  };
+
+  const login = useGoogleLogin({
+    flow: "auth-code",
+    ux_mode: "popup",
+    scope: "openid email profile",
+    onSuccess: handleSuccess,
+    onError: () => {
+      console.error("Google login failed");
+    },
+  });
+
   const { isPending } = useMutation({
     mutationFn: googleSignIn,
     onSuccess: (data) => {
@@ -27,27 +43,19 @@ export default function Oauth({
 
   console.log(isPending);
 
-  const loginWithGoogle = () => {
-    console.log("hello");
-  };
-
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    loginWithGoogle();
+    login();
   }
-
-  const handleSuccess = async (credentialResponse: any) => {
-    console.log(credentialResponse);
-  };
 
   return (
     <div className="font-inter flex w-full flex-col gap-4 text-sm font-medium text-[#101928]">
       <form onSubmit={onSubmit} className="w-full">
-        {/* <Button
+        <Button
           type="button"
           disabled={isPending}
           className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-[#F0F2F5] bg-transparent p-3 text-[#101928] hover:bg-transparent"
-          onClick={loginWithGoogle}
+          onClick={() => login()}
         >
           {isPending ? (
             <Spinner className="text-[#101928]" />
@@ -57,14 +65,7 @@ export default function Oauth({
               Continue with Google
             </>
           )}
-        </Button> */}
-        <GoogleLogin
-          onSuccess={handleSuccess}
-          onError={() => {
-            console.error("Google Sign In failed");
-          }}
-          useOneTap
-        />
+        </Button>
       </form>
       <button
         type="button"
