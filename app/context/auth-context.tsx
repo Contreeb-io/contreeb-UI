@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import cookie from "../lib/token";
 
-/** adapt this to your real user shape */
 export interface User {
   id: string;
   name: string;
@@ -29,7 +28,7 @@ export const AuthProvider: React.FC<{
   children: React.ReactNode;
   persist?: boolean;
 }> = ({ children, persist = true }) => {
-  const [token, setTokenState] = useState<string | null>(() => {
+  const [token] = useState<string | null>(() => {
     if (!persist) return null;
     const data = cookie.get(TOKEN_KEY);
     if (data) {
@@ -64,15 +63,13 @@ export const AuthProvider: React.FC<{
   };
 
   const logout = () => {
-    window.location.href = "/";
-    setTokenState(null);
-    setUserState(null);
     cookie.remove(TOKEN_KEY);
     if (persist) {
       try {
         localStorage.removeItem(USER_KEY);
       } catch {}
     }
+    window.location.href = "/";
   };
 
   const isAuthenticated = !!token;

@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { lazy, Suspense } from "react";
 import { HelmetProvider } from "react-helmet-async";
-import { createBrowserRouter, redirect, RouterProvider } from "react-router";
+import { createBrowserRouter, RouterProvider } from "react-router";
 
 import "@fontsource/fraunces/400.css";
 import "@fontsource/fraunces/700.css";
@@ -10,8 +10,6 @@ import "@fontsource/instrument-sans/700.css";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/700.css";
-import { TOKEN_KEY } from "./context/auth-context";
-import token from "./lib/token";
 import DashboardEmpty from "./routes/dashboard-empty";
 import ResetPassword from "./routes/reset-password";
 import VerifyMagicLink from "./routes/verify_magic_link";
@@ -47,14 +45,14 @@ const router = createBrowserRouter([
       { path: "donations", element: <Donations /> },
       { path: "settings", element: <Settings /> },
     ],
-    loader: () => {
-      const userToken = token.get(TOKEN_KEY);
-      if (!userToken) {
-        throw redirect("/");
-      }
+    // loader: () => {
+    //   const userToken = token.get(TOKEN_KEY);
+    //   if (!userToken) {
+    //     throw redirect("/");
+    //   }
 
-      return true;
-    },
+    //   return true;
+    // },
   },
   { path: "/donate/:id", element: <Donate /> },
 ]);
