@@ -3,16 +3,15 @@ import { useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "sonner";
 import { Spinner } from "../components/ui/spinner";
-import { TOKEN_KEY, useAuth } from "../context/auth-context";
+import { useAuth } from "../context/auth-context";
 import { magicLinkVerification } from "../lib/auth";
 import { successStyle } from "../lib/http";
-import token from "../lib/token";
 
 export default function VerifyMagicLink() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const hasAttempted = useRef(false);
-  const { setUser } = useAuth();
+  const { setUser, setToken } = useAuth();
 
   const { mutate, isPending } = useMutation({
     mutationFn: magicLinkVerification,
@@ -21,7 +20,7 @@ export default function VerifyMagicLink() {
       if (data) {
         toast(data.message, { style: successStyle });
         setUser(data.user);
-        token.set(TOKEN_KEY, data.token, data.expires_at);
+        setToken(data.token, data.expires_at);
         navigate("/dashboard");
         return;
       }
