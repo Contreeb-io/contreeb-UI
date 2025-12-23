@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import cookie from "../lib/token";
+import { default as cookie } from "../lib/token";
 
 export interface User {
   id: string;
@@ -12,11 +12,11 @@ export interface User {
 }
 
 type AuthContextType = {
-  token: string | null;
   user: User | null;
   setUser: (user: User | null) => void;
   logout: () => void;
-  isAuthenticated: boolean;
+  token: string | null;
+  setToken: (token: string | null, expiry?: Date) => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -28,16 +28,7 @@ export const AuthProvider: React.FC<{
   children: React.ReactNode;
   persist?: boolean;
 }> = ({ children, persist = true }) => {
-  const [token] = useState<string | null>(() => {
-    if (!persist) return null;
-    const data = cookie.get(TOKEN_KEY);
-    if (data) {
-      return data;
-    } else {
-      return null;
-    }
-  });
-
+  const [token, setTokenState] = useState<string | null>(null);
   const [user, setUserState] = useState<User | null>(() => {
     if (!persist) return null;
     try {
@@ -47,6 +38,23 @@ export const AuthProvider: React.FC<{
       return null;
     }
   });
+
+  useEffect(() => {
+    const storedToken = cookie.get(TOKEN_KEY);
+    if (storedToken) {
+      setTokenState(storedToken);
+    }
+  }, []);
+
+  const setToken = (newToken: string | null, expiry?: Date) => {
+    if (newToken && expiry) {
+      cookie.set(TOKEN_KEY, newToken, expiry);
+      setTokenState(newToken);
+    } else {
+      cookie.remove(TOKEN_KEY);
+      setTokenState(null);
+    }
+  };
 
   useEffect(() => {
     if (!persist) return;
@@ -72,11 +80,9 @@ export const AuthProvider: React.FC<{
     window.location.href = "/";
   };
 
-  const isAuthenticated = !!token;
-
   const value = useMemo(
-    () => ({ token, user, setUser, logout, isAuthenticated }),
-    [token, user, isAuthenticated],
+    () => ({ user, setUser, logout, token, setToken }),
+    [, user],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
