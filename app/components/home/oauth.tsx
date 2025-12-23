@@ -3,10 +3,9 @@ import type React from "react";
 import { useEffect, type SetStateAction } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
-import { TOKEN_KEY, useAuth } from "../../context/auth-context";
+import { useAuth } from "../../context/auth-context";
 import { googleSignIn } from "../../lib/auth";
 import { errorStyle } from "../../lib/http";
-import token from "../../lib/token";
 import type { FormType } from "../../types";
 import { Button } from "../ui/button";
 import { Spinner } from "../ui/spinner";
@@ -38,14 +37,14 @@ export default function Oauth({
   formType: FormType;
   setFormType: React.Dispatch<SetStateAction<FormType>>;
 }) {
-  const { setUser } = useAuth();
+  const { setUser, setToken } = useAuth();
   const navigate = useNavigate();
 
   const { isPending, mutate } = useMutation({
     mutationFn: googleSignIn,
     onSuccess: (data) => {
       setUser(data.user);
-      token.set(TOKEN_KEY, data.data.token, data.data.expired_at);
+      setToken(data.data.token, data.data.expired_at);
       navigate("/dashboard");
     },
   });
