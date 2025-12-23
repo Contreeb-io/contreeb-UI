@@ -16,6 +16,12 @@ export const successStyle = {
   borderColor: "#10b981",
 };
 
+let getAuthToken: (() => string | null) | null = null;
+
+export function setAuthTokenGetter(getter: () => string | null) {
+  getAuthToken = getter;
+}
+
 /**
  * Handles errors returned by API responses.
  * @param response - The fetch response object.
@@ -78,7 +84,7 @@ function setHeaders(config: {
   headers?: Record<string, string>;
   formData?: boolean;
 }): Record<string, string> {
-  const apiToken = token.get(TOKEN_KEY);
+  const apiToken = getAuthToken?.() || token.get(TOKEN_KEY);
 
   const headers: Record<string, string> = {
     Accept: "application/json",
