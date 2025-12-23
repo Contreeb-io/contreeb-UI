@@ -5,9 +5,8 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import z from "zod";
-import { TOKEN_KEY, useAuth } from "../../context/auth-context";
+import { useAuth } from "../../context/auth-context";
 import { passwordLogin } from "../../lib/auth";
-import token from "../../lib/token";
 import { Button } from "../ui/button";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
@@ -32,7 +31,7 @@ export default function PasswordForm({
   showResetPassword: () => void;
 }) {
   const [showPassword, setShowPassword] = useState(false);
-  const { setUser } = useAuth();
+  const { setUser, setToken } = useAuth();
   const navigate = useNavigate();
 
   const form = useForm<PasswordSignUp>({
@@ -47,7 +46,7 @@ export default function PasswordForm({
     mutationFn: passwordLogin,
     onSuccess: (res) => {
       if (res) {
-        token.set(TOKEN_KEY, res.data.token, res.data.expired_at);
+        setToken(res.data.token, res.data.expired_at);
         setUser(res.user);
         navigate("/dashboard");
       }
