@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { createBrowserRouter, RouterProvider } from "react-router";
 
@@ -10,6 +10,8 @@ import "@fontsource/instrument-sans/700.css";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/700.css";
+import { useAuth } from "./context/auth-context";
+import { setAuthTokenGetter } from "./lib/http";
 import DashboardEmpty from "./routes/dashboard-empty";
 import ResetPassword from "./routes/reset-password";
 import VerifyMagicLink from "./routes/verify_magic_link";
@@ -61,6 +63,11 @@ const queryClient = new QueryClient();
 
 export default function App() {
   const helmetContext = {};
+  const { token } = useAuth();
+
+  useEffect(() => {
+    setAuthTokenGetter(() => token);
+  }, [token]);
 
   return (
     <HelmetProvider context={helmetContext}>
