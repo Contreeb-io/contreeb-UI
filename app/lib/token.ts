@@ -16,9 +16,13 @@ function convertDateToDays(date: Date): number {
 }
 
 function set(name: string, value: string, expiry: Date) {
+  // Cookies.remove("g_state");
   const days = convertDateToDays(expiry);
-  console.log(name, value, expiry);
-  Cookies.set(name, value, { expires: days, secure: true });
+  Cookies.set(name, value, {
+    expires: days,
+    secure: true,
+    path: "/",
+  });
 }
 
 function get(name: string) {

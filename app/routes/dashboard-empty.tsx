@@ -1,6 +1,10 @@
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
+import { getCampaigns } from "../lib/campaigns";
 
 export default function DashboardEmpty() {
+  useQuery({ queryFn: getCampaigns, queryKey: ["campaigns"] });
+
   return (
     <main className="w-full">
       <section className="mx-auto flex max-w-[566px] flex-col items-center justify-center gap-4 rounded-2xl bg-[#F7F7F7] py-8">
