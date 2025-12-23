@@ -19,10 +19,9 @@ function set(name: string, value: string, expiry: Date) {
   const days = convertDateToDays(expiry);
   Cookies.set(name, value, {
     expires: days,
-    secure: false,
+    secure: true,
     path: "/",
-    sameSite: "Lax",
-    // domain: window.location.hostname,
+    sameSite: "None",
   });
 }
 
