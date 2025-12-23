@@ -1,7 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import type React from "react";
 import { useEffect, type SetStateAction } from "react";
+import { toast } from "sonner";
 import { googleSignIn } from "../../lib/auth";
+import { errorStyle } from "../../lib/http";
 import type { FormType } from "../../types";
 import { Button } from "../ui/button";
 import { Spinner } from "../ui/spinner";
@@ -33,12 +35,10 @@ export default function Oauth({
   formType: FormType;
   setFormType: React.Dispatch<SetStateAction<FormType>>;
 }) {
-  const { isPending } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: googleSignIn,
     onSuccess: (data) => {
       console.log("Sign in successful:", data);
-      // Example: localStorage.setItem("token", data.token);
-      // Example: localStorage.setItem("user", JSON.stringify(data.user));
     },
     onError: (error) => {
       console.error("Sign in failed:", error);
@@ -48,9 +48,9 @@ export default function Oauth({
   useEffect(() => {
     const handleCredentialResponse = (response: GoogleCredentialResponse) => {
       if (response.credential) {
-        console.log("Received credential:", response);
+        mutate(response.credential);
       } else {
-        console.log("No credential received");
+        toast.error("No credential received", { style: errorStyle });
       }
     };
 
@@ -59,8 +59,9 @@ export default function Oauth({
         window.google.accounts.id.initialize({
           client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
           callback: handleCredentialResponse,
-          auto_select: false,
           cancel_on_tap_outside: true,
+          use_fedcm_for_prompt: true,
+          use_fedcm_for_button: true,
         });
       }
     };
@@ -83,26 +84,7 @@ export default function Oauth({
     e.preventDefault();
 
     if (window.google) {
-      // Show the One Tap prompt
-      window.google.accounts.id.prompt((notification: any) => {
-        console.log("Prompt notification:", notification);
-
-        // Handle different notification types
-        if (notification.isNotDisplayed()) {
-          console.log(
-            "Prompt not displayed:",
-            notification.getNotDisplayedReason(),
-          );
-          // Reasons: browser_not_supported, invalid_client, missing_client_id,
-          // opt_out_or_no_session, secure_http_required, suppressed_by_user,
-          // unregistered_origin, unknown_reason
-        }
-
-        if (notification.isSkippedMoment()) {
-          console.log("Prompt skipped:", notification.getSkippedReason());
-          // Reasons: auto_cancel, user_cancel, tap_outside, issuing_failed
-        }
-      });
+      window.google.accounts.id.prompt();
     }
   }
 
