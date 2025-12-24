@@ -1,5 +1,6 @@
 import { Plus } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useAuth } from "../../context/auth-context";
 import { useMultiStepForm } from "../../context/multi-step-context";
 import { DialogTrigger } from "../ui/dialog";
 import AddItemForm from "./add-item-form";
@@ -16,8 +17,8 @@ export interface Item {
 }
 
 export default function CampaignItems() {
-  // const {  } = useAuth();
-  const { form } = useMultiStepForm();
+  const { isAuthenticated } = useAuth();
+  const { form, nextStep } = useMultiStepForm();
   const [items, setItems] = useState<Item[]>(
     form.getValues("campaign_items_attributes") || [],
   );
@@ -77,11 +78,11 @@ export default function CampaignItems() {
           <button
             type="button"
             onClick={() => {
-              // if (isAuthenticated) {
-              //   console.log("submit data");
-              // } else {
-              //   nextStep();
-              // }
+              if (isAuthenticated) {
+                console.log("submit data");
+              } else {
+                nextStep();
+              }
             }}
             className="cursor-pointer rounded-full bg-[#6360F0] px-4 py-3 text-white disabled:bg-[#D7D0DD] disabled:text-white md:w-full"
           >
