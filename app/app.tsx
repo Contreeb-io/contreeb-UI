@@ -10,8 +10,9 @@ import "@fontsource/instrument-sans/700.css";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/700.css";
+import { HydrateFallback } from "./components/dashboard/hydratefallback";
 import { TOKEN_KEY, useAuth } from "./context/auth-context";
-import { getAuthToken, setAuthTokenGetter } from "./lib/http";
+import http, { getAuthToken, setAuthTokenGetter } from "./lib/http";
 import token from "./lib/token";
 import DashboardEmpty from "./routes/dashboard-empty";
 import ResetPassword from "./routes/reset-password";
@@ -48,14 +49,14 @@ const router = createBrowserRouter([
       { path: "donations", element: <Donations /> },
       { path: "settings", element: <Settings /> },
     ],
-    loader: () => {
+    hydrateFallbackElement: <HydrateFallback />,
+    loader: async () => {
       const userToken = getAuthToken?.() || token.get(TOKEN_KEY);
       if (!userToken) {
         throw redirect("/");
       }
-      console.log("loader running....");
-
-      return true;
+      const res = await http.get("campaigns");
+      return res;
     },
   },
   { path: "/donate/:id", element: <Donate /> },
