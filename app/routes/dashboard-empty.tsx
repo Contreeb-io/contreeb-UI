@@ -1,9 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
-import { getCampaigns } from "../lib/campaigns";
 
 export default function DashboardEmpty() {
-  useQuery({ queryFn: getCampaigns, queryKey: ["campaigns"] });
+  // useQuery({ queryFn: getCampaigns, queryKey: ["campaigns"] });
 
   return (
     <main className="w-full">
