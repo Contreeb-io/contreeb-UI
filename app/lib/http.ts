@@ -16,7 +16,7 @@ export const successStyle = {
   borderColor: "#10b981",
 };
 
-let getAuthToken: (() => string | null) | null = null;
+export let getAuthToken: (() => string | null) | null = null;
 
 export function setAuthTokenGetter(getter: () => string | null) {
   getAuthToken = getter;
