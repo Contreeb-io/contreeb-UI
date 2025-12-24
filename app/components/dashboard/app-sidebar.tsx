@@ -7,7 +7,7 @@ import {
   User,
 } from "lucide-react";
 import { useState } from "react";
-import { Link, NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { useAuth } from "../../context/auth-context";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
@@ -30,9 +30,19 @@ export function AppSidebar() {
   const { setOpenMobile } = useSidebar();
   const { logout, user } = useAuth();
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleNavClick = () => {
     setOpenMobile(false);
+  };
+
+  const handleDropdownNavigation = (path: string) => {
+    setOpen(false);
+
+    setTimeout(() => {
+      setOpenMobile(false);
+      navigate(path);
+    }, 150);
   };
 
   return (
@@ -97,35 +107,26 @@ export function AppSidebar() {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="sidebar rounded-2xl border border-[#4949491F] p-3 font-sans shadow-[0px_2px_15px_7px_rgba(1,0,66,0.05)]">
             <DropdownMenuItem
-              className="flex items-center gap-2 p-4 text-sm font-medium text-[#1A1A1A]"
-              onClick={() => setOpen(false)}
+              className="flex cursor-pointer items-center gap-2 p-4 text-sm font-medium text-[#1A1A1A]"
+              onSelect={() => handleDropdownNavigation("/settings")}
             >
-              <Link to="/settings" className="flex w-full items-center gap-2">
-                <Settings color="#1A1A1A" />
-                Settings
-              </Link>
+              <Settings color="#1A1A1A" />
+              Settings
             </DropdownMenuItem>
             <DropdownMenuItem
-              className="flex items-center gap-2 p-4 text-sm font-medium text-[#1A1A1A]"
-              onClick={() => setOpen(false)}
+              className="flex cursor-pointer items-center gap-2 p-4 text-sm font-medium text-[#1A1A1A]"
+              onSelect={() => handleDropdownNavigation("/profile")}
             >
-              <Link to="/profile" className="flex w-full items-center gap-2">
-                <User color="#1A1A1A" />
-                Profile
-              </Link>
+              <User color="#1A1A1A" />
+              Profile
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
-              className="flex items-center gap-2 p-4 text-sm font-medium text-[#1A1A1A]"
-              onClick={handleNavClick}
+              className="flex cursor-pointer items-center gap-2 p-4 text-sm font-medium text-[#1A1A1A]"
+              onSelect={() => logout()}
             >
-              <button
-                onClick={() => logout()}
-                className="flex w-full items-center gap-2 text-left"
-              >
-                <LogOut color="#1A1A1A" />
-                Sign out
-              </button>
+              <LogOut color="#1A1A1A" />
+              Sign out
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
