@@ -17,6 +17,7 @@ type AuthContextType = {
   logout: () => void;
   token: string | null;
   setToken: (token: string | null, expiry?: Date) => void;
+  isAuthenticated: boolean;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -80,8 +81,10 @@ export const AuthProvider: React.FC<{
     window.location.href = "/";
   };
 
+  const isAuthenticated = !!user && !!token;
+
   const value = useMemo(
-    () => ({ user, setUser, logout, token, setToken }),
+    () => ({ user, setUser, logout, token, setToken, isAuthenticated }),
     [, user],
   );
 
