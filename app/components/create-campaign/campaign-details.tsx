@@ -26,26 +26,32 @@ export default function CampaignDetails() {
   const [startDate, setStartDate] = useState<Date>(
     form.getValues("start_date") || new Date(),
   );
-  const [endDate, setEndDate] = useState<Date>(
-    form.getValues("end_date") || new Date(),
-  );
+  const [endDate, setEndDate] = useState<Date>(() => {
+    const existingEndDate = form.getValues("end_date");
+    if (existingEndDate) return existingEndDate;
+
+    const nextDay = new Date(startDate);
+    nextDay.setDate(nextDay.getDate() + 1);
+    return nextDay;
+  });
   const [startMonth, setStartMonth] = useState<Date>(startDate);
   const [endMonth, setEndMonth] = useState<Date>(endDate);
   const [startValue, setStartValue] = useState(formatDate(startDate));
   const [endValue, setEndValue] = useState(formatDate(endDate));
-  // const [startTime, setStartTime] = useState("00:00:00");
-  // const [endTime, setEndTime] = useState("00:00:00");
+  const [startTime, setStartTime] = useState("10:00:00");
+  const [endTime, setEndTime] = useState("10:00:00");
 
   function formatDate(date: Date | undefined) {
     if (!date) {
       return "";
     }
-    return date.toLocaleDateString("en-US", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    });
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
   }
+
   function isValidDate(date: Date | undefined) {
     if (!date) {
       return false;
@@ -74,7 +80,12 @@ export default function CampaignDetails() {
                 <Select
                   name={field.name}
                   value={field.value}
-                  onValueChange={field.onChange}
+                  onValueChange={(value) => {
+                    field.onChange(value);
+                    if (fieldState.invalid) {
+                      form.clearErrors("campaign_type");
+                    }
+                  }}
                 >
                   <SelectTrigger
                     id="campaign_type"
@@ -88,13 +99,8 @@ export default function CampaignDetails() {
                     className="text-sm font-medium text-[#150524]"
                   >
                     <SelectItem value="personal_campaign">
-                      {" "}
                       <User color="#150524" size={18} /> Personal
                     </SelectItem>
-                    {/* <SelectItem value="public_campaign">
-                      {" "}
-                      <Earth color="#150524" size={18} /> Public
-                    </SelectItem> */}
                   </SelectContent>
                 </Select>
                 {fieldState.invalid && (
@@ -122,6 +128,19 @@ export default function CampaignDetails() {
                   placeholder="Enter campaign name"
                   autoComplete="off"
                   className="z-10 shadow-none"
+                  onChange={(e) => {
+                    field.onChange(e);
+                    if (
+                      fieldState.invalid &&
+                      e.target.value.trim().length >= 5
+                    ) {
+                      form.clearErrors("title");
+                    }
+                  }}
+                  onBlur={() => {
+                    field.onBlur();
+                    form.trigger("title");
+                  }}
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
@@ -148,6 +167,19 @@ export default function CampaignDetails() {
                   placeholder="Describe the goal of your campaign"
                   autoComplete="off"
                   className="z-10 shadow-none"
+                  onChange={(e) => {
+                    field.onChange(e);
+                    if (
+                      fieldState.invalid &&
+                      e.target.value.trim().length >= 20
+                    ) {
+                      form.clearErrors("description");
+                    }
+                  }}
+                  onBlur={() => {
+                    field.onBlur();
+                    form.trigger("description");
+                  }}
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
@@ -177,6 +209,16 @@ export default function CampaignDetails() {
                   className="z-10 shadow-none"
                   type="number"
                   min={1}
+                  onChange={(e) => {
+                    field.onChange(e);
+                    if (fieldState.invalid && Number(e.target.value) > 0) {
+                      form.clearErrors("goal_amount");
+                    }
+                  }}
+                  onBlur={() => {
+                    field.onBlur();
+                    form.trigger("goal_amount");
+                  }}
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
@@ -193,21 +235,15 @@ export default function CampaignDetails() {
                 alt="dotted-lines"
                 className="hidden h-8 w-2 md:block"
               />
-              {/* <img
-                src={dotted}
-                alt="dotted-lines"
-                className="block h-[101px] w-1 rotate-90 md:hidden"
-              /> */}
               <p>End date & time</p>
             </div>
             <div className="flex gap-2">
               <div className="space-y-4 md:w-[200px]">
-                {/* START DATE */}
                 <div className="relative flex gap-2">
                   <Input
                     id="start-date"
                     value={startValue}
-                    placeholder="June 01, 2025"
+                    placeholder="2025-06-01"
                     className="bg-background pr-10 shadow-none"
                     onChange={(e) => {
                       const date = new Date(e.target.value);
@@ -216,6 +252,7 @@ export default function CampaignDetails() {
                         setStartDate(date);
                         setStartMonth(date);
                         form.setValue("start_date", date);
+                        form.clearErrors("start_date");
                       }
                     }}
                     onKeyDown={(e) => {
@@ -258,11 +295,13 @@ export default function CampaignDetails() {
                           setStartDate(date);
                           setStartValue(formatDate(date));
                           form.setValue("start_date", date);
+                          form.clearErrors("start_date");
 
                           if (endDate < date) {
                             setEndDate(date);
                             setEndValue(formatDate(date));
                             form.setValue("end_date", date);
+                            form.clearErrors("end_date");
                           }
 
                           setOpenStart(false);
@@ -277,7 +316,7 @@ export default function CampaignDetails() {
                   <Input
                     id="end-date"
                     value={endValue}
-                    placeholder="June 01, 2025"
+                    placeholder="2025-06-01"
                     className="bg-background pr-10 shadow-none"
                     onChange={(e) => {
                       const date = new Date(e.target.value);
@@ -286,6 +325,7 @@ export default function CampaignDetails() {
                         setEndDate(date);
                         setEndMonth(date);
                         form.setValue("end_date", date);
+                        form.clearErrors("end_date");
                       }
                     }}
                     onKeyDown={(e) => {
@@ -329,6 +369,7 @@ export default function CampaignDetails() {
                           setEndDate(date);
                           setEndValue(formatDate(date));
                           form.setValue("end_date", date);
+                          form.clearErrors("end_date");
                           setOpenEnd(false);
                         }}
                       />
@@ -336,7 +377,7 @@ export default function CampaignDetails() {
                   </Popover>
                 </div>
               </div>
-              {/* <div className="w-[130px] space-y-4">
+              <div className="w-[130px] space-y-4">
                 <Input
                   type="time"
                   id="time-picker"
@@ -350,7 +391,7 @@ export default function CampaignDetails() {
                   onClick={(e) => {
                     e.currentTarget.showPicker?.();
                   }}
-                />{" "}
+                />
                 <Input
                   type="time"
                   id="time-picker"
@@ -365,7 +406,7 @@ export default function CampaignDetails() {
                     e.currentTarget.showPicker?.();
                   }}
                 />
-              </div> */}
+              </div>
             </div>
           </div>
 

@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { getAuthToken } from "../lib/http";
 import { default as cookie } from "../lib/token";
 
 export interface User {
@@ -81,7 +82,7 @@ export const AuthProvider: React.FC<{
     window.location.href = "/";
   };
 
-  const isAuthenticated = !!user && !!token;
+  const isAuthenticated = !!getAuthToken?.() || !!cookie.get(TOKEN_KEY);
 
   const value = useMemo(
     () => ({ user, setUser, logout, token, setToken, isAuthenticated }),

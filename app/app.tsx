@@ -13,7 +13,7 @@ import "@fontsource/inter/700.css";
 import { HydrateFallback } from "./components/dashboard/hydratefallback";
 import { useAuth } from "./context/auth-context";
 import { setAuthTokenGetter } from "./lib/http";
-import { dashboardLoader } from "./lib/utils";
+import { dashboardLoader, emptyDashboardLoader } from "./lib/utils";
 import DashboardEmpty from "./routes/dashboard-empty";
 import ResetPassword from "./routes/reset-password";
 import VerifyMagicLink from "./routes/verify_magic_link";
@@ -28,6 +28,8 @@ const PrivacyPolicy = lazy(() => import("./routes/privacy-policy"));
 const Settings = lazy(() => import("./routes/settings"));
 const Terms = lazy(() => import("./routes/terms"));
 const UserGuide = lazy(() => import("./routes/user-guide"));
+
+export const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -44,7 +46,11 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     children: [
-      { path: "dashboard", element: <DashboardEmpty /> },
+      {
+        path: "dashboard",
+        element: <DashboardEmpty />,
+        loader: emptyDashboardLoader,
+      },
       { path: "dashboard/:id", element: <Dashboard /> },
       { path: "donations", element: <Donations /> },
       { path: "settings", element: <Settings /> },
@@ -54,8 +60,6 @@ const router = createBrowserRouter([
   },
   { path: "/donate/:id", element: <Donate /> },
 ]);
-
-const queryClient = new QueryClient();
 
 export default function App() {
   const helmetContext = {};

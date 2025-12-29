@@ -3,9 +3,10 @@ import AccountForm from "./account-form";
 import CampaignDetails from "./campaign-details";
 import CampaignItems from "./campaign-items";
 import FormLayout from "./layout";
+import SuccessDialog from "./success-dialog";
 
 export default function MultistepForm() {
-  const { currentStep, form } = useMultiStepForm();
+  const { currentStep, form, isSuccess } = useMultiStepForm();
 
   return (
     <FormLayout>
@@ -21,6 +22,7 @@ export default function MultistepForm() {
         </div>
       )}
       {currentStep === 3 && <AccountForm />}
+      {isSuccess && <SuccessDialog />}
     </FormLayout>
   );
 }

@@ -13,7 +13,7 @@ export default function NavBar({
 
   return (
     <div
-      className={`fixed top-0 left-0 z-10 w-full ${!changeBg ? "bg-[#FFFFFF29]" : "bg-white/50"} `}
+      className={`fixed top-0 left-0 z-[99999] w-full ${!changeBg ? "bg-[#FFFFFF29]" : "bg-white/50"} `}
     >
       <header className="mx-auto flex max-w-[1500px] items-center justify-between px-6 py-3">
         <div className="flex items-center gap-2">

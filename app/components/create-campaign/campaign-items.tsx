@@ -2,6 +2,7 @@ import { Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/auth-context";
 import { useMultiStepForm } from "../../context/multi-step-context";
+import { Button } from "../ui/button";
 import { DialogTrigger } from "../ui/dialog";
 import AddItemForm from "./add-item-form";
 import Back from "./back";
@@ -18,7 +19,7 @@ export interface Item {
 
 export default function CampaignItems() {
   const { isAuthenticated } = useAuth();
-  const { form, nextStep } = useMultiStepForm();
+  const { form, nextStep, isPending, mutate } = useMultiStepForm();
   const [items, setItems] = useState<Item[]>(
     form.getValues("campaign_items_attributes") || [],
   );
@@ -70,24 +71,29 @@ export default function CampaignItems() {
         </article>
       </section>
 
-      <article className="font-inter flex items-center justify-between">
+      <article className="font-inter flex items-baseline justify-between">
         <Back />
 
         <div className="relative z-10 md:max-w-[443px] md:flex-1">
           {" "}
-          <button
+          <Button
             type="button"
+            disabled={isPending}
+            isLoading={isPending}
             onClick={() => {
               if (isAuthenticated) {
-                console.log("submit data");
+                const values = form.getValues();
+
+                mutate(values);
               } else {
                 nextStep();
               }
             }}
-            className="cursor-pointer rounded-full bg-[#6360F0] px-4 py-3 text-white disabled:bg-[#D7D0DD] disabled:text-white md:w-full"
+            className="min-w-[150px]"
+            variant="custom"
           >
             Create campaign
-          </button>
+          </Button>
         </div>
       </article>
 

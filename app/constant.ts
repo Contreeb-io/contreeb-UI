@@ -168,3 +168,7 @@ export const privacyData = [
     why: "To keep the site fast & block bad guys",
   },
 ];
+
+export const queryKeys = {
+  campaigns: ["campaigns"],
+};
