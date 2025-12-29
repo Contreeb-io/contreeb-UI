@@ -41,3 +41,12 @@ export async function googleSignIn(token: string) {
   });
   return res;
 }
+
+export async function updatePassword(values: {
+  password: string;
+  password_confirmation: string;
+  id: string;
+}) {
+  const res = await http.update(`users/1/update_password`, values);
+  return res;
+}

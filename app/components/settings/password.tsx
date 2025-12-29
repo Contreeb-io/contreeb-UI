@@ -1,9 +1,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { Eye, EyeOff, X } from "lucide-react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Link } from "react-router";
+import { toast } from "sonner";
 import z from "zod/v3";
+import { useAuth } from "../../context/auth-context";
+import { updatePassword } from "../../lib/auth";
+import { successStyle } from "../../lib/http";
+import { Button } from "../ui/button";
 import {
   Dialog,
   DialogClose,
@@ -25,14 +31,15 @@ const formSchema = z
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/,
         "password must contain at least one uppercase letter, one lowercase letter, one number, and one symbol.",
       ),
-    confirm_password: z.string(),
+    password_confirmation: z.string(),
   })
-  .refine((data) => data.password === data.confirm_password, {
+  .refine((data) => data.password === data.password_confirmation, {
     message: "passwords do not match",
-    path: ["confirm_password"],
+    path: ["password_confirmation"],
   });
 
 export default function Password() {
+  const { user } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -40,12 +47,25 @@ export default function Password() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       password: "",
-      confirm_password: "",
+      password_confirmation: "",
+    },
+  });
+
+  const { isPending, mutate } = useMutation({
+    mutationFn: updatePassword,
+    onSuccess: (data) => {
+      if (data.message) {
+        toast.success(data.message, { style: successStyle });
+        form.reset();
+        document.getElementById("close")?.click();
+      }
     },
   });
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log(data);
+    if (user) {
+      mutate({ ...data, id: user?.id });
+    }
   }
 
   return (
@@ -144,7 +164,7 @@ export default function Password() {
                 />
 
                 <Controller
-                  name="confirm_password"
+                  name="password_confirmation"
                   control={form.control}
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid} className="gap-1">
@@ -195,9 +215,13 @@ export default function Password() {
                   )}
                 />
               </FieldGroup>
-              <button className="mt-8 w-full rounded-full bg-[#6360F0] px-4 py-3 text-sm font-semibold text-white">
+              <Button
+                variant="custom"
+                isLoading={isPending}
+                disabled={isPending}
+              >
                 Update password
-              </button>
+              </Button>
               <Link
                 to={"#"}
                 className="mt-3 flex justify-center py-3 text-[#667185]"

@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowUpRight, Ellipsis, X } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import z from "zod/v3";
+import { useAuth } from "../../context/auth-context";
 import {
   Dialog,
   DialogClose,
@@ -21,6 +22,8 @@ const formSchema = z.object({
 });
 
 export default function Email() {
+  const { user } = useAuth();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,15 +42,27 @@ export default function Email() {
       </h5>
       <article className="flex items-center justify-between gap-1.5 font-sans">
         <div className="space-y-2">
-          <h6 className="font-medium text-[#150524]">Nessa.Linn@contreeb.io</h6>
+          <h6 className="font-medium text-[#150524]">{user?.email}</h6>
           <div className="flex flex-col items-start gap-2 md:flex-row md:items-center">
             <p className="text-sm font-medium text-[#667185]">
               Verify email address to keep your account secure
             </p>{" "}
             <Dialog>
-              <DialogTrigger className="flex items-center justify-center gap-2 rounded-[8px] bg-[#FBE2B7] px-2 py-0.5 text-xs font-medium text-[#865503]">
+              <DialogTrigger
+                className={`flex items-center justify-center gap-2 rounded-[8px] px-2 py-0.5 text-xs font-medium ${
+                  user?.email_verified
+                    ? "bg-green-100 py-1 text-green-600"
+                    : "bg-[#FBE2B7] text-[#865503]"
+                }`}
+              >
                 {" "}
-                Verify <ArrowUpRight />
+                {user?.email_verified ? (
+                  "Verified"
+                ) : (
+                  <span className="flex items-center justify-center gap-2">
+                    Verify <ArrowUpRight size={18} />
+                  </span>
+                )}
               </DialogTrigger>
               <DialogContent
                 className="top-[95%] flex max-h-[98%] w-[96%] translate-y-[-95%] flex-col gap-8 overflow-y-auto rounded-2xl p-8 pb-10 md:top-[50%] md:max-w-[403px] md:translate-y-[-50%]"

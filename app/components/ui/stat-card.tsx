@@ -8,7 +8,7 @@ export default function StatCard({
 }) {
   return (
     <div
-      className="min-w-[290px] flex-1 space-y-4 rounded-2xl px-4 py-4 md:flex-0 md:py-8"
+      className="min-w-[290px] flex-1 space-y-4 rounded-2xl px-4 py-4 md:py-8"
       style={{ backgroundColor: bgColor, color: textColor }}
     >
       <p className="text-sm font-medium">{label}</p>

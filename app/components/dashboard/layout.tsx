@@ -7,6 +7,7 @@ import {
   useLocation,
   useNavigate,
 } from "react-router";
+import type { CampaignSelectType } from "../../types";
 import {
   Select,
   SelectContent,
@@ -17,7 +18,6 @@ import {
 } from "../ui/select";
 import { SidebarProvider, SidebarTrigger, useSidebar } from "../ui/sidebar";
 import { AppSidebar } from "./app-sidebar";
-import type { CampaignSelectType } from "../../types";
 
 function LayoutContent() {
   const { open, openMobile, isMobile } = useSidebar();
@@ -28,9 +28,12 @@ function LayoutContent() {
   );
 
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    navigate(`dashboard/${selectedCampaign}`);
+    if (pathname.startsWith("/dashboard")) {
+      navigate(`dashboard/${selectedCampaign}`);
+    }
   }, [selectedCampaign]);
 
   return (
