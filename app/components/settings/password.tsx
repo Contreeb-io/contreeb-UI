@@ -223,7 +223,7 @@ export default function Password() {
                 Update password
               </Button>
               <Link
-                to={"#"}
+                to={"/?forgot_password=true"}
                 className="mt-3 flex justify-center py-3 text-[#667185]"
               >
                 Forgot password?

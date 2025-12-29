@@ -30,6 +30,11 @@ export async function dashboardLoader() {
 }
 
 export async function emptyDashboardLoader() {
+  const userToken = getAuthToken?.() || token.get(TOKEN_KEY);
+  if (!userToken) {
+    throw redirect("/");
+  }
+
   const cachedData = queryClient.getQueryData(
     queryKeys.campaigns,
   ) as CampaignSelectType[];

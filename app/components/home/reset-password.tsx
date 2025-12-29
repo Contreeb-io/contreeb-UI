@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { ArrowLeft, X } from "lucide-react";
-import { useState, type SetStateAction } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
@@ -19,7 +19,7 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 
 const formSchema = z.object({
-  email: z.email("Invalid email"),
+  email: z.string().email("Invalid email"),
 });
 
 type FormType = z.infer<typeof formSchema>;
@@ -30,7 +30,7 @@ export default function ResetPassword({
   showForm,
 }: {
   isResetPasswordOpen: boolean;
-  setIsResetPasswordOpen: React.Dispatch<SetStateAction<boolean>>;
+  setIsResetPasswordOpen: (open: boolean) => void;
   showForm: () => void;
 }) {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -58,6 +58,11 @@ export default function ResetPassword({
     mutate(values);
   }
 
+  function handleClose() {
+    setIsResetPasswordOpen(false);
+    setIsSuccess(false);
+  }
+
   return (
     <Dialog open={isResetPasswordOpen} onOpenChange={setIsResetPasswordOpen}>
       <DialogContent
@@ -67,7 +72,7 @@ export default function ResetPassword({
         {isSuccess ? (
           <>
             <div
-              onClick={() => setIsResetPasswordOpen(false)}
+              onClick={handleClose}
               className="flex size-9 cursor-pointer items-center justify-center rounded-full bg-[#E3EFFC]"
             >
               <X color="#343330" size={18} />

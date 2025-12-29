@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router";
+import { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router";
 import {
   Dialog,
   DialogContent,
@@ -16,9 +16,17 @@ import Oauth from "./oauth";
 import ResetPassword from "./reset-password";
 
 export default function SignIn() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [formType, setFormType] = useState<FormType>("password");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isResetPasswordOpen, setIsResetPasswordOpen] = useState(false);
+
+  useEffect(() => {
+    const forgotPassword = searchParams.get("forgot_password");
+    if (forgotPassword === "true") {
+      setIsResetPasswordOpen(true);
+    }
+  }, [searchParams]);
 
   function showResetPassword() {
     setIsDialogOpen(false);
@@ -30,9 +38,23 @@ export default function SignIn() {
     setIsDialogOpen(true);
   }
 
+  function handleDialogClose(open: boolean) {
+    setIsDialogOpen(open);
+    if (!open) {
+      setSearchParams({});
+    }
+  }
+
+  function handleResetPasswordClose(open: boolean) {
+    setIsResetPasswordOpen(open);
+    if (!open) {
+      setSearchParams({});
+    }
+  }
+
   return (
     <>
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <Dialog open={isDialogOpen} onOpenChange={handleDialogClose}>
         <DialogTrigger className="sing-in-btn cursor-pointer rounded-[695px] bg-[#FFDEDE1A] px-4 py-3 text-sm font-medium text-[#242424] md:text-base">
           sign in
         </DialogTrigger>
@@ -46,7 +68,7 @@ export default function SignIn() {
                 Sign in to Contreebute.io
               </DialogTitle>
               <DialogDescription className="text-left font-sans text-[#5D5757]">
-                Don’t have an account?{" "}
+                Don't have an account?{" "}
                 <Link
                   to={"/create-campaign"}
                   className="font-medium text-[#6360F0] underline"
@@ -70,7 +92,7 @@ export default function SignIn() {
       </Dialog>
       <ResetPassword
         isResetPasswordOpen={isResetPasswordOpen}
-        setIsResetPasswordOpen={setIsResetPasswordOpen}
+        setIsResetPasswordOpen={handleResetPasswordClose}
         showForm={showForm}
       />
     </>
