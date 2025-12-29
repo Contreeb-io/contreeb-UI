@@ -1,22 +1,31 @@
-import { useQuery } from "@tanstack/react-query";
 import { MoveUpRight, Pencil } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useParams } from "react-router";
+import { Link, useParams, useRouteLoaderData } from "react-router";
 import { dashboardColumns } from "../components/donations/dashboard-columns";
 import { DataTable } from "../components/donations/data-table";
 import StatCard from "../components/ui/stat-card";
-import { queryKeys } from "../constant";
-import { getCampaign } from "../lib/campaigns";
 import { formatLongDate } from "../lib/utils";
+import type { Campaign } from "../types";
 
 export default function Dashboard() {
+  const campaigns = useRouteLoaderData("dashboard-layout");
   const { id } = useParams<{ id: string }>();
+  const [selectedCampaign, setSelectedCampaign] = useState(
+    campaigns?.find((item: Campaign) => item.id.toString() === id),
+  );
 
-  const { data } = useQuery({
-    queryFn: () => getCampaign(id!),
-    queryKey: queryKeys.singleCampaign(id!),
-    enabled: !!id,
-  });
+  useEffect(() => {
+    setSelectedCampaign(
+      campaigns?.find((item: Campaign) => item.id.toString() === id),
+    );
+  }, [id]);
+
+  // const { data } = useQuery({
+  //   queryFn: () => getCampaign(id!),
+  //   queryKey: queryKeys.singleCampaign(id!),
+  //   enabled: !!id,
+  // });
 
   return (
     <>
@@ -31,26 +40,28 @@ export default function Dashboard() {
           <article className="space-y-4">
             <div className="space-y-2">
               <div className="w-fit rounded-full bg-[#FBF1F1] px-[10px] py-[3px] text-sm font-medium text-[#3E3838] md:text-base">
-                {data?.campaign_type === "personal_campaign"
+                {selectedCampaign?.campaign_type === "personal_campaign"
                   ? "Personal"
                   : "Public"}
               </div>
               <h5 className="font-mackinac text-xl font-bold text-[#0E021A] md:text-[28px]">
-                {data?.title}
+                {selectedCampaign?.title}
               </h5>
               <p className="text-xs text-[#344054] md:text-sm">
                 Raising funds to celebrate my{" "}
-                <span className="font-medium underline">{data?.title}</span> and
-                make it a memorable
+                <span className="font-medium underline">
+                  {selectedCampaign?.title}
+                </span>{" "}
+                and make it a memorable
               </p>
             </div>
             <div className="flex w-fit items-center gap-x-3 rounded-[8px] bg-[#F5F5F5] px-3 py-2.5">
               <div className="text-xs text-[#646464] md:text-sm">
-                {formatLongDate(data?.start_date)}
+                {formatLongDate(selectedCampaign?.start_date)}
               </div>
               <img src="/line-dashes-small.svg" alt="dashes" />
               <div className="text-xs font-medium text-[#0E021A] md:text-sm">
-                {formatLongDate(data?.end_date)}
+                {formatLongDate(selectedCampaign?.end_date)}
               </div>
             </div>
           </article>
