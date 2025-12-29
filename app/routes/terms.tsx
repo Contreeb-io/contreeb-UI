@@ -68,7 +68,7 @@ export default function Terms() {
         ></meta>
       </Helmet>
       <main className="relative min-h-screen pb-10">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[120px] [will-change:transform] md:blur-[490px]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[120px] [will-change:transform] md:blur-[650px]" />
         <NavBar text="Terms of Service" closeText />
 
         <section className="z-20 mx-auto mt-20 flex max-w-[1500px] px-6">
