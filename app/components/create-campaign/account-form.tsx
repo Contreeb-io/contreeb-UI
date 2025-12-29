@@ -52,7 +52,11 @@ const formSchema = z
 export type AccountType = z.infer<typeof formSchema>;
 
 export default function AccountForm() {
-  const { form: F } = useMultiStepForm();
+  const {
+    form: campaignForm,
+    mutate: createCampaignMutate,
+    isPending: isCampaignPending,
+  } = useMultiStepForm();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { setUser } = useAuth();
@@ -73,7 +77,9 @@ export default function AccountForm() {
       if (res) {
         token.set(TOKEN_KEY, res.token, res.expired_at);
         setUser(res.user);
-        // submit form
+
+        const campaignData = campaignForm.getValues();
+        createCampaignMutate(campaignData);
       }
     },
   });
@@ -81,6 +87,8 @@ export default function AccountForm() {
   const onSubmit = (data: AccountType) => {
     mutate(data);
   };
+
+  const isLoading = isPending || isCampaignPending;
 
   return (
     <section className="mx-auto max-w-[654px] space-y-6">
@@ -117,7 +125,8 @@ export default function AccountForm() {
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
                 )}
-                {F.getValues("campaign_type") === "public_campaign" && (
+                {campaignForm.getValues("campaign_type") ===
+                  "public_campaign" && (
                   <div className="rounded-[5px] bg-[#FEF3C7] px-4 py-2 font-sans text-sm font-medium text-[#5D5757]">
                     Your name should appear as it is on your national ID
                   </div>
@@ -296,8 +305,8 @@ export default function AccountForm() {
               document.getElementById("submit")?.click();
             }}
             variant="custom"
-            isLoading={isPending}
-            disabled={isPending}
+            isLoading={isLoading}
+            disabled={isLoading}
           >
             Create campaign
           </Button>

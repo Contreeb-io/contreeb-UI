@@ -8,7 +8,6 @@ import AddItemForm from "./add-item-form";
 import Back from "./back";
 import Header from "./header";
 import SelectedItems from "./selected-items";
-import SuccessDialog from "./success-dialog";
 
 export interface Item {
   name: string;
@@ -96,8 +95,6 @@ export default function CampaignItems() {
           </Button>
         </div>
       </article>
-
-      <SuccessDialog />
     </section>
   );
 }
