@@ -1,13 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import type React from "react";
-import { useEffect, type SetStateAction } from "react";
+import { useEffect, useRef, type SetStateAction } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { useAuth } from "../../context/auth-context";
 import { googleSignIn } from "../../lib/auth";
 import { errorStyle } from "../../lib/http";
 import type { FormType } from "../../types";
-import { Button } from "../ui/button";
 import { Spinner } from "../ui/spinner";
 
 interface GoogleCredentialResponse {
@@ -39,6 +38,7 @@ export default function Oauth({
 }) {
   const { setUser, setToken } = useAuth();
   const navigate = useNavigate();
+  const googleButtonRef = useRef<HTMLDivElement>(null);
 
   const { isPending, mutate } = useMutation({
     mutationFn: googleSignIn,
@@ -59,13 +59,20 @@ export default function Oauth({
     };
 
     const initializeGoogleSignIn = () => {
-      if (window.google) {
+      if (window.google && googleButtonRef.current) {
         window.google.accounts.id.initialize({
           client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
           callback: handleCredentialResponse,
+          auto_select: true,
           cancel_on_tap_outside: true,
-          use_fedcm_for_prompt: true,
-          use_fedcm_for_button: true,
+        });
+
+        window.google.accounts.id.renderButton(googleButtonRef.current, {
+          theme: "outline",
+          size: "large",
+          width: googleButtonRef.current.offsetWidth,
+          text: "continue_with",
+          shape: "pill",
         });
       }
     };
@@ -82,34 +89,37 @@ export default function Oauth({
 
       return () => clearInterval(checkGoogleLoaded);
     }
-  }, []);
+  }, [mutate]);
 
-  function handleGoogleSignIn(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    if (window.google) {
-      window.google.accounts.id.prompt();
+  const handleGoogleClick = () => {
+    const googleBtn = googleButtonRef.current?.querySelector(
+      'div[role="button"]',
+    ) as HTMLElement;
+    if (googleBtn) {
+      googleBtn.click();
     }
-  }
+  };
 
   return (
     <div className="font-inter flex w-full flex-col gap-4 text-sm font-medium text-[#101928]">
-      <form onSubmit={handleGoogleSignIn} className="w-full">
-        <Button
-          type="submit"
-          disabled={isPending}
-          className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-[#F0F2F5] bg-transparent p-3 text-[#101928] hover:bg-transparent"
-        >
-          {isPending ? (
-            <Spinner className="text-[#101928]" />
-          ) : (
-            <>
-              <img src={"/google.png"} alt="google image" className="size-4" />
-              Continue with Google
-            </>
-          )}
-        </Button>
-      </form>
+      <div ref={googleButtonRef} className="hidden" />
+
+      <button
+        type="button"
+        onClick={handleGoogleClick}
+        disabled={isPending}
+        className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-[#F0F2F5] bg-transparent p-3 text-[#101928] hover:bg-transparent disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        {isPending ? (
+          <Spinner className="text-[#101928]" />
+        ) : (
+          <>
+            <img src={"/google.png"} alt="google image" className="size-4" />
+            Continue with Google
+          </>
+        )}
+      </button>
+
       <button
         type="button"
         className="flex cursor-pointer justify-center rounded-full border border-[#F0F2F5] bg-transparent p-3"
