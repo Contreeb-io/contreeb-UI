@@ -7,6 +7,11 @@ export async function getCampaigns() {
   return response.data;
 }
 
+export async function getCampaign(id: string) {
+  const response = await http.get(`campaigns/${id}`);
+  return response;
+}
+
 export async function createCampaign(values: FormData) {
   const formattedValues = {
     ...values,

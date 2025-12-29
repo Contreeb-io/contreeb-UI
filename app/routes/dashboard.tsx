@@ -1,11 +1,23 @@
+import { useQuery } from "@tanstack/react-query";
 import { MoveUpRight, Pencil } from "lucide-react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import { dashboardColumns } from "../components/donations/dashboard-columns";
 import { DataTable } from "../components/donations/data-table";
 import StatCard from "../components/ui/stat-card";
+import { queryKeys } from "../constant";
+import { getCampaign } from "../lib/campaigns";
+import { formatLongDate } from "../lib/utils";
 
 export default function Dashboard() {
+  const { id } = useParams<{ id: string }>();
+
+  const { data } = useQuery({
+    queryFn: () => getCampaign(id!),
+    queryKey: queryKeys.singleCampaign(id!),
+    enabled: !!id,
+  });
+
   return (
     <>
       <Helmet>
@@ -18,24 +30,27 @@ export default function Dashboard() {
         <section className="flex flex-col items-start justify-between gap-8 md:flex-row">
           <article className="space-y-4">
             <div className="space-y-2">
-              <span className="rounded-full bg-[#FBF1F1] px-[5px] py-[3px] text-xs font-medium text-[#3E3838] md:text-sm">
-                Personal
-              </span>
+              <div className="w-fit rounded-full bg-[#FBF1F1] px-[10px] py-[3px] text-sm font-medium text-[#3E3838] md:text-base">
+                {data?.campaign_type === "personal_campaign"
+                  ? "Personal"
+                  : "Public"}
+              </div>
               <h5 className="font-mackinac text-xl font-bold text-[#0E021A] md:text-[28px]">
-                21st Birthday
+                {data?.title}
               </h5>
               <p className="text-xs text-[#344054] md:text-sm">
-                Raising funds to celebrate my <span>21st birthday</span> and
+                Raising funds to celebrate my{" "}
+                <span className="font-medium underline">{data?.title}</span> and
                 make it a memorable
               </p>
             </div>
             <div className="flex w-fit items-center gap-x-3 rounded-[8px] bg-[#F5F5F5] px-3 py-2.5">
               <div className="text-xs text-[#646464] md:text-sm">
-                25th April, 2025
+                {formatLongDate(data?.start_date)}
               </div>
               <img src="/line-dashes-small.svg" alt="dashes" />
               <div className="text-xs font-medium text-[#0E021A] md:text-sm">
-                25th April, 2025
+                {formatLongDate(data?.end_date)}
               </div>
             </div>
           </article>
@@ -44,6 +59,7 @@ export default function Dashboard() {
             Edit campaign
           </div>
         </section>
+
         <img src="/line-dashes.svg" alt="dashes" className="hidden md:block" />
         <img
           src="/line-dashes-mobile.svg"

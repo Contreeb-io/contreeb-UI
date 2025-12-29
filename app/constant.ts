@@ -171,4 +171,5 @@ export const privacyData = [
 
 export const queryKeys = {
   campaigns: ["campaigns"],
+  singleCampaign: (id: string) => ["campaigns", id],
 };

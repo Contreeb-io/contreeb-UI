@@ -1,4 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
 import { redirect } from "react-router";
 import { twMerge } from "tailwind-merge";
 import { queryClient } from "../app";
@@ -71,3 +73,11 @@ export function capitalizeFirst(str: string): string {
   if (!str) return "";
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
+
+dayjs.extend(advancedFormat);
+
+export const formatLongDate = (dateString: string): string => {
+  if (!dateString) return "";
+
+  return dayjs(dateString).format("Do MMMM, YYYY");
+};
