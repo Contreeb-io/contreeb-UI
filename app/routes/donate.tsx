@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import DonationDetails from "../components/donate/donation-details";
 import PaymentCard from "../components/donate/payment-card";
+import { useScroll } from "../hooks/use-scroll";
 
 export default function Donate() {
   const donations = [
@@ -28,35 +29,45 @@ export default function Donate() {
 
   console.log(donations);
 
+  const changeBg = useScroll();
+
   return (
-    <main className="relative isolate min-h-svh px-5 pb-10">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[70px] md:blur-[490px]" />
+    <main className="relative min-h-svh px-5 pb-10">
+      <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[120px] [will-change:transform] md:blur-[650px]" />
 
-      <div className="font-mackinac w-full max-w-[1440px]">
-        <div className="flex h-16 w-full items-center justify-between">
-          <Link to={"/"}>
-            <img src="/logo.svg" alt="Contreebute-logo" className="h-10 w-28" />
-          </Link>
-
-          <div className="flex items-center gap-4">
-            <Link
-              to={"/sign-in"}
-              className="font-sans text-sm font-medium text-[#404040]"
-            >
-              Sign in
+      <div
+        className={`fixed top-0 left-0 z-[99999] w-full ${!changeBg ? "bg-[#FFFFFF29]" : "bg-white/50"} `}
+      >
+        <div className="font-mackinac mx-auto flex max-w-[1500px] items-center justify-between px-6 py-3">
+          <div className="flex h-12 w-full items-center justify-between">
+            <Link to={"/"}>
+              <img
+                src="/logo.svg"
+                alt="Contreebute-logo"
+                className="h-10 w-28"
+              />
             </Link>
 
-            <Link
-              to={"/create-campaign"}
-              className="sing-in-btn rounded-full bg-[#FFDEDE1A] px-4 py-3 text-xs font-medium text-[#242424] md:text-base"
-            >
-              Create a campaign
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link
+                to={"/?sign_in=true"}
+                className="z-50 font-sans text-sm font-medium text-[#404040]"
+              >
+                Sign in
+              </Link>
+
+              <Link
+                to={"/create-campaign"}
+                className="sing-in-btn rounded-full bg-[#FFDEDE1A] px-4 py-2 text-xs font-medium text-[#242424] md:text-base"
+              >
+                Create a campaign
+              </Link>
+            </div>
           </div>
         </div>
       </div>
 
-      <section className="mx-auto mt-16 flex max-w-[1131px] flex-col items-center justify-between gap-10 font-sans md:flex-row md:items-start">
+      <section className="z-30 mx-auto mt-28 flex max-w-[1131px] flex-col items-center justify-between gap-10 font-sans md:flex-row md:items-start">
         <DonationDetails />
         <PaymentCard />
       </section>

@@ -21,7 +21,7 @@ export default function PaymentCard() {
   }
 
   return (
-    <article className="w-full space-y-14 rounded-2xl border border-[#F0F0F0] bg-[#FFFFFF80] px-4 py-6 md:w-[400px]">
+    <article className="z-50 w-full space-y-14 rounded-2xl border border-[#F0F0F0] bg-[#FFFFFF80] px-4 py-6 md:w-[400px]">
       <div className="space-y-3">
         <div className="space-y-1">
           <h6 className="text-[#5D5757]">Target</h6>

@@ -23,8 +23,12 @@ export default function SignIn() {
 
   useEffect(() => {
     const forgotPassword = searchParams.get("forgot_password");
+    const signIn = searchParams.get("sign_in");
     if (forgotPassword === "true") {
       setIsResetPasswordOpen(true);
+    }
+    if (signIn === "true") {
+      setIsDialogOpen(true);
     }
   }, [searchParams]);
 
@@ -73,7 +77,7 @@ export default function SignIn() {
                   to={"/create-campaign"}
                   className="font-medium text-[#6360F0] underline"
                 >
-                  Create a campaign
+                  Sign up
                 </Link>
               </DialogDescription>
             </DialogHeader>
