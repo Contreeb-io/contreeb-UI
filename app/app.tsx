@@ -14,13 +14,13 @@ import { HydrateFallback } from "./components/dashboard/hydratefallback";
 import { useAuth } from "./context/auth-context";
 import { setAuthTokenGetter } from "./lib/http";
 import { dashboardLoader, emptyDashboardLoader } from "./lib/utils";
+import Dashboard from "./routes/dashboard";
 import DashboardEmpty from "./routes/dashboard-empty";
 import ResetPassword from "./routes/reset-password";
 import VerifyMagicLink from "./routes/verify_magic_link";
 
 const Layout = lazy(() => import("./components/dashboard/layout"));
 const CreateCampaign = lazy(() => import("./routes/create-campaign"));
-const Dashboard = lazy(() => import("./routes/dashboard"));
 const Donate = lazy(() => import("./routes/donate"));
 const Donations = lazy(() => import("./routes/donations"));
 const Home = lazy(() => import("./routes/home"));

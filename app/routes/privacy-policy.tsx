@@ -64,7 +64,7 @@ export default function PrivacyPolicy() {
         ></meta>
       </Helmet>
       <main className="relative isolate min-h-svh pb-10">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[70px] md:blur-[490px]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[120px] [will-change:transform] md:blur-[490px]" />
         <NavBar text="Privacy Policy" closeText />
 
         <section className="mx-auto mt-20 flex max-w-[1500px] px-6">
