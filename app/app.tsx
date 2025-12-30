@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { lazy, Suspense, useEffect } from "react";
-import { HelmetProvider } from "react-helmet-async";
 import { createBrowserRouter, RouterProvider } from "react-router";
 
 import "@fontsource/fraunces/400.css";
@@ -63,7 +62,6 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  const helmetContext = {};
   const { token } = useAuth();
 
   useEffect(() => {
@@ -71,12 +69,10 @@ export default function App() {
   }, [token]);
 
   return (
-    <HelmetProvider context={helmetContext}>
-      <QueryClientProvider client={queryClient}>
-        <Suspense fallback={<div></div>}>
-          <RouterProvider router={router} />
-        </Suspense>
-      </QueryClientProvider>{" "}
-    </HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <Suspense fallback={<div></div>}>
+        <RouterProvider router={router} />
+      </Suspense>
+    </QueryClientProvider>
   );
 }

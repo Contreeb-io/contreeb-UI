@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router";
 import { GuideDataTable } from "../components/donations/guide-table";
 import NavBar from "../components/ui/nav-bar";
@@ -61,12 +60,6 @@ const faqSections = [
 export default function UserGuide() {
   return (
     <>
-      <Helmet>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=0.8"
-        ></meta>
-      </Helmet>
       <main className="relative min-h-svh pb-10">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,rgba(125,68,182,0.5)_0%,rgba(183,111,255,0.43)_100%)] blur-[120px] [will-change:transform] md:blur-[650px]" />
         <NavBar text="User Guide" closeText />

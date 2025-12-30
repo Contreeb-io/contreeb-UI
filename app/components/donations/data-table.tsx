@@ -51,7 +51,7 @@ export function DataTable<TData, TValue>({
                 return (
                   <TableHead
                     key={header.id}
-                    className="bg-[#FCFCFD] text-sm text-[#1A1A1A] md:text-sm"
+                    className="bg-[#FCFCFD] text-sm text-[#1A1A1A]"
                   >
                     {header.isPlaceholder
                       ? null
@@ -77,7 +77,7 @@ export function DataTable<TData, TValue>({
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
                     key={cell.id}
-                    className="text-sm text-[#1A1A1A] md:text-base"
+                    className="text-[13px] text-[#1A1A1A] md:text-base"
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>

@@ -1,14 +1,12 @@
 import { ArrowRight } from "lucide-react";
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router";
 import SignIn from "../components/home/sign-in";
 
 export default function Home() {
   return (
     <>
-      <Helmet>
-        <link rel="preload" as="image" href="/image-desktop.webp" />
-      </Helmet>
+      <link rel="preload" as="image" href="/image-desktop.webp" />
+
       <section className="flex h-svh flex-col items-center justify-center overflow-hidden bg-[url('/image-mobile.webp')] bg-cover bg-no-repeat px-4 sm:bg-[url('/image-desktop.webp')]">
         <div className="absolute inset-0 top-[90px]">
           <img

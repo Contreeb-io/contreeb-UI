@@ -1,6 +1,5 @@
 import { MoveUpRight, Pencil } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { Link, useParams, useRouteLoaderData } from "react-router";
 import { dashboardColumns } from "../components/donations/dashboard-columns";
 import { DataTable } from "../components/donations/data-table";
@@ -29,18 +28,12 @@ export default function Dashboard() {
 
   return (
     <>
-      <Helmet>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=0.8"
-        ></meta>
-      </Helmet>
       <main className="mx-auto max-w-[902px] space-y-6 font-sans">
         <section className="flex flex-col items-start justify-between gap-8 md:flex-row">
           <article className="space-y-4">
             <div className="space-y-2">
               <div className="w-fit rounded-full bg-[#FBF1F1] px-[10px] py-[3px] text-sm font-medium text-[#3E3838] md:text-base">
-                {selectedCampaign?.campaign_type === "personal_campaign"
+                {selectedCampaign?.campaign_types === "personal_campaign"
                   ? "Personal"
                   : "Public"}
               </div>
@@ -103,12 +96,12 @@ export default function Dashboard() {
 
           <article className="rounded-2xl border border-[#EAECF0] bg-white">
             <div className="flex items-center justify-between px-6 py-4">
-              <h3 className="text-lg font-medium text-[#101828]">
+              <h3 className="font-medium text-[#101828] md:text-lg">
                 Recent donations
               </h3>
               <Link
                 to={"/donations"}
-                className="flex items-center gap-2 rounded-[8px] border border-[#E4E7EC] px-4 py-2.5 text-sm font-medium text-[#101928]"
+                className="flex items-center gap-2 rounded-[8px] border border-[#E4E7EC] px-4 py-1.5 text-sm font-medium text-[#101928] md:py-2.5"
               >
                 See all <MoveUpRight size={16} strokeWidth={1.5} />
               </Link>
