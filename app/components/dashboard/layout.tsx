@@ -24,7 +24,7 @@ function LayoutContent() {
   const isSidebarOpen = isMobile ? openMobile : open;
   const data = useLoaderData();
   const [selectedCampaign, setSelectedCampaign] = useState(
-    data.length > 0 ? data[0].id : "",
+    data?.length > 0 ? data[0].id : "",
   );
 
   const navigate = useNavigate();

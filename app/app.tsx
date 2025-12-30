@@ -15,6 +15,8 @@ import { setAuthTokenGetter } from "./lib/http";
 import { dashboardLoader, emptyDashboardLoader } from "./lib/utils";
 import Dashboard from "./routes/dashboard";
 import DashboardEmpty from "./routes/dashboard-empty";
+import ErrorElement from "./routes/error-element";
+import NotFound from "./routes/not-found";
 import ResetPassword from "./routes/reset-password";
 import VerifyMagicLink from "./routes/verify_magic_link";
 
@@ -45,13 +47,17 @@ const router = createBrowserRouter([
     path: "/",
     id: "dashboard-layout",
     element: <Layout />,
+    errorElement: <ErrorElement />,
     children: [
       {
         path: "dashboard",
         element: <DashboardEmpty />,
         loader: emptyDashboardLoader,
       },
-      { path: "dashboard/:id", element: <Dashboard /> },
+      {
+        path: "dashboard/:id",
+        element: <Dashboard />,
+      },
       { path: "donations", element: <Donations /> },
       { path: "settings", element: <Settings /> },
     ],
@@ -59,6 +65,8 @@ const router = createBrowserRouter([
     loader: dashboardLoader,
   },
   { path: "/donate/:id", element: <Donate /> },
+
+  { path: "*", element: <NotFound /> },
 ]);
 
 export default function App() {

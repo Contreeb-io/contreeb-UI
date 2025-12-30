@@ -33,7 +33,7 @@ export default function Dashboard() {
           <article className="space-y-4">
             <div className="space-y-2">
               <div className="w-fit rounded-full bg-[#FBF1F1] px-[10px] py-[3px] text-sm font-medium text-[#3E3838] md:text-base">
-                {selectedCampaign?.campaign_types === "personal_campaign"
+                {selectedCampaign?.campaign_type === "personal_campaign"
                   ? "Personal"
                   : "Public"}
               </div>
@@ -41,11 +41,9 @@ export default function Dashboard() {
                 {selectedCampaign?.title}
               </h5>
               <p className="text-xs text-[#344054] md:text-sm">
-                Raising funds to celebrate my{" "}
-                <span className="font-medium underline">
-                  {selectedCampaign?.title}
-                </span>{" "}
-                and make it a memorable
+                Raising funds to turn my{" "}
+                <span className="font-medium">({selectedCampaign?.title})</span>{" "}
+                dream into reality!
               </p>
             </div>
             <div className="flex w-fit items-center gap-x-3 rounded-[8px] bg-[#F5F5F5] px-3 py-2.5">

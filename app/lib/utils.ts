@@ -16,6 +16,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export async function dashboardLoader() {
   const userToken = getAuthToken?.() || token.get(TOKEN_KEY);
+  console.log({ userToken });
   if (!userToken) {
     throw redirect("/");
   }
