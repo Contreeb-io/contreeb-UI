@@ -1,29 +1,18 @@
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { Check } from "lucide-react";
-import { useState } from "react";
 import { useNavigate } from "react-router";
-import { toast } from "sonner";
 import { useMultiStepForm } from "../../context/multi-step-context";
-import { errorStyle } from "../../lib/http";
+import { useCopy } from "../../hooks/use-copy";
 import { Button } from "../ui/button";
 import { Dialog, DialogContent, DialogDescription } from "../ui/dialog";
 
 export default function SuccessDialog() {
-  const [copied, setCopied] = useState(false);
-  const { isSuccess, campaignDetails } = useMultiStepForm();
+  const { campaignDetails, isSuccess } = useMultiStepForm();
+  const { copied, handleCopyToClipboard } = useCopy(
+    campaignDetails.sharableLink,
+  );
 
   const navigate = useNavigate();
-
-  const handleCopyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(campaignDetails.sharableLink);
-      setCopied(true);
-
-      setTimeout(() => setCopied(false), 2000);
-    } catch (error) {
-      toast.error("Failed to copy to clipboard", { style: errorStyle });
-    }
-  };
 
   return (
     <Dialog open={isSuccess}>

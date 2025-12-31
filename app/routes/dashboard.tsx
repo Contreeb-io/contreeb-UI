@@ -1,8 +1,10 @@
 import {
+  Check,
   EllipsisVertical,
   Landmark,
   MoveUpRight,
   PencilLine,
+  Share2,
   Trash2,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -18,6 +20,7 @@ import {
   DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu";
 import StatCard from "../components/ui/stat-card";
+import { useCopy } from "../hooks/use-copy";
 import { formatLongDate } from "../lib/utils";
 import type { Campaign } from "../types";
 
@@ -28,6 +31,9 @@ export default function Dashboard() {
     campaigns?.find((item: Campaign) => item.id.toString() === id),
   );
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const { copied, handleCopyToClipboard } = useCopy(
+    selectedCampaign.shareable_link,
+  );
 
   const navigate = useNavigate();
 
@@ -75,30 +81,50 @@ export default function Dashboard() {
               </div>
             </div>
           </article>
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1.5 rounded-full bg-[#F0F2F5] px-4 py-2 text-sm font-medium text-[#0E021A] md:text-base">
-              {" "}
-              <EllipsisVertical size={16} />
-              More
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="space-y-1.5 rounded-2xl border border-[#F0F0F0] p-3 font-sans shadow-[0px_2px_15px_7px_rgba(1,0,66,0.05)]">
-              <DropdownMenuItem className="flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-[#0E021A] hover:bg-[#F0F2F5]">
-                <PencilLine size={16} color="#0E021A" />
-                Edit campaign
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                className="flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-[#0E021A] hover:bg-[#F0F2F5]"
-                onSelect={() => navigate(`/payment-requests/${id}`)}
-              >
-                <Landmark size={16} color="#0E021A" /> Request payment
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem className="flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-[#DC2626] hover:bg-[#F0F2F5]" onSelect={() => setShowDeleteModal(true)}>
-                <Trash2 size={16} color="#DC2626" />
-                Delete campaign
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <div className="flex items-center gap-2">
+            <button
+              className="flex items-center gap-1.5 rounded-full bg-[#F0F2F5] px-4 py-2 text-sm font-medium text-[#0E021A] md:text-base"
+              onClick={handleCopyToClipboard}
+            >
+              {copied ? (
+                <>
+                  <Check className="mr-1 h-4 w-4" />
+                  Copied!
+                </>
+              ) : (
+                <>
+                  <Share2 size={16} /> Share
+                </>
+              )}
+            </button>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1.5 rounded-full bg-[#F0F2F5] px-4 py-2 text-sm font-medium text-[#0E021A] md:text-base">
+                {" "}
+                <EllipsisVertical size={16} />
+                More
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="space-y-1.5 rounded-2xl border border-[#F0F0F0] p-3 font-sans shadow-[0px_2px_15px_7px_rgba(1,0,66,0.05)]">
+                <DropdownMenuItem className="flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-[#0E021A] hover:bg-[#F0F2F5]">
+                  <PencilLine size={16} color="#0E021A" />
+                  Edit campaign
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-[#0E021A] hover:bg-[#F0F2F5]"
+                  onSelect={() => navigate(`/payment-requests/${id}`)}
+                >
+                  <Landmark size={16} color="#0E021A" /> Request payment
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  className="flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-[#DC2626] hover:bg-[#F0F2F5]"
+                  onSelect={() => setShowDeleteModal(true)}
+                >
+                  <Trash2 size={16} color="#DC2626" />
+                  Delete campaign
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </section>
 
         <DeleteModal
