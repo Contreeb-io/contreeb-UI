@@ -1,5 +1,5 @@
 import { PlusIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type SetStateAction } from "react";
 import {
   Link,
   Outlet,
@@ -19,13 +19,16 @@ import {
 import { SidebarProvider, SidebarTrigger, useSidebar } from "../ui/sidebar";
 import { AppSidebar } from "./app-sidebar";
 
-function LayoutContent() {
+function LayoutContent({
+  selectedCampaign,
+  setSelectedCampaign,
+}: {
+  selectedCampaign: string;
+  setSelectedCampaign: React.Dispatch<SetStateAction<string>>;
+}) {
   const { open, openMobile, isMobile } = useSidebar();
   const isSidebarOpen = isMobile ? openMobile : open;
   const data = useLoaderData();
-  const [selectedCampaign, setSelectedCampaign] = useState(
-    data?.length > 0 ? data[0].id : "",
-  );
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -73,14 +76,22 @@ function LayoutContent() {
 
 export default function Layout() {
   const { pathname } = useLocation();
+  const data = useLoaderData();
+  const [selectedCampaign, setSelectedCampaign] = useState(
+    data?.length > 0 ? data[0].id : "",
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
   return (
     <SidebarProvider>
-      <AppSidebar />
-      <LayoutContent />
+      <AppSidebar selectedCampaign={selectedCampaign} />
+      <LayoutContent
+        selectedCampaign={selectedCampaign}
+        setSelectedCampaign={setSelectedCampaign}
+      />
     </SidebarProvider>
   );
 }

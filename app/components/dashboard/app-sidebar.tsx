@@ -1,11 +1,4 @@
-import {
-  Ellipsis,
-  HandCoins,
-  House,
-  LogOut,
-  Settings,
-  User,
-} from "lucide-react";
+import { Ellipsis, HandCoins, House, LogOut, Settings } from "lucide-react";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { useAuth } from "../../context/auth-context";
@@ -26,7 +19,7 @@ import {
   useSidebar,
 } from "../ui/sidebar";
 
-export function AppSidebar() {
+export function AppSidebar({ selectedCampaign }: { selectedCampaign: string }) {
   const { setOpenMobile } = useSidebar();
   const { logout, user } = useAuth();
   const [open, setOpen] = useState(false);
@@ -50,7 +43,7 @@ export function AppSidebar() {
       <SidebarHeader className="font-mackinac flex flex-row items-center justify-between">
         <div className="flex items-center gap-2">
           <img src="/logo.svg" alt="Contreebute-logo" className="h-10 w-28" />
-          <span className="rounded-full bg-[#F0E3FC] px-[5px] py-[3px] text-[10px] font-bold text-[#8620D4]">
+          <span className="rounded-full bg-[#F0E3FC] px-1.25 py-0.75 text-[10px] font-bold text-[#8620D4]">
             beta
           </span>
         </div>
@@ -58,7 +51,9 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent className="mt-14 space-y-1">
         <NavLink
-          to={"/dashboard"}
+          to={
+            selectedCampaign ? `/dashboard/${selectedCampaign}` : `/dashboard`
+          }
           className={({ isActive }) =>
             `flex items-center gap-2 rounded-full px-4 py-2 text-sm ${
               isActive ? "bg-[#DAD9FF47] text-[#0400CD]" : "text-[#333333]"
@@ -70,7 +65,9 @@ export function AppSidebar() {
           <p>Dashboard</p>
         </NavLink>
         <NavLink
-          to={"/donations"}
+          to={
+            selectedCampaign ? `/donations/${selectedCampaign}` : `/donations`
+          }
           onClick={handleNavClick}
           className={({ isActive }) =>
             `flex items-center gap-2 rounded-full px-4 py-2 text-sm ${
@@ -83,7 +80,7 @@ export function AppSidebar() {
         </NavLink>
       </SidebarContent>
 
-      <SidebarFooter className="flex flex-row items-center justify-between rounded-[8px] border border-[#F0F2F5] bg-[#EEEEFF54] p-2">
+      <SidebarFooter className="flex flex-row items-center justify-between rounded-xl border border-[#F0F2F5] bg-[#EEEEFF54] p-2">
         <div className="flex max-w-[90%]">
           <div className="flex items-center gap-2">
             <Avatar>
@@ -113,13 +110,7 @@ export function AppSidebar() {
               <Settings color="#1A1A1A" />
               Settings
             </DropdownMenuItem>
-            <DropdownMenuItem
-              className="flex cursor-pointer items-center gap-2 p-4 text-sm font-medium text-[#1A1A1A]"
-              onSelect={() => handleDropdownNavigation("/profile")}
-            >
-              <User color="#1A1A1A" />
-              Profile
-            </DropdownMenuItem>
+
             <DropdownMenuSeparator />
             <DropdownMenuItem
               className="flex cursor-pointer items-center gap-2 p-4 text-sm font-medium text-[#1A1A1A]"

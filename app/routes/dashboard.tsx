@@ -28,11 +28,11 @@ export default function Dashboard() {
 
   return (
     <>
-      <main className="mx-auto max-w-[902px] space-y-6 font-sans">
+      <main className="mx-auto max-w-225.5 space-y-6 font-sans">
         <section className="flex flex-col items-start justify-between gap-8 md:flex-row">
           <article className="space-y-4">
             <div className="space-y-2">
-              <div className="w-fit rounded-full bg-[#FBF1F1] px-[10px] py-[3px] text-sm font-medium text-[#3E3838] md:text-base">
+              <div className="w-fit rounded-full bg-[#FBF1F1] px-2.5 py-0.75 text-sm font-medium text-[#3E3838] md:text-base">
                 {selectedCampaign?.campaign_type === "personal_campaign"
                   ? "Personal"
                   : "Public"}
@@ -42,11 +42,13 @@ export default function Dashboard() {
               </h5>
               <p className="text-xs text-[#344054] md:text-sm">
                 Raising funds to turn my{" "}
-                <span className="font-medium">({selectedCampaign?.title})</span>{" "}
+                <span className="font-semibold underline">
+                  {selectedCampaign?.title}
+                </span>{" "}
                 dream into reality!
               </p>
             </div>
-            <div className="flex w-fit items-center gap-x-3 rounded-[8px] bg-[#F5F5F5] px-3 py-2.5">
+            <div className="flex w-fit items-center gap-x-3 rounded-xl bg-[#F5F5F5] px-3 py-2.5">
               <div className="text-xs text-[#646464] md:text-sm">
                 {formatLongDate(selectedCampaign?.start_date)}
               </div>
@@ -99,7 +101,7 @@ export default function Dashboard() {
               </h3>
               <Link
                 to={"/donations"}
-                className="flex items-center gap-2 rounded-[8px] border border-[#E4E7EC] px-4 py-1.5 text-sm font-medium text-[#101928] md:py-2.5"
+                className="flex items-center gap-2 rounded-xl border border-[#E4E7EC] px-4 py-1.5 text-sm font-medium text-[#101928] md:py-2.5"
               >
                 See all <MoveUpRight size={16} strokeWidth={1.5} />
               </Link>
