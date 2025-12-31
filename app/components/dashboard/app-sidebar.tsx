@@ -1,4 +1,11 @@
-import { Ellipsis, HandCoins, House, LogOut, Settings } from "lucide-react";
+import {
+  Ellipsis,
+  HandCoins,
+  House,
+  LogOut,
+  ReceiptText,
+  Settings,
+} from "lucide-react";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { useAuth } from "../../context/auth-context";
@@ -77,6 +84,22 @@ export function AppSidebar({ selectedCampaign }: { selectedCampaign: string }) {
         >
           <HandCoins size={16} />
           <p>Donations</p>
+        </NavLink>
+        <NavLink
+          to={
+            selectedCampaign
+              ? `/payment-requests/${selectedCampaign}`
+              : `/payment-requests`
+          }
+          onClick={handleNavClick}
+          className={({ isActive }) =>
+            `flex items-center gap-2 rounded-full px-4 py-2 text-sm ${
+              isActive ? "bg-[#DAD9FF47] text-[#0400CD]" : "text-[#333333]"
+            }`
+          }
+        >
+          <ReceiptText size={16} />
+          <p>Payment requests</p>
         </NavLink>
       </SidebarContent>
 

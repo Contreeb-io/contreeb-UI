@@ -1,8 +1,22 @@
-import { MoveUpRight, Pencil } from "lucide-react";
+import {
+  EllipsisVertical,
+  Landmark,
+  MoveUpRight,
+  PencilLine,
+  Trash2,
+} from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link, useParams, useRouteLoaderData } from "react-router";
+import { Link, useNavigate, useParams, useRouteLoaderData } from "react-router";
 import { dashboardColumns } from "../components/donations/dashboard-columns";
 import { DataTable } from "../components/donations/data-table";
+import DeleteModal from "../components/ui/delete-modal";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../components/ui/dropdown-menu";
 import StatCard from "../components/ui/stat-card";
 import { formatLongDate } from "../lib/utils";
 import type { Campaign } from "../types";
@@ -13,6 +27,9 @@ export default function Dashboard() {
   const [selectedCampaign, setSelectedCampaign] = useState(
     campaigns?.find((item: Campaign) => item.id.toString() === id),
   );
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setSelectedCampaign(
@@ -58,11 +75,38 @@ export default function Dashboard() {
               </div>
             </div>
           </article>
-          <div className="flex items-center gap-2 rounded-full bg-[#F0F2F5] px-4 py-2 text-sm font-medium text-[#0E021A] md:text-base">
-            <Pencil size={16} />
-            Edit campaign
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center gap-1.5 rounded-full bg-[#F0F2F5] px-4 py-2 text-sm font-medium text-[#0E021A] md:text-base">
+              {" "}
+              <EllipsisVertical size={16} />
+              More
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="space-y-1.5 rounded-2xl border border-[#F0F0F0] p-3 font-sans shadow-[0px_2px_15px_7px_rgba(1,0,66,0.05)]">
+              <DropdownMenuItem className="flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-[#0E021A] hover:bg-[#F0F2F5]">
+                <PencilLine size={16} color="#0E021A" />
+                Edit campaign
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className="flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-[#0E021A] hover:bg-[#F0F2F5]"
+                onSelect={() => navigate(`/payment-requests/${id}`)}
+              >
+                <Landmark size={16} color="#0E021A" /> Request payment
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-[#DC2626] hover:bg-[#F0F2F5]" onSelect={() => setShowDeleteModal(true)}>
+                <Trash2 size={16} color="#DC2626" />
+                Delete campaign
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </section>
+
+        <DeleteModal
+          header="Delete campaign?"
+          text="Removing this campaign means you loss data on is history. This action is irreversible. Are you sure you want to remove?"
+          showDeleteModal={showDeleteModal}
+          setShowDeleteModal={setShowDeleteModal}
+        />
 
         <img src="/line-dashes.svg" alt="dashes" className="hidden md:block" />
         <img

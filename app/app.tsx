@@ -60,6 +60,11 @@ const router = createBrowserRouter([
       },
       { path: "donations", element: <DashboardEmpty /> },
       { path: "donations/:id", element: <Donations /> },
+      { path: "payment-requests", element: <DashboardEmpty /> },
+      {
+        path: "payment-requests/:id",
+        element: <h1>so you no go dash me the money?</h1>,
+      },
       { path: "settings", element: <Settings /> },
     ],
     hydrateFallbackElement: <HydrateFallback />,

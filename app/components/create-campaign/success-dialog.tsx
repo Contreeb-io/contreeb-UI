@@ -29,14 +29,14 @@ export default function SuccessDialog() {
     <Dialog open={isSuccess}>
       {/* <DialogTrigger>Open</DialogTrigger> */}
       <DialogContent
-        className="flex w-[92%] flex-col items-center gap-8 rounded-2xl px-3 py-6 md:max-w-[457px] md:p-8"
+        className="flex w-[92%] flex-col items-center gap-8 rounded-2xl px-3 py-6 md:max-w-114.25 md:p-8"
         showCloseButton={false}
       >
         <div className="flex flex-col items-center gap-5 md:gap-8">
           <img
             src="/success.webp"
             alt="success-icon"
-            className="size-[100px] md:size-[146px]"
+            className="size-25 md:size-36.5"
           />
           <DialogTitle className="text-center font-semibold text-[#0E021A] md:text-xl">
             Congratulations Your campaign is ready.
