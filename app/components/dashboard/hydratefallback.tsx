@@ -16,7 +16,7 @@ function Spinner() {
 export function HydrateFallback() {
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar selectedCampaign="" />
       <SidebarInset>
         <Spinner />
       </SidebarInset>
