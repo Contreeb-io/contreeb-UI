@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams, useRouteLoaderData } from "react-router";
+import EditCampaign from "../components/dashboard/edit-campaign";
 import { dashboardColumns } from "../components/donations/dashboard-columns";
 import { DataTable } from "../components/donations/data-table";
 import DeleteModal from "../components/ui/delete-modal";
@@ -133,6 +134,8 @@ export default function Dashboard() {
           showDeleteModal={showDeleteModal}
           setShowDeleteModal={setShowDeleteModal}
         />
+
+        <EditCampaign />
 
         <img src="/line-dashes.svg" alt="dashes" className="hidden md:block" />
         <img
