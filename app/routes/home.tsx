@@ -25,8 +25,8 @@ export default function Home() {
         <article className="z-30 mt-20 max-w-183.5 space-y-10 self-center">
           <div className="space-y-4">
             <h1 className="font-fraunces text-center text-[40px] leading-tight font-medium text-[#06052A] md:text-[80px] md:leading-[1.1]">
-              Where <span className="italic">dreamers</span> meet{" "}
-              <span className="italic">givers</span>
+              Turn your wishes into{" "}
+              <span className="text-[#7976FF]">real money</span>
             </h1>
             <p className="text-center font-sans text-sm text-[#464646] md:text-lg">
               Family, friends and strangers already help each other every day.
