@@ -49,7 +49,7 @@ export default function Email() {
             </p>{" "}
             <Dialog>
               <DialogTrigger
-                className={`flex items-center justify-center gap-2 rounded-[8px] px-2 py-0.5 text-xs font-medium ${
+                className={`flex items-center justify-center gap-2 rounded-xl px-2 py-0.5 text-xs font-medium ${
                   user?.email_verified
                     ? "bg-green-100 py-1 text-green-600"
                     : "bg-[#FBE2B7] text-[#865503]"
@@ -65,7 +65,7 @@ export default function Email() {
                 )}
               </DialogTrigger>
               <DialogContent
-                className="top-[95%] flex max-h-[98%] w-[96%] translate-y-[-95%] flex-col gap-8 overflow-y-auto rounded-2xl p-8 pb-10 md:top-[50%] md:max-w-[403px] md:translate-y-[-50%]"
+                className="top-[95%] flex max-h-[98%] w-[96%] translate-y-[-95%] flex-col gap-8 overflow-y-auto rounded-2xl p-8 pb-10 md:top-[50%] md:max-w-100.75 md:translate-y-[-50%]"
                 showCloseButton={false}
               >
                 <article className="flex justify-between gap-8">
@@ -81,7 +81,7 @@ export default function Email() {
 
                   <DialogClose
                     id="close"
-                    className="flex size-9 flex-shrink-0 cursor-pointer items-center justify-center rounded-full bg-[#E3EFFC] p-2"
+                    className="flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full bg-[#E3EFFC] p-2"
                   >
                     <X size={16} color="#101928" />
                   </DialogClose>

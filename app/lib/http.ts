@@ -28,7 +28,12 @@ export function setAuthTokenGetter(getter: () => string | null) {
  * @returns Throws an error or returns parsed data.
  */
 async function handleErrors(response: Response): Promise<any> {
+  if (response.status === 204) {
+    return null;
+  }
+
   const res = await response.json();
+
   if (response.status === 401) {
     toast.error(res.error || res.message, {
       style: errorStyle,
@@ -84,7 +89,7 @@ function setHeaders(config: {
   headers?: Record<string, string>;
   formData?: boolean;
 }): Record<string, string> {
-  const apiToken = getAuthToken?.() || token.get(TOKEN_KEY);
+  const apiToken = token.get(TOKEN_KEY);
 
   const headers: Record<string, string> = {
     Accept: "application/json",
@@ -197,12 +202,14 @@ const update = async <T = any>(
 
 const destroy = async <T = any>(
   url: string,
+  data: any,
   options: { headers?: Record<string, string>; formData?: boolean } = {},
   config: RequestInit = {},
 ): Promise<T> => {
   const response = await fetch(`${baseUrl}/${url}`, {
     method: "DELETE",
     headers: setHeaders(options),
+    body: JSON.stringify(data),
     ...config,
   });
 

@@ -8,7 +8,7 @@ export default function Home() {
       <link rel="preload" as="image" href="/image-desktop.webp" />
 
       <section className="flex h-svh flex-col items-center justify-center overflow-hidden bg-[url('/image-mobile.webp')] bg-cover bg-no-repeat px-4 sm:bg-[url('/image-desktop.webp')]">
-        <div className="absolute inset-0 top-[90px]">
+        <div className="absolute inset-0 top-22.5">
           <img
             alt="bg-cover-illustration"
             className="h-full w-full object-cover md:object-fill"
@@ -17,12 +17,12 @@ export default function Home() {
           />
         </div>
 
-        <div className="button-bg font-mackinac absolute top-8 left-1/2 flex w-[310px] -translate-x-1/2 items-center justify-between gap-8 rounded-full px-6 py-2.5 opacity-70">
+        <div className="button-bg font-mackinac absolute top-8 left-1/2 flex w-77.5 -translate-x-1/2 items-center justify-between gap-8 rounded-full px-6 py-2.5 opacity-70">
           <img src="/logo.svg" alt="Contreebute-logo" className="h-10 w-36" />
           <SignIn />
         </div>
 
-        <article className="z-30 mt-20 max-w-[734px] space-y-10 self-center">
+        <article className="z-30 mt-20 max-w-183.5 space-y-10 self-center">
           <div className="space-y-4">
             <h1 className="font-fraunces text-center text-[40px] leading-tight font-medium text-[#06052A] md:text-[80px] md:leading-[1.1]">
               Where <span className="italic">dreamers</span> meet{" "}
@@ -38,7 +38,7 @@ export default function Home() {
 
           <Link
             to={"/create-campaign"}
-            className="button-shadow font-mackinac mx-auto flex max-w-[347px] cursor-pointer items-center justify-center gap-4 rounded-full bg-[#5C59ED] px-6 py-3 text-sm font-medium text-white md:text-lg"
+            className="button-shadow font-mackinac mx-auto flex max-w-86.75 cursor-pointer items-center justify-center gap-4 rounded-full bg-[#5C59ED] px-6 py-3 text-sm font-medium text-white md:text-lg"
           >
             Create your campaign in 3 steps
             <ArrowRight />
@@ -46,7 +46,7 @@ export default function Home() {
         </article>
 
         <footer className="fixed bottom-2 z-30 w-full md:bottom-4">
-          <div className="mx-auto flex max-w-[1100px] items-end justify-between gap-y-4 px-4 font-sans md:items-center">
+          <div className="mx-auto flex max-w-275 items-end justify-between gap-y-4 px-4 font-sans md:items-center">
             <p className="text-[#464646]">
               {new Date().getFullYear()} Contreebute
             </p>

@@ -48,3 +48,14 @@ export interface Campaign {
   campaign_items: CampaignItem[];
   payment_wallet: PaymentWallet[];
 }
+
+export interface Wallet {
+  account_name: string;
+  campaign_id: string | null;
+  created_at: string;
+  id: number;
+  momo_number: string;
+  network: string;
+  updated_at: string;
+  user_id: 36;
+}

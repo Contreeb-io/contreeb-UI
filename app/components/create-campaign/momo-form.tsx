@@ -83,7 +83,7 @@ export default function MomoForm() {
   return (
     <article>
       <p className="text-sm font-medium text-[#150524]">Payment wallet</p>
-      <div className="mt-1.5 flex w-full flex-col items-center justify-center gap-6 rounded-[8px] bg-white p-4 backdrop-blur-sm md:flex-row md:gap-16">
+      <div className="mt-1.5 flex w-full flex-col items-center justify-center gap-6 rounded-xl bg-white p-4 backdrop-blur-sm md:flex-row md:gap-16">
         {!hasWalletData && (
           <div className="flex flex-col items-center gap-4">
             <h5 className="text-sm font-medium text-[#404040]">
@@ -132,7 +132,7 @@ export default function MomoForm() {
 
       <Dialog open={showPaymentModal} onOpenChange={setShowPaymentModal}>
         <DialogContent
-          className="flex w-[96%] flex-col gap-8 rounded-2xl p-8 md:max-w-[586px]"
+          className="flex w-[96%] flex-col gap-8 rounded-2xl p-8 md:max-w-146.5"
           showCloseButton={false}
         >
           <article className="flex items-center justify-between">

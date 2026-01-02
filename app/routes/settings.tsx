@@ -17,7 +17,7 @@ export default function Settings() {
   }, [searchParams]);
 
   return (
-    <main className="max-w-[560px] space-y-8 pb-8 xl:ml-[142px]">
+    <main className="max-w-140 space-y-8 pb-8 xl:ml-35.5">
       <article className="space-y-2">
         <h3 className="font-mackinac text-xl font-bold text-[#0E021A] md:text-[28px]">
           Settings
