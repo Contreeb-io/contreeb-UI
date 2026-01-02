@@ -91,7 +91,7 @@ export default function AccountForm() {
   const isLoading = isPending || isCampaignPending;
 
   return (
-    <section className="mx-auto max-w-[654px] space-y-6">
+    <section className="mx-auto max-w-163.5 space-y-6">
       <Header
         header="Finish creating your campaign"
         desc="Complete creating your campaign by setting up your  account "
@@ -298,7 +298,7 @@ export default function AccountForm() {
       <article className="flex items-baseline justify-between">
         <Back />
 
-        <div className="relative bottom-1 z-10 min-w-[120px] md:max-w-[226px] md:flex-1">
+        <div className="relative bottom-1 z-10 min-w-30 md:max-w-56.5 md:flex-1">
           {" "}
           <Button
             onClick={() => {

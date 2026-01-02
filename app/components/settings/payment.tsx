@@ -1,15 +1,18 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Loader2, PenLine, Trash2 } from "lucide-react";
-import { useState } from "react";
+import React, { useState, type SetStateAction } from "react";
 import { queryClient } from "../../app";
 import { queryKeys } from "../../constant";
 import { deleteWallet, getAllWallets } from "../../lib/payment-wallet";
 import type { Wallet } from "../../types";
+import PaymentModal from "../dashboard/payment-modal";
 import PaymentWalletSkeleton from "../skeletons/payment-wallet";
 import { Button } from "../ui/button";
 
 export default function Payment() {
+  const [walletToEdit, setWalletToEdit] = useState<null | Wallet>(null);
   const [deletingId, setDeletingId] = useState<number | null>(null);
+  const [showModal, setShowModal] = useState(false);
 
   const { data, isPending } = useQuery({
     queryKey: queryKeys.wallets,
@@ -26,7 +29,6 @@ export default function Payment() {
 
   const handleDelete = (id: number) => {
     setDeletingId(id);
-
     deleteItem(id);
   };
 
@@ -38,16 +40,25 @@ export default function Payment() {
         </h5>
 
         {!isPending && data?.length !== 0 && (
-          <div className="flex items-center justify-center gap-1 rounded-full bg-[#F7F7F7] px-3 py-2.5 text-sm font-medium">
+          <button
+            onClick={() => setShowModal(true)}
+            className="flex items-center justify-center gap-1 rounded-full bg-[#F7F7F7] px-3 py-2.5 text-sm font-medium"
+          >
             <PenLine size={16} color="#737373" />
             Add
-          </div>
+          </button>
         )}
+        <PaymentModal
+          walletToEdit={walletToEdit}
+          showModal={showModal}
+          setShowModal={setShowModal}
+          setWalletToEdit={setWalletToEdit}
+        />
       </div>
 
       {isPending && <PaymentWalletSkeleton />}
       {!isPending && data?.length === 0 ? (
-        <EmptyState />
+        <EmptyState setShowModal={setShowModal} />
       ) : (
         data?.map((wallet: Wallet) => (
           <div key={wallet.id} className="rounded-2xl bg-[#F5F5F5]/60 p-4">
@@ -71,10 +82,16 @@ export default function Payment() {
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="flex items-center justify-center gap-2 rounded-full bg-[#F0F2F5] px-3 py-2 text-sm">
+                <button
+                  onClick={() => {
+                    setWalletToEdit(wallet);
+                    setShowModal(true);
+                  }}
+                  className="flex items-center justify-center gap-2 rounded-full bg-[#F0F2F5] px-3 py-2 text-sm"
+                >
                   <PenLine size={14} />
                   Edit
-                </div>
+                </button>
                 <button
                   disabled={deletingId === wallet.id}
                   onClick={() => handleDelete(wallet.id)}
@@ -99,7 +116,11 @@ export default function Payment() {
   );
 }
 
-function EmptyState() {
+function EmptyState({
+  setShowModal,
+}: {
+  setShowModal: React.Dispatch<SetStateAction<boolean>>;
+}) {
   return (
     <article className="flex flex-col items-center justify-between rounded-2xl bg-[#F5F5F5] px-10 py-10 md:px-36">
       <div>
@@ -108,7 +129,10 @@ function EmptyState() {
           You have no payment method added
         </p>
       </div>
-      <Button variant="custom">Add payment method</Button>
+
+      <Button variant="custom" onClick={() => setShowModal(true)}>
+        Add payment method
+      </Button>
     </article>
   );
 }

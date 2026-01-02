@@ -1,3 +1,5 @@
+import type { WalletType } from "./components/dashboard/payment-modal";
+
 export type FormType = "password" | "magicLink";
 
 export interface CampaignSelectType {
@@ -49,13 +51,6 @@ export interface Campaign {
   payment_wallet: PaymentWallet[];
 }
 
-export interface Wallet {
-  account_name: string;
-  campaign_id: string | null;
-  created_at: string;
+export type Wallet = WalletType & {
   id: number;
-  momo_number: string;
-  network: string;
-  updated_at: string;
-  user_id: 36;
-}
+};
