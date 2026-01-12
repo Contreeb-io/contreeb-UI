@@ -173,5 +173,6 @@ export const queryKeys = {
   campaigns: ["campaigns"],
   singleCampaign: (id: string) => ["campaigns", id],
   wallets: ["wallets"],
-  recentDonations: ["recent_donations"],
+  recentDonations: (id: string) => ["recent_donations", id],
+  dashboardData: (id: string) => ["dashboard_data", id],
 };

@@ -10,7 +10,7 @@ export async function getTotalDonors(id: string) {
   return res;
 }
 
-export async function getTotalDonation(id: string) {
+export async function getTotalDonationReceived(id: string) {
   const res = await http.post("total_donations", { campaign_id: id });
 
   return res;

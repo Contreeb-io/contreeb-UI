@@ -13,6 +13,8 @@ import { Link, useNavigate, useParams, useRouteLoaderData } from "react-router";
 import EditCampaign from "../components/dashboard/edit-campaign";
 import { dashboardColumns } from "../components/donations/dashboard-columns";
 import { DataTable } from "../components/donations/data-table";
+import StatCardsSkeletonGroup from "../components/skeletons/stat-card-skeleton";
+import { TableSkeleton } from "../components/skeletons/table-skeleton";
 import DeleteModal from "../components/ui/delete-modal";
 import {
   DropdownMenu,
@@ -24,7 +26,11 @@ import {
 import StatCard from "../components/ui/stat-card";
 import { queryKeys } from "../constant";
 import { useCopy } from "../hooks/use-copy";
-import { getRecentDonations } from "../lib/dashboard";
+import {
+  getRecentDonations,
+  getTotalDonationReceived,
+  getTotalDonors,
+} from "../lib/dashboard";
 import { formatLongDate } from "../lib/utils";
 import type { Campaign } from "../types";
 
@@ -49,7 +55,22 @@ export default function Dashboard() {
 
   const { data: recentDonations, isPending: isDonationsPending } = useQuery({
     queryFn: () => getRecentDonations(id!),
-    queryKey: queryKeys.recentDonations,
+    queryKey: queryKeys.recentDonations(id!),
+    enabled: !!id,
+  });
+
+  const { data: dashboardData, isPending: isCardsPending } = useQuery({
+    queryFn: async () => {
+      const [totalDonations, totalDonors] = await Promise.all([
+        getTotalDonationReceived(id!),
+        getTotalDonors(id!),
+      ]);
+      return {
+        totalDonations: totalDonations.total_donations,
+        totalDonors: totalDonors.total_donors,
+      };
+    },
+    queryKey: queryKeys.dashboardData(id!),
     enabled: !!id,
   });
 
@@ -147,37 +168,43 @@ export default function Dashboard() {
           className="block md:hidden"
         />
         <section className="space-y-6">
-          <article className="flex flex-wrap items-center justify-between gap-4">
-            <StatCard
-              label="Target"
-              value="4,1211"
-              bgColor="#FBF9F1"
-              textColor="#282310"
-              showCurrency
-            />
-            <StatCard
-              label="Total received"
-              value="4,1211"
-              bgColor="#E7F6EC"
-              textColor="#036B26"
-              showCurrency
-            />
-            <StatCard
-              label="Number of donors "
-              value="211"
-              bgColor="#E3EFFC"
-              textColor="#04326B"
-            />
-          </article>
+          {isCardsPending ? (
+            <StatCardsSkeletonGroup />
+          ) : (
+            <article className="flex flex-wrap items-center justify-between gap-4">
+              <StatCard
+                label="Target"
+                value={selectedCampaign?.goal_amount}
+                bgColor="#FBF9F1"
+                textColor="#282310"
+                showCurrency
+              />
+              <StatCard
+                label="Total received"
+                value={dashboardData?.totalDonations}
+                bgColor="#E7F6EC"
+                textColor="#036B26"
+                showCurrency
+              />
+              <StatCard
+                label="Number of donors"
+                value={dashboardData?.totalDonors}
+                bgColor="#E3EFFC"
+                textColor="#04326B"
+              />
+            </article>
+          )}
 
-          {recentDonations?.length >= 1 ? (
+          {isDonationsPending ? (
+            <TableSkeleton columns={5} rows={10} />
+          ) : recentDonations?.length >= 1 ? (
             <article className="rounded-2xl border border-[#EAECF0] bg-white">
               <div className="flex items-center justify-between px-6 py-4">
                 <h3 className="font-medium text-[#101828] md:text-lg">
                   Recent donations
                 </h3>
                 <Link
-                  to={"/donations"}
+                  to={`/donations/${id}`}
                   className="flex items-center gap-2 rounded-xl border border-[#E4E7EC] px-4 py-1.5 text-sm font-medium text-[#101928] md:py-2.5"
                 >
                   See all <MoveUpRight size={16} strokeWidth={1.5} />
