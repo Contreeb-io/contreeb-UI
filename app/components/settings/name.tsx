@@ -4,7 +4,6 @@ import z from "zod/v3";
 import { useAuth } from "../../context/auth-context";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
 
 const formSchema = z.object({
   name: z
@@ -52,12 +51,13 @@ export default function Name() {
                 aria-invalid={fieldState.invalid}
                 placeholder="Enter your name"
                 autoComplete="off"
+                value={user?.name || ""}
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
           )}
         />
-        <Controller
+        {/* <Controller
           name="bio"
           control={form.control}
           render={({ field, fieldState }) => (
@@ -78,11 +78,11 @@ export default function Name() {
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
           )}
-        />
+        /> */}
 
-        <button className="self-start rounded-full bg-[#6360F0] px-4 py-2 text-sm font-semibold text-white">
+        {/* <button className="self-start rounded-full bg-[#6360F0] px-4 py-2 text-sm font-semibold text-white">
           Save changes
-        </button>
+        </button> */}
       </FieldGroup>
     </form>
   );
