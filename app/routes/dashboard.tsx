@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import {
   Check,
   EllipsisVertical,
@@ -21,7 +22,9 @@ import {
   DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu";
 import StatCard from "../components/ui/stat-card";
+import { queryKeys } from "../constant";
 import { useCopy } from "../hooks/use-copy";
+import { getRecentDonations } from "../lib/dashboard";
 import { formatLongDate } from "../lib/utils";
 import type { Campaign } from "../types";
 
@@ -44,11 +47,11 @@ export default function Dashboard() {
     );
   }, [id]);
 
-  // const { data } = useQuery({
-  //   queryFn: () => getCampaign(id!),
-  //   queryKey: queryKeys.singleCampaign(id!),
-  //   enabled: !!id,
-  // });
+  const { data: recentDonations, isPending: isDonationsPending } = useQuery({
+    queryFn: () => getRecentDonations(id!),
+    queryKey: queryKeys.recentDonations,
+    enabled: !!id,
+  });
 
   return (
     <>
@@ -167,42 +170,38 @@ export default function Dashboard() {
             />
           </article>
 
-          <article className="rounded-2xl border border-[#EAECF0] bg-white">
-            <div className="flex items-center justify-between px-6 py-4">
-              <h3 className="font-medium text-[#101828] md:text-lg">
-                Recent donations
-              </h3>
-              <Link
-                to={"/donations"}
-                className="flex items-center gap-2 rounded-xl border border-[#E4E7EC] px-4 py-1.5 text-sm font-medium text-[#101928] md:py-2.5"
-              >
-                See all <MoveUpRight size={16} strokeWidth={1.5} />
-              </Link>
+          {recentDonations?.length >= 1 ? (
+            <article className="rounded-2xl border border-[#EAECF0] bg-white">
+              <div className="flex items-center justify-between px-6 py-4">
+                <h3 className="font-medium text-[#101828] md:text-lg">
+                  Recent donations
+                </h3>
+                <Link
+                  to={"/donations"}
+                  className="flex items-center gap-2 rounded-xl border border-[#E4E7EC] px-4 py-1.5 text-sm font-medium text-[#101928] md:py-2.5"
+                >
+                  See all <MoveUpRight size={16} strokeWidth={1.5} />
+                </Link>
+              </div>
+              <DataTable
+                columns={dashboardColumns}
+                data={recentDonations || []}
+              />
+            </article>
+          ) : (
+            <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-[#F0F0F0] py-8">
+              <img src="/empty-state.webp" className="size-24" />
+              <div className="mx-auto space-y-2 text-center md:max-w-75">
+                <h5 className="font-fraunces font-bold text-[#0E021A]">
+                  No donations in yet
+                </h5>
+                <p className="font-sans text-sm text-[#595959]">
+                  You haven’t received any notions yet. Any recent donation you
+                  will receive will show here
+                </p>
+              </div>
             </div>
-            <DataTable
-              columns={dashboardColumns}
-              data={[
-                {
-                  date: "20th May, 2025",
-                  name: "saeed",
-                  amount: 40,
-                  items: "laptop",
-                },
-                {
-                  date: "20th May, 2025",
-                  name: "yussif",
-                  amount: 60,
-                  items: "laptop",
-                },
-                {
-                  date: "20th May, 2025",
-                  name: "hi",
-                  amount: 50,
-                  items: "laptop",
-                },
-              ]}
-            />
-          </article>
+          )}
         </section>
       </main>
     </>

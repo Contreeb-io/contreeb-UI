@@ -117,9 +117,9 @@ function setHeaders(config: {
  */
 const get = async <T = any>(
   url: string,
+  config: RequestInit = {},
   params?: Record<string, any>,
   options: { headers?: Record<string, string>; formData?: boolean } = {},
-  config: RequestInit = {},
 ): Promise<T> => {
   let newUrl = `${url}`;
   if (params) {
