@@ -1,16 +1,17 @@
 import { type ColumnDef } from "@tanstack/react-table";
 import { ArrowDown, ArrowUp } from "lucide-react";
+import { formatLongDate } from "../../lib/utils";
 
 export type Payment = {
-  date: string;
-  name: string;
+  created_at: string;
+  donor_name: string;
   items: string;
   amount: number;
 };
 
 export const dashboardColumns: ColumnDef<Payment>[] = [
   {
-    accessorKey: "date",
+    accessorKey: "created_at",
     header: ({ column }) => {
       const isSorted = column.getIsSorted();
       return (
@@ -29,9 +30,12 @@ export const dashboardColumns: ColumnDef<Payment>[] = [
         </div>
       );
     },
+    cell: ({ row }) => {
+      return <div>{formatLongDate(row.original.created_at)}</div>;
+    },
   },
   {
-    accessorKey: "name",
+    accessorKey: "donor_name",
     header: ({ column }) => {
       const isSorted = column.getIsSorted();
       return (
@@ -70,6 +74,9 @@ export const dashboardColumns: ColumnDef<Payment>[] = [
           )}
         </div>
       );
+    },
+    cell: ({ row }) => {
+      return <div>{row.original.items || "N/A"}</div>;
     },
   },
   {

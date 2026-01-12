@@ -24,7 +24,7 @@ export default function Home() {
 
         <article className="z-30 mt-20 max-w-183.5 space-y-10 self-center">
           <div className="space-y-4">
-            <h1 className="font-fraunces text-center text-[40px] leading-tight font-medium text-[#01003C] md:text-[80px] md:leading-[1.1]">
+            <h1 className="font-fraunces text-center text-[38px] leading-tight font-medium text-[#01003C] md:text-[80px] md:leading-[1.1]">
               Turn your wishes into{" "}
               <span className="text-[#6360F0]">real money</span>
             </h1>
