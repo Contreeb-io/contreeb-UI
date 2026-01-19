@@ -34,8 +34,14 @@ function LayoutContent({
   const { pathname } = useLocation();
 
   useEffect(() => {
-    if (pathname.startsWith("/dashboard")) {
-      navigate(`dashboard/${selectedCampaign}`);
+    const pathSegments = pathname.split("/").filter(Boolean);
+    const baseRoute = pathSegments[0];
+
+    if (
+      baseRoute &&
+      ["dashboard", "donations", "payment-requests"].includes(baseRoute)
+    ) {
+      navigate(`/${baseRoute}/${selectedCampaign}`);
     }
   }, [selectedCampaign]);
 

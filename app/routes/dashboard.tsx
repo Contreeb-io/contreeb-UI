@@ -205,7 +205,7 @@ export default function Dashboard() {
                 </h3>
                 <Link
                   to={`/donations/${id}`}
-                  className="flex items-center gap-2 rounded-xl border border-[#E4E7EC] px-4 py-1.5 text-sm font-medium text-[#101928] md:py-2.5"
+                  className="flex items-center gap-2 rounded-md border border-[#E4E7EC] px-4 py-1.5 text-sm font-medium text-[#101928] md:rounded-xl md:py-2.5"
                 >
                   See all <MoveUpRight size={16} strokeWidth={1.5} />
                 </Link>

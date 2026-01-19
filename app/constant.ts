@@ -175,4 +175,5 @@ export const queryKeys = {
   wallets: ["wallets"],
   recentDonations: (id: string) => ["recent_donations", id],
   dashboardData: (id: string) => ["dashboard_data", id],
+  allDonations: (id: string) => ["all_donations", id],
 };

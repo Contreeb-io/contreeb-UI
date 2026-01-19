@@ -1,5 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import { CloudDownload, ListFilter, X } from "lucide-react";
 import { useState } from "react";
+import { useParams } from "react-router";
 import { DataTable } from "../components/donations/data-table";
 import {
   donationColumns,
@@ -13,8 +15,11 @@ import {
   DialogTitle,
 } from "../components/ui/dialog";
 import { Input } from "../components/ui/input";
+import { queryKeys } from "../constant";
+import { allDonations } from "../lib/dashboard";
 
 export default function Donations() {
+  const { id } = useParams<{ id: string }>();
   const [selectedDonation, setSelectedDonation] = useState<Payment | null>(
     null,
   );
@@ -25,8 +30,18 @@ export default function Donations() {
     setIsDialogOpen(true);
   };
 
+  useQuery({
+    queryFn: () => allDonations(id!),
+    queryKey: queryKeys.allDonations(id!),
+    enabled: !!id,
+  });
+
+  // useEffect(() => {
+  //   console.log(id);
+  // }, [id]);
+
   return (
-    <main className="mx-auto max-w-[902px] space-y-6 pb-20 font-sans">
+    <main className="mx-auto max-w-225.5 space-y-6 pb-20 font-sans">
       <section className="space-y-2">
         <h1 className="font-mackinac text-2xl font-bold text-[#0E021A]">
           Donations
@@ -44,14 +59,14 @@ export default function Donations() {
           <Input
             type="text"
             placeholder="🔍︎ Search for Item. name, or email"
-            className="border-[#D0D5DD] md:max-w-[375px]"
+            className="border-[#D0D5DD] md:max-w-93.75"
           />
           <div className="flex items-center gap-2">
-            <div className="flex items-center gap-2 rounded-[8px] border border-[#E4E7EC] px-4 py-2.5">
+            <div className="flex items-center gap-2 rounded-xl border border-[#E4E7EC] px-4 py-2.5">
               <ListFilter size={16} strokeWidth={1.5} />
               <span className="hidden sm:block">Filter</span>
             </div>
-            <div className="flex items-center gap-2 rounded-[8px] border border-[#E4E7EC] px-4 py-2.5">
+            <div className="flex items-center gap-2 rounded-xl border border-[#E4E7EC] px-4 py-2.5">
               <CloudDownload size={16} strokeWidth={1.5} />
               <span className="hidden sm:block">Export</span>
             </div>
@@ -86,7 +101,7 @@ export default function Donations() {
       {/* Donation Details Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent
-          className="top-[95%] flex max-h-[98%] w-[96%] translate-y-[-95%] flex-col gap-8 overflow-y-auto rounded-2xl p-8 pb-10 md:top-[50%] md:max-w-[603px] md:translate-y-[-50%]"
+          className="top-[95%] flex max-h-[98%] w-[96%] translate-y-[-95%] flex-col gap-8 overflow-y-auto rounded-2xl p-8 pb-10 md:top-[50%] md:max-w-150.75 md:translate-y-[-50%]"
           showCloseButton={false}
         >
           <article className="flex items-center justify-between">
