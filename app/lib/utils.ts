@@ -37,11 +37,24 @@ export async function emptyDashboardLoader() {
     throw redirect("/");
   }
 
+  const savedCampaignId = localStorage.getItem("selectedCampaign");
+
   const cachedData = queryClient.getQueryData(
     queryKeys.campaigns,
   ) as CampaignSelectType[];
   if (cachedData && cachedData.length > 0) {
-    throw redirect(`/dashboard/${cachedData[0].id}`);
+    let targetCampaign: CampaignSelectType;
+
+    if (savedCampaignId) {
+      const foundCampaign = cachedData.find(
+        (campaign) => campaign.id === savedCampaignId,
+      );
+      targetCampaign = foundCampaign || cachedData[0];
+    } else {
+      targetCampaign = cachedData[0];
+    }
+
+    throw redirect(`/dashboard/${targetCampaign.id}`);
   }
 
   const data = await queryClient.ensureQueryData({

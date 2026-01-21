@@ -83,9 +83,21 @@ function LayoutContent({
 export default function Layout() {
   const { pathname } = useLocation();
   const data = useLoaderData();
-  const [selectedCampaign, setSelectedCampaign] = useState(
-    data?.length > 0 ? data[0].id : "",
-  );
+  const [selectedCampaign, setSelectedCampaign] = useState(() => {
+    const savedCampaignId = localStorage.getItem("selectedCampaign");
+
+    if (savedCampaignId) {
+      return Number(savedCampaignId);
+    }
+
+    return data?.length > 0 ? data[0].id : "";
+  });
+
+  useEffect(() => {
+    if (selectedCampaign) {
+      localStorage.setItem("selectedCampaign", selectedCampaign);
+    }
+  }, [selectedCampaign]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
