@@ -39,7 +39,7 @@ export default function VerifyMagicLink() {
   if (isPending) {
     return (
       <section className="sidebar flex h-screen items-center justify-center px-6">
-        <article className="flex w-full flex-col items-center gap-4 rounded-md py-6 shadow-sm md:w-[500px]">
+        <article className="flex w-full flex-col items-center gap-4 rounded-md py-6 shadow-sm md:w-125">
           <Spinner color="#06052A" className="size-6" />
           <div className="text-center">
             <h1 className="text-lg font-semibold text-[#06052A]">

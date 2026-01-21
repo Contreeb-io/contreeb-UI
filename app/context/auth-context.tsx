@@ -77,6 +77,7 @@ export const AuthProvider: React.FC<{
     if (persist) {
       try {
         localStorage.removeItem(USER_KEY);
+        localStorage.removeItem("selectedCampaign");
       } catch {}
     }
     window.location.href = "/";

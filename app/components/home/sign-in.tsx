@@ -63,7 +63,7 @@ export default function SignIn() {
           sign in
         </DialogTrigger>
         <DialogContent
-          className="flex w-[96%] flex-col gap-8 rounded-2xl p-8 md:max-w-[477px]"
+          className="flex w-[96%] flex-col gap-8 rounded-2xl p-8 md:max-w-119.25"
           showCloseButton={false}
         >
           <article className="space-y-6">

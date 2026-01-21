@@ -1,16 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import {
-  Check,
   EllipsisVertical,
   Landmark,
   MoveUpRight,
   PencilLine,
-  Share2,
   Trash2,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams, useRouteLoaderData } from "react-router";
 import EditCampaign from "../components/dashboard/edit-campaign";
+import ShareCampaignModal from "../components/dashboard/share-campaign";
 import { dashboardColumns } from "../components/donations/dashboard-columns";
 import { DataTable } from "../components/donations/data-table";
 import StatCardsSkeletonGroup from "../components/skeletons/stat-card-skeleton";
@@ -25,7 +24,6 @@ import {
 } from "../components/ui/dropdown-menu";
 import StatCard from "../components/ui/stat-card";
 import { queryKeys } from "../constant";
-import { useCopy } from "../hooks/use-copy";
 import {
   getRecentDonations,
   getTotalDonationReceived,
@@ -41,9 +39,7 @@ export default function Dashboard() {
     campaigns?.find((item: Campaign) => item.id.toString() === id),
   );
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const { copied, handleCopyToClipboard } = useCopy(
-    selectedCampaign.shareable_link,
-  );
+  const [showShareDialog, setShowShareDialog] = useState(false);
 
   const navigate = useNavigate();
 
@@ -107,21 +103,12 @@ export default function Dashboard() {
             </div>
           </article>
           <div className="flex items-center gap-2">
-            <button
-              className="flex items-center gap-1.5 rounded-full bg-[#F0F2F5] px-4 py-2 text-sm font-medium text-[#0E021A] md:text-base"
-              onClick={handleCopyToClipboard}
-            >
-              {copied ? (
-                <>
-                  <Check className="mr-1 h-4 w-4" />
-                  Copied!
-                </>
-              ) : (
-                <>
-                  <Share2 size={16} /> Share
-                </>
-              )}
-            </button>
+            <ShareCampaignModal
+              setShowShareDialog={setShowShareDialog}
+              showShareDialog={showShareDialog}
+              shareableLink={selectedCampaign.shareable_link}
+            />
+
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center gap-1.5 rounded-full bg-[#F0F2F5] px-4 py-2 text-sm font-medium text-[#0E021A] md:text-base">
                 {" "}
@@ -223,7 +210,7 @@ export default function Dashboard() {
                   No donations in yet
                 </h5>
                 <p className="font-sans text-sm text-[#595959]">
-                  You haven’t received any notions yet. Any recent donation you
+                  You haven't received any notions yet. Any recent donation you
                   will receive will show here
                 </p>
               </div>
